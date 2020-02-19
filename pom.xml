@@ -16,30 +16,105 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <junit.version>5.5.2</junit.version>
+        <jmockit.version>1.49</jmockit.version>
+        <selenium.version>3.141.59</selenium.version>
+        <selenium-htmlunit.version>2.36.0</selenium-htmlunit.version>
+        <pitest.version>1.4.11</pitest.version>
+        <pitest-junit5.version>0.11</pitest-junit5.version>
+        <jmeter-plugin.version>3.0.0</jmeter-plugin.version>
+        <jmeter.version>5.2.1</jmeter.version>
+        <dependency-check.version>5.2.4</dependency-check.version>
+
+        <jmockit.path>${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar</jmockit.path>
+        <jmockit.agentConfig>-javaagent:${jmockit.path}</jmockit.agentConfig>
+
+        <jacoco.version>0.8.5</jacoco.version>
+        <jacoco.path>${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar</jacoco.path>
+        <jacoco.utReport>${project.build.directory}/jacoco.exec</jacoco.utReport>
+        <jacoco.itReport>${project.build.directory}/jacoco-it.exec</jacoco.itReport>
+        <jacoco.utAgentConfig>-javaagent:${jacoco.path}=destfile=${jacoco.utReport}</jacoco.utAgentConfig>
+        <jacoco.itAgentConfig>-javaagent:${jacoco.path}=destfile=${jacoco.itReport}</jacoco.itAgentConfig>
+
+        <sonarjava.version>5.14.0.18788</sonarjava.version>
+
+        <compiler.version>3.8.1</compiler.version>
+        <surefire.version>2.22.2</surefire.version>
+        <failsafe.version>2.22.2</failsafe.version>
+        <dependency.version>3.1.1</dependency.version>
+
+        <!-- test properties -->
+        <jmeter.target.host>localhost</jmeter.target.host>
+        <jmeter.target.port>8083</jmeter.target.port>
+        <jmeter.target.root>/</jmeter.target.root>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
+
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>5.2.3.RELEASE</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.junit.jupiter</groupId>-->
+<!--            <artifactId>junit-jupiter-api</artifactId>-->
+<!--            <version>${junit.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.junit.jupiter</groupId>-->
+<!--            <artifactId>junit-jupiter-engine</artifactId>-->
+<!--            <version>${junit.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>${jmockit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>${selenium-htmlunit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <version>${jacoco.version}</version>
+            <classifier>runtime</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.java</groupId>
+            <artifactId>sonar-jacoco-listeners</artifactId>
+            <version>${sonarjava.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+<!--            <scope>test</scope>-->
         </dependency>
 
 
@@ -51,6 +126,162 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${dependency.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jacoco</groupId>
+                                    <artifactId>org.jacoco.agent</artifactId>
+                                    <version>${jacoco.version}</version>
+                                    <classifier>runtime</classifier>
+                                    <destFileName>jacocoagent.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.jacoco</groupId>
+                                    <artifactId>org.jacoco.cli</artifactId>
+                                    <version>${jacoco.version}</version>
+                                    <classifier>nodeps</classifier>
+                                    <destFileName>jacococli.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- unit tests (with mocking and code coverage agents enabled) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <argLine>${jmockit.agentConfig} ${jacoco.utAgentConfig}</argLine>
+                    <excludes>
+                        <exclude>**/*IntegrationTest.java</exclude>
+                    </excludes>
+                    <properties>
+                        <!-- add SonarQube's JaCoCo listener to enable -->
+                        <!-- gathering of code coverage metrics per test -->
+                        <property>
+                            <name>listener</name>
+                            <value>org.sonar.java.jacoco.JUnitListener</value>
+                        </property>
+                    </properties>
+                </configuration>
+            </plugin>
+
+            <!-- integration tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${failsafe.version}</version>
+                <configuration>
+                    <!-- JaCoCo must be enabled on target app container to gather coverage
+                         for integration tests, e.g. UI tests and API tests -->
+                    <includes>
+                        <include>**/*IntegrationTest.java</include>
+                    </includes>
+                </configuration>
+                <!-- if activated, failsafe will run automatically on integration-test and verify goals -->
+                <!--<executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>-->
+            </plugin>
+
+            <!-- mutation tests (with mocking agent enabled) -->
+<!--            <plugin>-->
+<!--                <groupId>org.pitest</groupId>-->
+<!--                <artifactId>pitest-maven</artifactId>-->
+<!--                <version>${pitest.version}</version>-->
+<!--                <configuration>-->
+<!--                    <jvmArgs>-->
+<!--                        <value>${jmockit.agentConfig}</value>-->
+<!--                    </jvmArgs>-->
+<!--                    <excludedTestClasses>-->
+<!--                        <param>*ApplicationTests</param>-->
+<!--                        <param>*IntegrationTest</param>-->
+<!--                    </excludedTestClasses>-->
+<!--                    <outputFormats>-->
+<!--                        <outputFormat>XML</outputFormat>-->
+<!--                    </outputFormats>-->
+<!--                </configuration>-->
+<!--                &lt;!&ndash; enable support for JUnit 5 in Pitest &ndash;&gt;-->
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>org.pitest</groupId>-->
+<!--                        <artifactId>pitest-junit5-plugin</artifactId>-->
+<!--                        <version>${pitest-junit5.version}</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+                <!-- if activated, pitest will run automatically on integration-test goal -->
+                <!--<executions>
+                    <execution>
+                        <goals>
+                            <goal>mutationCoverage</goal>
+                        </goals>
+                    </execution>
+                </executions>-->
+<!--            </plugin>-->
+
+            <!-- performance tests -->
+<!--            <plugin>-->
+<!--                <groupId>com.lazerycode.jmeter</groupId>-->
+<!--                <artifactId>jmeter-maven-plugin</artifactId>-->
+<!--                <version>${jmeter-plugin.version}</version>-->
+<!--                <configuration>-->
+<!--                    <testResultsTimestamp>false</testResultsTimestamp>-->
+<!--                    <propertiesUser>-->
+<!--                        <host>${jmeter.target.host}</host>-->
+<!--                        <port>${jmeter.target.port}</port>-->
+<!--                        <root>${jmeter.target.root}</root>-->
+<!--                    </propertiesUser>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>configuration</id>-->
+<!--                        <goals>-->
+<!--                            <goal>configure</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    &lt;!&ndash; if activated, jmeter will run automatically on integration-test and verify goals &ndash;&gt;-->
+<!--                    &lt;!&ndash;<execution>-->
+<!--                        <phase>integration-test</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>configure</goal>-->
+<!--                            <goal>jmeter</goal>-->
+<!--                            <goal>results</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>&ndash;&gt;-->
+<!--                </executions>-->
+<!--            </plugin>-->
+
+
+<!--            &lt;!&ndash; dependency vulnerability tests &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>org.owasp</groupId>-->
+<!--                <artifactId>dependency-check-maven</artifactId>-->
+<!--                <version>${dependency-check.version}</version>-->
+<!--                <configuration>-->
+<!--                    <format>ALL</format>-->
+<!--                    &lt;!&ndash;<failBuildOnCVSS>5</failBuildOnCVSS>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
         </plugins>
     </build>
 
