@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh './mvnw package'
+                sh 'mvn package'
                 echo 'Build Success'
             }
         }
