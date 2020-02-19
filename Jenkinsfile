@@ -39,12 +39,14 @@ pipeline {
                 }
         }
         stage('Push To Registry'){
-            echo 'Pushing'
+
             steps{
-                 sh "docker push ${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
+                echo 'Pushing'
+                sh "docker push ${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
                  //sh "docker rmi $(docker images | grep ${ORG_NAME}/${APP_NAME} | grep -v 'latest' | grep -v ${APP_VERSION} | awk '{print $3}') "
+                echo 'Pushing Success'
             }
-            echo 'Pushing Success'
+
         }
     }
 }
