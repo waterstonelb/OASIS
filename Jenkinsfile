@@ -41,7 +41,7 @@ pipeline {
 
             steps{
                 echo 'Pushing'
-                sh "docker tag ${APP_NAME}:${APP_VERSION} ${ORG_NAME}/shkb/${APP_NAME}:latest"
+                sh "docker tag ${APP_NAME}:${APP_VERSION} ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
 
                 sh "docker push ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
                  //sh "docker rmi $(docker images | grep ${ORG_NAME}/${APP_NAME} | grep -v 'latest' | grep -v ${APP_VERSION} | awk '{print $3}') "
