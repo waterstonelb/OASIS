@@ -1,11 +1,9 @@
 package com.example.demo.service;
 
-import org.springframework.stereotype.Service;
 
-@Service
-public class TestService {
+import com.example.demo.bean.User;
 
-    public String HelloTest(){
-        return "Test Success!";
-    }
+public interface TestService {
+
+    public User HelloTest(String name);
 }

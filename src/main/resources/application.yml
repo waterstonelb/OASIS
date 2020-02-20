@@ -1,2 +1,14 @@
 server:
   port: 8090
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://106.12.89.160:3306/shkb
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: MYSQL
+    show-sql: true

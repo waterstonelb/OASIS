@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.bean.User;
+import com.example.demo.service.HelloService;
 import com.example.demo.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestContorller {
     @Autowired
     private TestService testService;
+    private HelloService helloService;
 
-
+    @RequestMapping(path = "/user",method = RequestMethod.GET)
+    public User getUser(){
+        return testService.HelloTest("mzl");
+    }
     @RequestMapping(path = "/hello",method = RequestMethod.GET)
     public String getHello(){
-        return testService.HelloTest();
+        return helloService.HelloTest();
     }
 }
