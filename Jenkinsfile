@@ -34,7 +34,7 @@ pipeline {
                 steps {
                     echo "-=- run Docker image -=-"
                     sh 'docker stop ${APP_NAME}'
-                    sh "docker run --name ${APP_NAME} -d --rm -p 8090:8090 ${APP_NAME}:latest"
+                    sh "docker run --name ${APP_NAME} -d --rm -p 8090:8090 ${APP_NAME}:${APP_VERSION}"
                 }
         }
         stage('Push To Registry'){
