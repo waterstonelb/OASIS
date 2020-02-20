@@ -11,7 +11,7 @@ public class CORSConfig extends WebMvcConfigurationSupport {
         registry.addMapping("/**")
                 .allowedMethods("*")
                 .allowedOrigins("*")
-                .exposedHeaders("*");
+                .allowedHeaders("*");
         super.addCorsMappings(registry);
     }
 }
