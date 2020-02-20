@@ -3,7 +3,7 @@ pipeline {
 
     environment{
          ORG_NAME = "shkb.cf:5000"
-         APP_NAME = "springdemo"
+         APP_NAME = "backend-shkb"
          APP_VERSION = "${env.BUILD_NUMBER}"
         //DOCKER_HUB = credentials("${ORG_NAME}-docker-hub")
     }
