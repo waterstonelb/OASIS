@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment{
-         ORG_NAME = "shkb.cf:5000"
+         ORG_NAME = "106.12.89.160:5000"
          APP_NAME = "backend-shkb"
          APP_VERSION = "${env.BUILD_NUMBER}"
         //DOCKER_HUB = credentials("${ORG_NAME}-docker-hub")
@@ -42,7 +42,7 @@ pipeline {
 
             steps{
                 echo 'Pushing'
-                sh "docker push ${ORG_NAME}/${APP_NAME}:${APP_VERSION}"
+                sh "docker push ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
                  //sh "docker rmi $(docker images | grep ${ORG_NAME}/${APP_NAME} | grep -v 'latest' | grep -v ${APP_VERSION} | awk '{print $3}') "
                 echo 'Pushing Success'
             }
