@@ -1,4 +1,6 @@
 
+USE shkb;
+
 #create document table
 DROP TABLE IF EXISTS document;
 CREATE TABLE document(
