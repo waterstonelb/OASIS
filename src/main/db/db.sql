@@ -1,8 +1,6 @@
-DROP DATABASE IF EXISTS oasis;
-CREATE DATABASE oasis DEFAULT CHARACTER SET utf8;
-USE oasis;
 
 #create document table
+DROP TABLE IF EXISTS document;
 CREATE TABLE document(
      document_id                 INT NOT NULL AUTO_INCREMENT
     ,document_title              VARCHAR(200) NOT NULL
@@ -39,6 +37,7 @@ CREATE TABLE document(
 )ENGINE=InnoDB;
 
 #create author table
+DROP TABLE IF EXISTS author;
 CREATE TABLE author(
      author_id          INT NOT NULL AUTO_INCREMENT
     ,author_name        VARCHAR(50) NOT NULL
@@ -49,6 +48,7 @@ CREATE TABLE author(
 )ENGINE=InnoDB;
 
 #create publish table
+DROP TABLE IF EXISTS publish;
 CREATE TABLE publish(
      document_id         INT NOT NULL
     ,author_id           INT NOT NULL
