@@ -1,6 +1,5 @@
 
 
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,3 +11,5 @@ spring:
       ddl-auto: create
     database: MYSQL
     show-sql: true
+server:
+  port: 8090
