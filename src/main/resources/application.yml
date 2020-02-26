@@ -3,13 +3,13 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://106.12.89.160:3306/shkb
-    username: root
-    password: root
+    url: jdbc:mysql://182.92.80.192:3306/shkb
+    username: shkb
+    password: shkb
   jpa:
     hibernate:
       ddl-auto: create
-    database: MYSQL
     show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 server:
   port: 8090
