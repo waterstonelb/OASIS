@@ -9,31 +9,31 @@ CREATE TABLE document(
     ,authors                     VARCHAR(500)
     ,author_affiliations         VARCHAR(1200)
     ,publication_title           VARCHAR(100) NOT NULL
-    ,date_added_to_xplore        VARCHAR(30)
+    ,date_added_to_xplore        VARCHAR(100)
     ,publication_year            INTEGER  NOT NULL
-    ,volume                      VARCHAR(30)
-    ,issue                       VARCHAR(30)
-    ,start_page                  VARCHAR(10) NOT NULL
-    ,end_page                    VARCHAR(10) NOT NULL
+    ,volume                      VARCHAR(50)
+    ,issue                       VARCHAR(100)
+    ,start_page                  VARCHAR(50) NOT NULL
+    ,end_page                    VARCHAR(50) NOT NULL
     ,abstract                    VARCHAR(8000) NOT NULL
-    ,issn                        VARCHAR(30)
-    ,isbns                       VARCHAR(30)
-    ,doi                         VARCHAR(30)
-    ,funding_information         VARCHAR(30)
-    ,pdf_link                    VARCHAR(60) NOT NULL
+    ,issn                        VARCHAR(100)
+    ,isbns                       VARCHAR(100)
+    ,doi                         VARCHAR(100)
+    ,funding_information         VARCHAR(100)
+    ,pdf_link                    VARCHAR(200) NOT NULL
     ,author_keywords             VARCHAR(1000)
     ,ieee_terms                  VARCHAR(200)
     ,inspec_controlled_terms     VARCHAR(800)
     ,inspec_noncontrolled_terms  VARCHAR(800)
-    ,mesh_terms                  VARCHAR(30)
+    ,mesh_terms                  VARCHAR(100)
     ,article_citation_count      INTEGER
     ,reference_count             INTEGER
-    ,license                     VARCHAR(30)
-    ,online_date                 VARCHAR(30)
-    ,issue_date                  VARCHAR(30)
-    ,meeting_date                VARCHAR(30)
-    ,publisher                   VARCHAR(20) NOT NULL
-    ,document_identifier         VARCHAR(30) NOT NULL
+    ,license                     VARCHAR(100)
+    ,online_date                 VARCHAR(50)
+    ,issue_date                  VARCHAR(50)
+    ,meeting_date                VARCHAR(50)
+    ,publisher                   VARCHAR(100) NOT NULL
+    ,document_identifier         VARCHAR(100) NOT NULL
 
     ,PRIMARY KEY (document_id)
 )ENGINE=InnoDB;
@@ -42,8 +42,8 @@ CREATE TABLE document(
 DROP TABLE IF EXISTS author;
 CREATE TABLE author(
      author_id          INT NOT NULL AUTO_INCREMENT
-    ,author_name        VARCHAR(50) NOT NULL
-    ,author_affiliation  VARCHAR(100)
+    ,author_name        VARCHAR(100) NOT NULL
+    ,author_affiliation  VARCHAR(200)
     ,author_keywords    VARCHAR(200)
 
     ,PRIMARY KEY (author_id)
