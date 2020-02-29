@@ -36,7 +36,7 @@ CREATE TABLE document(
     ,document_identifier         VARCHAR(100) NOT NULL
 
     ,PRIMARY KEY (document_id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
 #create author table
 DROP TABLE IF EXISTS author;
@@ -47,7 +47,7 @@ CREATE TABLE author(
     ,author_keywords    VARCHAR(200)
 
     ,PRIMARY KEY (author_id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
 #create publish table
 DROP TABLE IF EXISTS publish;
@@ -56,7 +56,7 @@ CREATE TABLE publish(
     ,author_id           INT NOT NULL
     ,publication_year    INTEGER  NOT NULL
     ,PRIMARY KEY (document_id, author_id)
-)ENGINE=InnoDB;
+)ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
 
 

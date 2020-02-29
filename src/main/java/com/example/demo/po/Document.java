@@ -17,7 +17,7 @@ public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "document_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "document_title", length = 200, nullable = false)
     private String documentTitle;
@@ -83,10 +83,10 @@ public class Document {
     private String meshTerms;
 
     @Column(name = "article_citation_count")
-    private int articleCitationCount;
+    private Integer articleCitationCount;
 
     @Column(name = "reference_count")
-    private int referenceCount;
+    private Integer referenceCount;
 
     @Column(name = "license", length = 100)
     private String license;
