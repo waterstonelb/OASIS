@@ -1,4 +1,4 @@
-package com.example.demo.service.analyze;
+package com.example.demo.analyze;
 
 public class AuthorAnalyzeImpl {
 

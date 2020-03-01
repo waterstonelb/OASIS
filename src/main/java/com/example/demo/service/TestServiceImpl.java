@@ -1,8 +1,7 @@
-package com.example.demo.service;
+package com.example.demo;
 
 import com.example.demo.bean.User;
 import com.example.demo.dao.UserRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

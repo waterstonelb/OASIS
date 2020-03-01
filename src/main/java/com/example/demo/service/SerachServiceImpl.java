@@ -1,4 +1,4 @@
-package com.example.demo.service.search;
+package com.example.demo.search;
 
 
 import com.example.demo.dao.DocumentDao;
@@ -20,7 +20,7 @@ public class SerachServiceImpl implements SearchService{
     }
 
     @Override
-    public ResponseVO seaechByAuthor(String author) {
+    public ResponseVO<List<Document>>  seaechByAuthor(String author) {
         try{
             List<Document> res = documentDao.findByAuthorsContaining(author);
             return ResponseVO.buildSuccess(res);
@@ -32,7 +32,7 @@ public class SerachServiceImpl implements SearchService{
     }
 
     @Override
-    public ResponseVO searchByInstitution(String institution) {
+    public ResponseVO<List<Document>>  searchByInstitution(String institution) {
         try{
             List<Document> res = documentDao.
                     findByAuthorAffiliationsContaining(institution);
@@ -44,7 +44,7 @@ public class SerachServiceImpl implements SearchService{
     }
 
     @Override
-    public ResponseVO searchByConference(String conference) {
+    public ResponseVO<List<Document>>  searchByConference(String conference) {
         try{
             List<Document> res = documentDao.
                     findByPublicationTitleContaining(conference);
@@ -57,7 +57,7 @@ public class SerachServiceImpl implements SearchService{
 
 
     @Override
-    public ResponseVO searchByStudyKeyword(String keyword) {
+    public ResponseVO<List<Document>>  searchByStudyKeyword(String keyword) {
         try{
             List<Document> res = documentDao.
                     findByAuthorKeywordsContaining(keyword);
