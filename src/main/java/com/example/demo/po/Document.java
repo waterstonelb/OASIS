@@ -22,7 +22,7 @@ public class Document {
     @Column(name = "document_title", length = 200, nullable = false)
     private String documentTitle;
 
-    @Column(name = "authors", length = 500)
+    @Column(name = "authors", length = 500, nullable = false)
     private String authors;
 
     @Column(name = "author_affiliations", length = 1200)

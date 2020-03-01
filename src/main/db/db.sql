@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS document;
 CREATE TABLE document(
      document_id                 INT NOT NULL AUTO_INCREMENT
     ,document_title              VARCHAR(200) NOT NULL
-    ,authors                     VARCHAR(500)
+    ,authors                     VARCHAR(500) NOT NULL
     ,author_affiliations         VARCHAR(1200)
     ,publication_title           VARCHAR(100) NOT NULL
     ,date_added_to_xplore        VARCHAR(100)
@@ -50,8 +50,8 @@ CREATE TABLE author(
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
 #create publish table
-DROP TABLE IF EXISTS publish;
-CREATE TABLE publish(
+DROP TABLE IF EXISTS author_publish;
+CREATE TABLE author_publish(
      document_id         INT NOT NULL
     ,author_id           INT NOT NULL
     ,publication_year    INTEGER  NOT NULL
