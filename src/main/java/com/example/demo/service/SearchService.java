@@ -1,4 +1,4 @@
-package com.example.demo.search;
+package com.example.demo.service;
 
 import com.example.demo.po.Document;
 import com.example.demo.vo.ResponseVO;
