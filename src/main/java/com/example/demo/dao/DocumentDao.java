@@ -19,13 +19,9 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
 
     List<Document> findByAuthorKeywordsContaining(String keyword);
 
-<<<<<<< HEAD
     @Query(value = "select * from document where if(?1 !='',authors like concat('%',?1,'%'),1=1)" +
             " and if(?2 !='',author_affiliations like concat('%',?2,'%'),1=1)" +
             " and if(?3 !='',publication_title like concat('%',?3,'%'),1=1)" +
             " and if(?4 !='',author_keywords like concat('%',?4,'%'),1=1)",nativeQuery = true)
     List<Document> find(String author,String institution, String conference, String keyword);
-=======
-    List<Document> findAll();
->>>>>>> 984f181049400c4e5284ad324ddfb3b311b4a253
 }
