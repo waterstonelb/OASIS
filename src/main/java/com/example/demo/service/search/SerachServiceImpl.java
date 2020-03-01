@@ -21,22 +21,50 @@ public class SerachServiceImpl implements SearchService{
 
     @Override
     public ResponseVO seaechByAuthor(String author) {
-        List<Document> res = documentDao.findByAuthorsContaining("penix");
-        return ResponseVO.buildSuccess(res);
+        try{
+            List<Document> res = documentDao.findByAuthorsContaining(author);
+            return ResponseVO.buildSuccess(res);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseVO.buildFailure("Error");
+        }
+
     }
 
     @Override
     public ResponseVO searchByInstitution(String institution) {
-        return null;
+        try{
+            List<Document> res = documentDao.
+                    findByAuthorAffiliationsContaining(institution);
+            return ResponseVO.buildSuccess(res);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseVO.buildFailure("Error");
+        }
     }
 
     @Override
     public ResponseVO searchByConference(String conference) {
-        return null;
+        try{
+            List<Document> res = documentDao.
+                    findByPublicationTitleContaining(conference);
+            return ResponseVO.buildSuccess(res);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseVO.buildFailure("Error");
+        }
     }
+
 
     @Override
     public ResponseVO searchByStudyKeyword(String keyword) {
-        return null;
+        try{
+            List<Document> res = documentDao.
+                    findByAuthorKeywordsContaining(keyword);
+            return ResponseVO.buildSuccess(res);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseVO.buildFailure("Error");
+        }
     }
 }

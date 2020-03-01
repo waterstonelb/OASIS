@@ -22,4 +22,8 @@ public class ResponseVO {
         responseVO.message = message;
         return responseVO;
     }
+
+    public Object getData(){
+        return this.data;
+    }
 }

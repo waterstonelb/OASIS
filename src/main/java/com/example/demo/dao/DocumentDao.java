@@ -11,4 +11,10 @@ import java.util.List;
 public interface DocumentDao extends JpaRepository<Document, Integer> {
 
     List<Document> findByAuthorsContaining(String author);
+
+    List<Document> findByAuthorAffiliationsContaining(String institution);
+
+    List<Document> findByPublicationTitleContaining(String conference);
+
+    List<Document> findByAuthorKeywordsContaining(String keyword);
 }
