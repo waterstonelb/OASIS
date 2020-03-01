@@ -1,66 +1,8 @@
 
 USE shkb;
 
-#create document table
-DROP TABLE IF EXISTS document;
-CREATE TABLE document(
-     document_id                 INT NOT NULL AUTO_INCREMENT
-    ,document_title              VARCHAR(200) NOT NULL
-    ,authors                     VARCHAR(500) NOT NULL
-    ,author_affiliations         VARCHAR(1200)
-    ,publication_title           VARCHAR(100) NOT NULL
-    ,date_added_to_xplore        VARCHAR(100)
-    ,publication_year            INTEGER  NOT NULL
-    ,volume                      VARCHAR(50)
-    ,issue                       VARCHAR(100)
-    ,start_page                  VARCHAR(50) NOT NULL
-    ,end_page                    VARCHAR(50) NOT NULL
-    ,abstract                    VARCHAR(8000) NOT NULL
-    ,issn                        VARCHAR(100)
-    ,isbns                       VARCHAR(100)
-    ,doi                         VARCHAR(100)
-    ,funding_information         VARCHAR(100)
-    ,pdf_link                    VARCHAR(200) NOT NULL
-    ,author_keywords             VARCHAR(1000)
-    ,ieee_terms                  VARCHAR(200)
-    ,inspec_controlled_terms     VARCHAR(800)
-    ,inspec_noncontrolled_terms  VARCHAR(800)
-    ,mesh_terms                  VARCHAR(100)
-    ,article_citation_count      INTEGER
-    ,reference_count             INTEGER
-    ,license                     VARCHAR(100)
-    ,online_date                 VARCHAR(50)
-    ,issue_date                  VARCHAR(50)
-    ,meeting_date                VARCHAR(50)
-    ,publisher                   VARCHAR(100) NOT NULL
-    ,document_identifier         VARCHAR(100) NOT NULL
 
-    ,PRIMARY KEY (document_id)
-)ENGINE=InnoDB DEFAULT CHARSET = utf8;
-
-#create author table
-DROP TABLE IF EXISTS author;
-CREATE TABLE author(
-     author_id          INT NOT NULL AUTO_INCREMENT
-    ,author_name        VARCHAR(100) NOT NULL
-    ,author_affiliation  VARCHAR(200)
-    ,author_keywords    VARCHAR(200)
-
-    ,PRIMARY KEY (author_id)
-)ENGINE=InnoDB DEFAULT CHARSET = utf8;
-
-#create publish table
-DROP TABLE IF EXISTS author_publish;
-CREATE TABLE author_publish(
-     document_id         INT NOT NULL
-    ,author_id           INT NOT NULL
-    ,publication_year    INTEGER  NOT NULL
-    ,PRIMARY KEY (document_id, author_id)
-)ENGINE=InnoDB DEFAULT CHARSET = utf8;
-
-
-
-#initial database
+#initiate database
 
 INSERT INTO document(document_title,authors,author_affiliations,publication_title,date_added_to_xplore,publication_year,volume,issue,start_page,end_page,abstract,issn,isbns,doi,funding_information,pdf_link,author_keywords,ieee_terms,inspec_controlled_terms,inspec_noncontrolled_terms,mesh_terms,article_citation_count,reference_count,license,online_date,issue_date,meeting_date,publisher,document_identifier) VALUES ('Keynotes',NULL,NULL,'2019 34th IEEE/ACM International Conference on Automated Software Engineering (ASE)',NULL,2019,NULL,NULL,'36','38','Provides an abstract for each of the keynote presentations and may include a brief professional biography of each presenter. The complete presentations were not made available for publication as part of the conference proceedings.',NULL,NULL,'10.1109/ASE.2019.00010',NULL,'https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8952191',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'IEEE','IEEE Conferences');
 INSERT INTO document(document_title,authors,author_affiliations,publication_title,date_added_to_xplore,publication_year,volume,issue,start_page,end_page,abstract,issn,isbns,doi,funding_information,pdf_link,author_keywords,ieee_terms,inspec_controlled_terms,inspec_noncontrolled_terms,mesh_terms,article_citation_count,reference_count,license,online_date,issue_date,meeting_date,publisher,document_identifier) VALUES ('Big problems in industry (panel)','J. Penix','Google, USA','2013 28th IEEE/ACM International Conference on Automated Software Engineering (ASE)',NULL,2013,NULL,NULL,'3','3','Software Engineering in practice deals with scale in a variety of dimensions. We build large scale systems operating on vast amount of data. We have millions of customers with billions of queries and transactions. We have distributed teams making thousands of changes, running millions of tests and releasing multiple times per day. These dimensions of scale interact to provide challenges for software development tools and processes. The panelists will describe the challenging aspects of scale in their specific problem domains and discuss which software engineering methods work and which leave room for improvement.',NULL,NULL,'10.1109/ASE.2013.6693060',NULL,'https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6693060',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,'IEEE','IEEE Conferences');
