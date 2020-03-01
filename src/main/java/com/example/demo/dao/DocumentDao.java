@@ -17,4 +17,6 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
     List<Document> findByPublicationTitleContaining(String conference);
 
     List<Document> findByAuthorKeywordsContaining(String keyword);
+
+    List<Document> findAll();
 }

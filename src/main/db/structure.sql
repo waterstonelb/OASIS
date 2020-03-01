@@ -44,10 +44,9 @@ CREATE TABLE author(
      author_id          INT NOT NULL AUTO_INCREMENT
     ,author_name        VARCHAR(100) NOT NULL
     ,author_affiliation  VARCHAR(200)
-    ,author_keywords    VARCHAR(200)
 
     ,PRIMARY KEY (author_id)
-
+    ,UNIQUE KEY (author_name, author_affiliation)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
 #create publish table
@@ -58,3 +57,6 @@ CREATE TABLE author_publish(
     ,publication_year    INTEGER  NOT NULL
     ,PRIMARY KEY (document_id, author_id)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;
+
+#index
+CREATE INDEX aindex ON author(author_name, author_affiliation);
