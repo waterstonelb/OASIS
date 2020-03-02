@@ -7,7 +7,9 @@ import java.util.Objects;
 @Table(name = "author_publish")
 @IdClass(AuthorPublishPK.class)
 public class AuthorPublish {
+    //文章id
     private int documentId;
+    //作者id
     private String authorId;
 
     @Id

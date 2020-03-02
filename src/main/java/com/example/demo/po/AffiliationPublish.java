@@ -4,10 +4,14 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "affiliation_publish", schema = "shkb", catalog = "")
+@Table(name = "affiliation_publish")
 @IdClass(AffiliationPublishPK.class)
 public class AffiliationPublish {
+
+    //文章id
     private int documentId;
+
+    //机构id
     private int affId;
 
     @Id

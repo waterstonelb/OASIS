@@ -57,3 +57,20 @@ CREATE TABLE affiliation_publish(
     ,PRIMARY KEY (document_id, aff_id)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
+#craete reference table
+DROP TABLE IF EXISTS ref;
+CREATE TABLE ref(
+     id                     INT NOT NULL AUTO_INCREMENT
+    ,doc_id                 INT NOT NULL
+
+    ,google_scholar_link    VARCHAR(300)
+    ,refid                  VARCHAR(50)
+    ,ref_order              VARCHAR(50)
+    ,ref_type               VARCHAR(50)
+    ,ref_text               TEXT
+    ,title                  VARCHAR(200)
+    ,abst                   TEXT
+    ,acm_link               VARCHAR(100)
+    ,cross_ref_link         VARCHAR(100)
+    ,document_link          VARCHAR(50)
+)ENGINE=InnoDB DEFAULT CHARSET = utf8;
