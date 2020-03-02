@@ -5,9 +5,9 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class AuthorPublishEntityPK implements Serializable {
+public class AuthorPublishPK implements Serializable {
     private int documentId;
-    private int authorId;
+    private String authorId;
 
     @Column(name = "document_id")
     @Id
@@ -21,11 +21,11 @@ public class AuthorPublishEntityPK implements Serializable {
 
     @Column(name = "author_id")
     @Id
-    public int getAuthorId() {
+    public String getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    public void setAuthorId(String authorId) {
         this.authorId = authorId;
     }
 
@@ -33,9 +33,9 @@ public class AuthorPublishEntityPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AuthorPublishEntityPK that = (AuthorPublishEntityPK) o;
+        AuthorPublishPK that = (AuthorPublishPK) o;
         return documentId == that.documentId &&
-                authorId == that.authorId;
+                Objects.equals(authorId, that.authorId);
     }
 
     @Override
