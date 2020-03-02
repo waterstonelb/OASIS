@@ -2,13 +2,14 @@ package com.example.demo.po;
 
 
 
+import lombok.Builder;
 import lombok.Data;
 
 
 import javax.persistence.*;
 
 @Data
-
+//@Builder
 @Entity
 @Table(name = "document")
 

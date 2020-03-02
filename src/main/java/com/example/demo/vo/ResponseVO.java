@@ -29,18 +29,10 @@ public class ResponseVO<T> {
 
     public static <T> ResponseVO<T> buildSuccess(String message, T data) {
         return new ResponseVO<>(1,message ,data);
-//        ResponseVO responseVO = new ResponseVO();
-//        responseVO.success = true;
-//        responseVO.data = data;
-//        return responseVO;
     }
 
     public static <T> ResponseVO<T> buildFailure(String message) {
         return new ResponseVO<>(0, message);
-//        ResponseVO responseVO = new ResponseVO();
-//        responseVO.code= 0;
-//        responseVO.message = message;
-//        return responseVO;
     }
 
     public static <T> ResponseVO<T> buildSuccess(T data) {
