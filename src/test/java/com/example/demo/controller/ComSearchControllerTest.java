@@ -20,8 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ComSearchControllerTest {
 
     @Test

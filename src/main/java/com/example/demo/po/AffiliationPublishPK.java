@@ -5,8 +5,12 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
+//复合主键对象
 public class AffiliationPublishPK implements Serializable {
+    //文章id
     private int documentId;
+
+    //机构id
     private int affId;
 
     @Column(name = "document_id")

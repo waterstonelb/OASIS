@@ -1,5 +1,6 @@
 package com.example.demo.dataSource;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,14 @@ import java.util.List;
 @Setter
 public class Data {
 
+    @JsonProperty("abstract")
     private String abst;
+
+    private String org_id;
+
+    private String publish_year;
+
+    public String pdf_link;
 
     private List<AuthorData> authors;
 

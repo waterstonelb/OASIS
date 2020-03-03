@@ -5,9 +5,13 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
+//复合主键对象
 public class AuthorPublishPK implements Serializable {
+
+    //文章id
     private int documentId;
-    private String authorId;
+    //作者id
+    private int authorId;
 
     @Column(name = "document_id")
     @Id
@@ -21,11 +25,11 @@ public class AuthorPublishPK implements Serializable {
 
     @Column(name = "author_id")
     @Id
-    public String getAuthorId() {
+    public int getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(String authorId) {
+    public void setAuthorId(int authorId) {
         this.authorId = authorId;
     }
 
@@ -35,7 +39,7 @@ public class AuthorPublishPK implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         AuthorPublishPK that = (AuthorPublishPK) o;
         return documentId == that.documentId &&
-                Objects.equals(authorId, that.authorId);
+                authorId ==  that.authorId;
     }
 
     @Override

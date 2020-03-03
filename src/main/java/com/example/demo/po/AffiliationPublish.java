@@ -1,17 +1,30 @@
 package com.example.demo.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.Objects;
 
+@Builder
+@AllArgsConstructor
+
 @Entity
-@Table(name = "affiliation_publish", schema = "shkb", catalog = "")
+@Table(name = "affiliation_publish")
 @IdClass(AffiliationPublishPK.class)
 public class AffiliationPublish {
+
+    //文章id
     private int documentId;
+
+    //机构id
     private int affId;
 
+    public AffiliationPublish() {
+    }
+
     @Id
-    @Column(name = "document_id")
+    @Column(name = "document_id", nullable = false)
     public int getDocumentId() {
         return documentId;
     }
@@ -21,7 +34,7 @@ public class AffiliationPublish {
     }
 
     @Id
-    @Column(name = "aff_id")
+    @Column(name = "aff_id", nullable = false)
     public int getAffId() {
         return affId;
     }

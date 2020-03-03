@@ -1,17 +1,29 @@
 package com.example.demo.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Objects;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
 
 @Entity
 @Table(name = "author_publish")
 @IdClass(AuthorPublishPK.class)
 public class AuthorPublish {
+    //文章id
     private int documentId;
-    private String authorId;
+    //作者id
+    private int authorId;
 
     @Id
-    @Column(name = "document_id")
+    @Column(name = "document_id", nullable = false)
     public int getDocumentId() {
         return documentId;
     }
@@ -21,26 +33,15 @@ public class AuthorPublish {
     }
 
     @Id
-    @Column(name = "author_id")
-    public String getAuthorId() {
+    @Column(name = "author_id", nullable = false)
+    public int getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(String authorId) {
+    public void setAuthorId(int authorId) {
         this.authorId = authorId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AuthorPublish that = (AuthorPublish) o;
-        return documentId == that.documentId &&
-                Objects.equals(authorId, that.authorId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(documentId, authorId);
+    public AuthorPublish() {
     }
 }
