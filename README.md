@@ -2,12 +2,12 @@
 
 ### 开发人员：梁斌、刘奇康
 
-- 部署地址：www.ismzl.com:8090
-- 代码质量检测平台(SonarQube)：www.ismzl.com:9000/projects
-- Jenkins地址：www.ismzl.com:8000 
+- 部署地址：[www.ismzl.com:8090](www.ismzl.com:8090)
+- 代码质量检测平台(SonarQube)：[www.ismzl.com:9000/projects](www.ismzl.com:9000/projects)
+- Jenkins地址：[www.ismzl.com:8000](www.ismzl.com:8000) 
     - 账号：shkb
     - 密码：shkb
-- 接口Api文档地址(Swagger)：www.ismzl.com:8090/swagger-ui.html
+- 接口Api文档地址(Swagger)：[www.ismzl.com:8090/swagger-ui.html](www.ismzl.com:8090/swagger-ui.html)
 - MySQL地址：www.ismzl.com:3306
     - 账号 shkb
     - 密码 shkb
