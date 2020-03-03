@@ -19,10 +19,13 @@ class DocumentDaoTest {
 
     @Test
     void findSuccess() {
-        assertEquals(2,documentDao.find("Ali","Dallas","34th","").size());
+
+        assertEquals(1, documentDao.findFirstById(1).getId());
     }
+
     @Test
     void findFail(){
         assertEquals(0,documentDao.find("Ali","Dallas","34th","null").size());
+
     }
 }

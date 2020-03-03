@@ -15,6 +15,8 @@ public interface AuthorDao extends JpaRepository<Author, Integer> {
 
     boolean existsByNameAndAffiliation(String name, String aff);
 
+    List<Author> findByNameContaining(String author);
+
 
 
 }

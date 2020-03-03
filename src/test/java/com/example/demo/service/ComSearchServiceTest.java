@@ -13,6 +13,7 @@ import static org.mockito.Mockito.when;
 public class ComSearchServiceTest {
     @Test
     void comSearchCocument() {
+
         DocumentDao documentDao=mock(DocumentDao.class);
         ComSearchServiceImpl comSearchService=new ComSearchServiceImpl(documentDao);
         List<Document> testRes=new ArrayList<>();
@@ -25,5 +26,6 @@ public class ComSearchServiceTest {
                 .conference("34th")
                 .keyword("")
                 .build()).getMessage());
+
     }
 }
