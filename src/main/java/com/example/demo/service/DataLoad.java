@@ -2,10 +2,12 @@ package com.example.demo.service;
 
 import com.example.demo.dao.AffiliationDao;
 import com.example.demo.dao.AuthorDao;
+import com.example.demo.dao.AuthorPublishDao;
 import com.example.demo.dao.DocumentDao;
 import com.example.demo.dataSource.AuthorData;
 import com.example.demo.dataSource.Data;
 import com.example.demo.po.Affiliation;
+import com.example.demo.po.AuthorPublish;
 import com.example.demo.po.Document;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,9 @@ public class DataLoad {
 
     @Autowired
     private AffiliationDao affiliationDao;
+
+    @Autowired
+    private AuthorPublishDao authorPublishDao;
 
     @PostConstruct
     public void load(){
@@ -98,6 +103,10 @@ public class DataLoad {
                     int auId = authorDao
                             .findFirstByNameAndAffiliation(adata.getName()
                                     , adata.getAffiliation()).getId();
+                    AuthorPublish authorPublish = AuthorPublish.builder()
+                            .authorId(auId).documentId(docId).build();
+                    authorPublishDao.saveAndFlush(authorPublish);
+
 
 
                 }

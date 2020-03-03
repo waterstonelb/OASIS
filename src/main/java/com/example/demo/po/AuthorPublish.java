@@ -1,7 +1,17 @@
 package com.example.demo.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Objects;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
 
 @Entity
 @Table(name = "author_publish")
@@ -32,5 +42,6 @@ public class AuthorPublish {
         this.authorId = authorId;
     }
 
-
+    public AuthorPublish() {
+    }
 }
