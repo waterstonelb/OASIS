@@ -17,14 +17,14 @@ pipeline {
             }
         }
         stage('Test') {
-            steps('Junit Test') {
+            steps{
                 echo 'Testing..'
                 sh 'mvn test'
                 junit 'target/surefire-reports/*.xml'
                 jacoco execPattern: 'target/jacoco.exec'
                 echo 'Test Success'
             }
-            steps('Push to SonarQube'){
+            steps{
                 withSonarQubeEnv('sonarqube') {
                        sh "mvn sonar:sonar -Dproject.settings=sonar-project.properties"
                    }
