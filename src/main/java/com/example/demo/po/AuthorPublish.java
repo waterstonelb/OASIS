@@ -13,7 +13,7 @@ public class AuthorPublish {
     private String authorId;
 
     @Id
-    @Column(name = "document_id")
+    @Column(name = "document_id", nullable = false)
     public int getDocumentId() {
         return documentId;
     }
@@ -23,7 +23,7 @@ public class AuthorPublish {
     }
 
     @Id
-    @Column(name = "author_id")
+    @Column(name = "author_id", nullable = false)
     public String getAuthorId() {
         return authorId;
     }

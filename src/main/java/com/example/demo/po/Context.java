@@ -12,6 +12,7 @@ public class Context {
     private String part;
     private String sec;
 
+    //id
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +24,9 @@ public class Context {
         this.id = id;
     }
 
+    //引用id
     @Basic
-    @Column(name = "ref_id")
+    @Column(name = "ref_id", nullable = false)
     public int getRefId() {
         return refId;
     }
@@ -33,6 +35,7 @@ public class Context {
         this.refId = refId;
     }
 
+    //内容文本
     @Basic
     @Column(name = "txt", length = 10000)
     public String getTxt() {
@@ -43,6 +46,7 @@ public class Context {
         this.txt = txt;
     }
 
+    //文章第几部分
     @Basic
     @Column(name = "part", length = 50)
     public String getPart() {
@@ -53,6 +57,7 @@ public class Context {
         this.part = part;
     }
 
+    //sec
     @Basic
     @Column(name = "sec", length = 50)
     public String getSec() {

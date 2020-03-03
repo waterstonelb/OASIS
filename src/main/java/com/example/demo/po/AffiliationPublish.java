@@ -15,7 +15,7 @@ public class AffiliationPublish {
     private int affId;
 
     @Id
-    @Column(name = "document_id")
+    @Column(name = "document_id", nullable = false)
     public int getDocumentId() {
         return documentId;
     }
@@ -25,7 +25,7 @@ public class AffiliationPublish {
     }
 
     @Id
-    @Column(name = "aff_id")
+    @Column(name = "aff_id", nullable = false)
     public int getAffId() {
         return affId;
     }

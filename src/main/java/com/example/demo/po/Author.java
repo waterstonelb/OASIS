@@ -25,7 +25,7 @@ public class Author {
     private String affiliation;
 
     //作者姓名
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private String name;
 
     //作者名字

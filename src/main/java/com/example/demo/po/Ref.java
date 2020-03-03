@@ -22,6 +22,7 @@ public class Ref {
     private String pdfLink;
     private String pdfSize;
 
+    //id
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +34,9 @@ public class Ref {
         this.id = id;
     }
 
+    //文章id
     @Basic
-    @Column(name = "doc_id")
+    @Column(name = "doc_id", nullable = false)
     public int getDocId() {
         return docId;
     }
@@ -43,6 +45,7 @@ public class Ref {
         this.docId = docId;
     }
 
+    //谷歌学术链接
     @Basic
     @Column(name = "google_scholar_link", length = 300)
     public String getGoogleScholarLink() {
@@ -53,6 +56,7 @@ public class Ref {
         this.googleScholarLink = googleScholarLink;
     }
 
+    //引用在文章中的编号
     @Basic
     @Column(name = "refnum", length = 50)
     public String getRefnum() {
@@ -63,6 +67,7 @@ public class Ref {
         this.refnum = refnum;
     }
 
+    //ref_{ref_num}
     @Basic
     @Column(name = "ref_order", length = 50)
     public String getRefOrder() {
@@ -73,6 +78,7 @@ public class Ref {
         this.refOrder = refOrder;
     }
 
+    //引用类型
     @Basic
     @Column(name = "ref_type", length = 50)
     public String getRefType() {
@@ -83,6 +89,7 @@ public class Ref {
         this.refType = refType;
     }
 
+    //引用文本
     @Basic
     @Column(name = "ref_text", length = 10000)
     public String getRefText() {
@@ -93,6 +100,7 @@ public class Ref {
         this.refText = refText;
     }
 
+    //引用的文章标题
     @Basic
     @Column(name = "title", length = 200)
     public String getTitle() {
@@ -103,6 +111,7 @@ public class Ref {
         this.title = title;
     }
 
+    //引用的文章摘要
     @Basic
     @Column(name = "abst", length = 10000)
     public String getAbst() {
@@ -113,6 +122,7 @@ public class Ref {
         this.abst = abst;
     }
 
+    //acm 链接
     @Basic
     @Column(name = "acm_link", length = 100)
     public String getAcmLink() {
@@ -123,6 +133,7 @@ public class Ref {
         this.acmLink = acmLink;
     }
 
+    //crossref链接
     @Basic
     @Column(name = "cross_ref_link", length = 100)
     public String getCrossRefLink() {
@@ -133,6 +144,7 @@ public class Ref {
         this.crossRefLink = crossRefLink;
     }
 
+    //文档链接
     @Basic
     @Column(name = "document_link", length = 50)
     public String getDocumentLink() {
@@ -143,6 +155,7 @@ public class Ref {
         this.documentLink = documentLink;
     }
 
+    //图像链接
     @Basic
     @Column(name = "open_url_img_loc", length = 100)
     public String getOpenUrlImgLoc() {
@@ -153,6 +166,7 @@ public class Ref {
         this.openUrlImgLoc = openUrlImgLoc;
     }
 
+    //pdf链接
     @Basic
     @Column(name = "pdf_link", length = 200)
     public String getPdfLink() {
@@ -163,6 +177,7 @@ public class Ref {
         this.pdfLink = pdfLink;
     }
 
+    //pde大小
     @Basic
     @Column(name = "pdf_size", length = 50)
     public String getPdfSize() {

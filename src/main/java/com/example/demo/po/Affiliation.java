@@ -15,7 +15,7 @@ public class Affiliation {
     private int id;
 
     //机构名称
-    @Column
+    @Column(nullable = false)
     private String name;
 
 }
