@@ -11,15 +11,21 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class DocumentDaoTest {
+
     @Autowired
     DocumentDao documentDao;
 
+
+
     @Test
     void findSuccess() {
+
         assertEquals(1, documentDao.findFirstById(1).getId());
     }
+
     @Test
     void findFail(){
-        //assertEquals(0,documentDao.find("Penzsdx","Google","ACM","").size());
+        assertEquals(0,documentDao.find("Ali","Dallas","34th","null").size());
+
     }
 }
