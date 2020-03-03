@@ -62,9 +62,10 @@ public class SerachServiceImpl implements SearchService{
     @Override
     public ResponseVO<List<Document>>  searchByStudyKeyword(String keyword) {
         try{
-            List<Document> res = documentDao.
-                    findByAuthorKeywordsContaining(keyword);
-            return ResponseVO.buildSuccess(res);
+//            List<Document> res = documentDao.
+//                    findByAuthorKeywordsContaining(keyword);
+//            return ResponseVO.buildSuccess(res);
+            return null;
         }catch (Exception ex) {
             ex.printStackTrace();
             return ResponseVO.buildFailure("Error");
