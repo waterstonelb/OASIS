@@ -10,8 +10,7 @@ import java.util.List;
 @Repository
 public interface AuthorDao extends JpaRepository<Author, Integer> {
 
-    boolean existsByAuthorNameAndAuthorAffiliation(String author, String affiliation);
+    boolean existsByName(String name);
 
-    @Query("select a.authorId from Author a where a.authorName = ?1 and a.authorAffiliation = ?2")
-    int findIdByAnameAndAaff(String aname, String aaff);
+
 }

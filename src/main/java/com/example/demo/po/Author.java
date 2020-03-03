@@ -1,12 +1,15 @@
 package com.example.demo.po;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "author")
 public class Author {

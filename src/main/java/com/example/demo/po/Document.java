@@ -6,13 +6,16 @@ import com.example.demo.dataSource.AuthorData;
 import com.example.demo.dataSource.RefData;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
-//@Builder
+@Getter
+@Setter
+@Builder
 @Entity
 @Table(name = "document")
 
@@ -47,8 +50,11 @@ public class Document {
     @Column(name = "publication_year")
     private int publicationYear;
 
+    @Column(name = "pdf_link", length = 200)
+    private String pdfLink;
 
+    public Document(){
 
-
+    }
 
 }

@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AffiliationDao extends JpaRepository<Affiliation, Integer> {
+
+    boolean existsByName(String name);
 }

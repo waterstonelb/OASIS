@@ -1,6 +1,12 @@
 package com.example.demo.service;
 
+import com.example.demo.dao.AffiliationDao;
+import com.example.demo.dao.AuthorDao;
+import com.example.demo.dao.DocumentDao;
+import com.example.demo.dataSource.AuthorData;
 import com.example.demo.dataSource.Data;
+import com.example.demo.po.Affiliation;
+import com.example.demo.po.Document;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +19,20 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DataLoad {
 
-
+    @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private DocumentDao documentDao;
 
     @Autowired
-    public DataLoad(ObjectMapper objectMapper){
-        this.objectMapper = objectMapper;
-    }
+    private AuthorDao authorDao;
+
+    @Autowired
+    private AffiliationDao affiliationDao;
 
     @PostConstruct
     public void load(){
@@ -57,18 +65,40 @@ public class DataLoad {
         /*-------------------------------Filter-------------------------------*/
 
 
+        List<Data> filData = new ArrayList<Data>();
+
+        for (Data data : originalData)
+            if (data.getAuthors().size() != 0)
+                filData.add(data);
+
         /*--------------------Write to database-------------------------------*/
 
-        writeToDB(originalData);
+        writeToDB(filData);
     }
 
-    private void writeToDB(List<Data> originalData){
+    private void writeToDB(List<Data> filData){
 
+        for (Data data : filData) {
+            Document document = Document.builder().abst(data.getAbst())
+                    .doi(data.getDoi()).keywords(data.getKeywords()).title(data.getTitle())
+                    .publication(data.getPublication())
+                    .publicationYear(Integer.parseInt(data.getPublish_year())).build();
+            Document result = documentDao.saveAndFlush(document);
+            int docId = result.getId();
+
+            for (AuthorData adata : data.getAuthors()){
+                boolean auexist = authorDao.existsByName(adata.getName());
+                boolean afexist = affiliationDao.existsByName(adata.getAffiliation());
+                if (auexist && afexist){
+
+                }
+                else {
+
+                }
+            }
+
+        }
     }
 
-    public static String getUUID32(){
 
-        return UUID.randomUUID().toString().replace("-", "").toLowerCase();
-
-    }
 }
