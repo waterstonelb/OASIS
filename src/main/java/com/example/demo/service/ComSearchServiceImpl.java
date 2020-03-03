@@ -25,20 +25,22 @@ public class ComSearchServiceImpl implements ComSearchService {
 
     @Override
     public ResponseVO<List<Document>> comSearchCocument(ComSearchInpVO comSearchInpVO) {
-        try {
-            List<Document> res = documentDao.find(
-                    comSearchInpVO.getAuthors(),
-                    comSearchInpVO.getInstitution(),
-                    comSearchInpVO.getConference(),
-                    comSearchInpVO.getKeyword());
-            //System.out.println(res.size());
-            if(res.size()>=1)
-                return ResponseVO.buildSuccess("组合查询成功", res);
-            else
-                return ResponseVO.buildFailure("未查询到匹配的论文");
-        }catch (Exception e){
-            e.printStackTrace();
-            return ResponseVO.buildFailure("组合查询失败");
-        }
+//        try {
+//            List<Document> res = documentDao.find(
+//                    comSearchInpVO.getAuthors(),
+//                    comSearchInpVO.getInstitution(),
+//                    comSearchInpVO.getConference(),
+//                    comSearchInpVO.getKeyword());
+//            //System.out.println(res.size());
+//            if(res.size()>=1)
+//                return ResponseVO.buildSuccess("组合查询成功", res);
+//            else
+//                return ResponseVO.buildFailure("未查询到匹配的论文");
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return ResponseVO.buildFailure("组合查询失败");
+//        }
+
+        return null;
     }
 }
