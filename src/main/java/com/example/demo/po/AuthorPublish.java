@@ -10,7 +10,7 @@ public class AuthorPublish {
     //文章id
     private int documentId;
     //作者id
-    private String authorId;
+    private int authorId;
 
     @Id
     @Column(name = "document_id", nullable = false)
@@ -24,25 +24,13 @@ public class AuthorPublish {
 
     @Id
     @Column(name = "author_id", nullable = false)
-    public String getAuthorId() {
+    public int getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(String authorId) {
+    public void setAuthorId(int authorId) {
         this.authorId = authorId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AuthorPublish that = (AuthorPublish) o;
-        return documentId == that.documentId &&
-                Objects.equals(authorId, that.authorId);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(documentId, authorId);
-    }
 }

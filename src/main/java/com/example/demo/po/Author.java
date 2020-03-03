@@ -17,7 +17,7 @@ public class Author {
     //作者id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
 
     //作者ieee id
     @Column(name = "ieee_id", length = 100)

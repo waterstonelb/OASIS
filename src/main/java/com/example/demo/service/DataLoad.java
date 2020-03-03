@@ -91,13 +91,17 @@ public class DataLoad {
             int docId = result.getId();
 
             for (AuthorData adata : data.getAuthors()) {
+                boolean auafexists = authorDao
+                        .existsByNameAndAffiliation(adata.getName(), adata.getAffiliation());
 
-                if (true) {
+                if (auafexists){
+                    int auId = authorDao
+                            .findFirstByNameAndAffiliation(adata.getName()
+                                    , adata.getAffiliation()).getId();
+
 
                 }
-                else {
 
-                }
             }
         }catch (Exception ex){
                 ex.printStackTrace();

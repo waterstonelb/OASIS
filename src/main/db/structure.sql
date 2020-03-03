@@ -37,7 +37,7 @@ CREATE TABLE author(
 DROP TABLE IF EXISTS author_publish;
 CREATE TABLE author_publish(
      document_id         INT NOT NULL
-    ,author_id           VARCHAR(20) NOT NULL
+    ,author_id           INT NOT NULL
     ,PRIMARY KEY (document_id, author_id)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
