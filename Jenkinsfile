@@ -22,13 +22,12 @@ pipeline {
                 sh 'mvn test'
                 junit 'target/surefire-reports/*.xml'
                 jacoco execPattern: 'target/jacoco.exec'
+                withSonarQubeEnv('sonarqube') {
+                    sh "mvn sonar:sonar -Dproject.settings=sonar-project.properties"
+                }
                 echo 'Test Success'
             }
-            steps{
-                withSonarQubeEnv('sonarqube') {
-                       sh "mvn sonar:sonar -Dproject.settings=sonar-project.properties"
-                   }
-            }
+
         }
         stage('Build Docker Image') {
             steps {
