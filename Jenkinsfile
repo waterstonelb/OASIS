@@ -20,6 +20,8 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh 'mvn test'
+                junit 'target/surefire-reports/*.xml'
+                jacoco execPattern: 'target/jacoco.exec'
                 echo 'Test Success'
             }
         }
@@ -33,7 +35,7 @@ pipeline {
         stage('Run Docker image') {
                 steps {
                     echo "-=- run Docker image -=-"
-                    //sh 'docker stop ${APP_NAME}'
+                    sh 'docker stop ${APP_NAME}'
                     sh "docker run --name ${APP_NAME} -d --rm -p 8090:8090 ${APP_NAME}:${APP_VERSION}"
                 }
         }
