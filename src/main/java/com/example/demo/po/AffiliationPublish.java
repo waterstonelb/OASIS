@@ -1,7 +1,13 @@
 package com.example.demo.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.Objects;
+
+@Builder
+@AllArgsConstructor
 
 @Entity
 @Table(name = "affiliation_publish")
@@ -13,6 +19,9 @@ public class AffiliationPublish {
 
     //机构id
     private int affId;
+
+    public AffiliationPublish() {
+    }
 
     @Id
     @Column(name = "document_id", nullable = false)

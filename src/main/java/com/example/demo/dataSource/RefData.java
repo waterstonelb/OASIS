@@ -11,10 +11,12 @@ public class RefData {
 
     private String googleScholarLink;
 
+    //refnum
     private String id;
 
     private LinksData links;
 
+    //reforder
     private String order;
 
     private String refType;

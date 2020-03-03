@@ -1,10 +1,20 @@
 package com.example.demo.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Objects;
 
+
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+
+
 @Entity
-@Table(name = "ref", schema = "shkb", catalog = "")
+@Table(name = "ref", schema = "shkb")
 public class Ref {
     private int id;
     private int docId;

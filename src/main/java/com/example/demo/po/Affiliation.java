@@ -1,14 +1,14 @@
 package com.example.demo.po;
 
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "affiliation")
 public class Affiliation {
@@ -21,4 +21,6 @@ public class Affiliation {
     @Column(nullable = false)
     private String name;
 
+    public Affiliation() {
+    }
 }

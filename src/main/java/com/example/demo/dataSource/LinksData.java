@@ -1,5 +1,9 @@
 package com.example.demo.dataSource;
 
+
+import lombok.Getter;
+
+@Getter
 public class LinksData {
 
     private String abst;

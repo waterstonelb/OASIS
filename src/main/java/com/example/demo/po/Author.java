@@ -1,8 +1,6 @@
 package com.example.demo.po;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -10,6 +8,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "author")
 public class Author {
@@ -38,4 +38,7 @@ public class Author {
     //作者姓氏
     @Column(name = "last_name", length = 50)
     private String lastName;
+
+    public Author() {
+    }
 }
