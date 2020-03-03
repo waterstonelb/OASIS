@@ -4,12 +4,14 @@ USE shkb;
 #create document table
 DROP TABLE IF EXISTS document;
 CREATE TABLE document(
-     id              INT NOT NULL AUTO_INCREMENT
-    ,abst            TEXT
-    ,doi             VARCHAR(50)
-    ,keywords        VARCHAR(400)
-    ,publication     VARCHAR(400)
-    ,title           VARCHAR(200)
+     id                 INT NOT NULL AUTO_INCREMENT
+    ,abst               TEXT
+    ,doi                VARCHAR(50)
+    ,keywords           VARCHAR(400)
+    ,publication        VARCHAR(400)
+    ,title              VARCHAR(200)
+    ,publication_year   INT
+    ,pdf_link           VARCHAR(200)
     ,PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
@@ -18,13 +20,15 @@ CREATE TABLE document(
 #create author table
 DROP TABLE IF EXISTS author;
 CREATE TABLE author(
-     id                 VARCHAR(20) NOT NULL
+     id                 INT NOT NULL AUTO_INCREMENT
+    ,ieee_id            VARCHAR(100)
     ,name               VARCHAR(100) NOT NULL
     ,affiliation        VARCHAR(200)
-    ,first_name         VARCHAR(100)
-    ,last_name          VARCHAR(100)
+    ,first_name         VARCHAR(50)
+    ,last_name          VARCHAR(50)
 
     ,PRIMARY KEY (id)
+    ,UNIQUE KEY (name)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
 
@@ -62,9 +66,8 @@ DROP TABLE IF EXISTS ref;
 CREATE TABLE ref(
      id                     INT NOT NULL AUTO_INCREMENT
     ,doc_id                 INT NOT NULL
-
     ,google_scholar_link    VARCHAR(300)
-    ,refid                  VARCHAR(50)
+    ,refnum                 VARCHAR(50)
     ,ref_order              VARCHAR(50)
     ,ref_type               VARCHAR(50)
     ,ref_text               TEXT
@@ -73,4 +76,18 @@ CREATE TABLE ref(
     ,acm_link               VARCHAR(100)
     ,cross_ref_link         VARCHAR(100)
     ,document_link          VARCHAR(50)
+    ,open_url_img_loc       VARCHAR(100)
+    ,pdf_link               VARCHAR(200)
+    ,pdf_size               VARCHAR(50)
+    , PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS context;
+CREATE TABLE context(
+    id                     INT NOT NULL AUTO_INCREMENT
+    ,ref_id                INT NOT NULL
+    ,txt                   TEXT
+    ,part                  VARCHAR(50)
+    ,sec                   VARCHAR(50)
+    ,primary key (id)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;

@@ -11,6 +11,12 @@ public class Data {
 
     private String abst;
 
+    private String org_id;
+
+    private String publish_year;
+
+    public String pdf_link;
+
     private List<AuthorData> authors;
 
     private String  doi;
