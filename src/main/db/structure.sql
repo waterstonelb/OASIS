@@ -28,7 +28,7 @@ CREATE TABLE author(
     ,last_name          VARCHAR(50)
 
     ,PRIMARY KEY (id)
-    ,UNIQUE KEY (name)
+    ,UNIQUE KEY (name, affiliation)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
 
@@ -83,6 +83,7 @@ CREATE TABLE ref(
     , PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;
 
+#create context table
 DROP TABLE IF EXISTS context;
 CREATE TABLE context(
     id                     INT NOT NULL AUTO_INCREMENT

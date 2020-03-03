@@ -25,6 +25,7 @@ public class DataLoad {
 
     @Autowired
     private ObjectMapper objectMapper;
+
     @Autowired
     private DocumentDao documentDao;
 
@@ -48,6 +49,7 @@ public class DataLoad {
             while ((line = br.readLine()) != null){
                 lines.add(line);
             }
+            br.close();
         }catch (IOException ex){
             ex.printStackTrace();
         }
@@ -79,22 +81,26 @@ public class DataLoad {
     private void writeToDB(List<Data> filData){
 
         for (Data data : filData) {
+            try {
             Document document = Document.builder().abst(data.getAbst())
                     .doi(data.getDoi()).keywords(data.getKeywords()).title(data.getTitle())
-                    .publication(data.getPublication())
+                    .publication(data.getPublication()).pdfLink(data.getPdf_link())
                     .publicationYear(Integer.parseInt(data.getPublish_year())).build();
+
             Document result = documentDao.saveAndFlush(document);
             int docId = result.getId();
 
-            for (AuthorData adata : data.getAuthors()){
-                boolean auexist = authorDao.existsByName(adata.getName());
-                boolean afexist = affiliationDao.existsByName(adata.getAffiliation());
-                if (auexist && afexist){
+            for (AuthorData adata : data.getAuthors()) {
+
+                if (true) {
 
                 }
                 else {
 
                 }
+            }
+        }catch (Exception ex){
+                ex.printStackTrace();
             }
 
         }
