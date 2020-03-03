@@ -48,7 +48,9 @@ public class DataLoad {
 
 
 
-    @PostConstruct
+    //postconstruct注解使方法在springboot初始化完成后执行该方法
+    //该方法运行较慢, 所以只在需要时使用!!!!!!!!!!!!!!!
+    //@PostConstruct
     public void load(){
 
         /*-------------------Read Data---------------------------------------*/
@@ -167,20 +169,26 @@ public class DataLoad {
                         .refnum(refData.getId()).refOrder(refData.getOrder())
                         .refType(refData.getRefType()).refText(refData.getText())
                         .title(refData.getTitle())
-                        .abst(refData.getLinks().getAbst())
-                        .acmLink(refData.getLinks().getAcmLink())
-                        .crossRefLink(refData.getLinks().getCrossRefLink())
-                        .documentLink(refData.getLinks().getDocumentLink())
-                        .openUrlImgLoc(refData.getLinks().getOpenUrlImgLoc())
-                        .pdfLink(refData.getLinks().getPdfLink())
-                        .pdfSize(refData.getLinks().getPdfSize())
                         .build();
+
+
+                if (refData.getLinks() != null) {
+                    ref.setAbst(refData.getLinks().getAbst());
+                    ref.setAcmLink(refData.getLinks().getAcmLink());
+                    ref.setCrossRefLink(refData.getLinks().getCrossRefLink());
+                    ref.setDocumentLink(refData.getLinks().getDocumentLink());
+                    ref.setOpenUrlImgLoc(refData.getLinks().getOpenUrlImgLoc());
+                    ref.setPdfLink(refData.getLinks().getPdfLink());
+                    ref.setPdfSize(refData.getLinks().getPdfSize());
+
+                }
 
                 Ref refRes = refDao.saveAndFlush(ref);
                 int refId = refRes.getId();
 
                 for (ContextData contextData : refData.getContext()){
                     Context context = Context.builder().refId(refId)
+                            .txt(contextData.getText())
                             .part(contextData.getPart()).sec(contextData.getSec())
                             .build();
                     contextDao.saveAndFlush(context);

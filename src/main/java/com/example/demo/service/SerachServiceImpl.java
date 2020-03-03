@@ -22,8 +22,9 @@ public class SerachServiceImpl implements SearchService{
     @Override
     public ResponseVO<List<Document>>  seaechByAuthor(String author) {
         try{
-            List<Document> res = documentDao.findByAuthorsContaining(author);
-            return ResponseVO.buildSuccess(res);
+//            List<Document> res = documentDao.findByAuthorsContaining(author);
+//            return ResponseVO.buildSuccess(res);
+            return null;
         }catch (Exception ex) {
             ex.printStackTrace();
             return ResponseVO.buildFailure("Error");
@@ -34,9 +35,10 @@ public class SerachServiceImpl implements SearchService{
     @Override
     public ResponseVO<List<Document>>  searchByInstitution(String institution) {
         try{
-            List<Document> res = documentDao.
-                    findByAuthorAffiliationsContaining(institution);
-            return ResponseVO.buildSuccess(res);
+//            List<Document> res = documentDao.
+//                    findByAuthorAffiliationsContaining(institution);
+//            return ResponseVO.buildSuccess(res);
+            return null;
         }catch (Exception ex) {
             ex.printStackTrace();
             return ResponseVO.buildFailure("Error");
@@ -46,9 +48,10 @@ public class SerachServiceImpl implements SearchService{
     @Override
     public ResponseVO<List<Document>>  searchByConference(String conference) {
         try{
-            List<Document> res = documentDao.
-                    findByPublicationTitleContaining(conference);
-            return ResponseVO.buildSuccess(res);
+//            List<Document> res = documentDao.
+//                    findByPublicationTitleContaining(conference);
+//            return ResponseVO.buildSuccess(res);
+            return null;
         }catch (Exception ex) {
             ex.printStackTrace();
             return ResponseVO.buildFailure("Error");
