@@ -168,37 +168,37 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>${dependency.version}</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jacoco</groupId>
-                                    <artifactId>org.jacoco.agent</artifactId>
-                                    <version>${jacoco.version}</version>
-                                    <classifier>runtime</classifier>
-                                    <destFileName>jacocoagent.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>org.jacoco</groupId>
-                                    <artifactId>org.jacoco.cli</artifactId>
-                                    <version>${jacoco.version}</version>
-                                    <classifier>nodeps</classifier>
-                                    <destFileName>jacococli.jar</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-dependency-plugin</artifactId>-->
+<!--                <version>${dependency.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>copy</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <artifactItems>-->
+<!--                                <artifactItem>-->
+<!--                                    <groupId>org.jacoco</groupId>-->
+<!--                                    <artifactId>org.jacoco.agent</artifactId>-->
+<!--                                    <version>${jacoco.version}</version>-->
+<!--                                    <classifier>runtime</classifier>-->
+<!--                                    <destFileName>jacocoagent.jar</destFileName>-->
+<!--                                </artifactItem>-->
+<!--                                <artifactItem>-->
+<!--                                    <groupId>org.jacoco</groupId>-->
+<!--                                    <artifactId>org.jacoco.cli</artifactId>-->
+<!--                                    <version>${jacoco.version}</version>-->
+<!--                                    <classifier>nodeps</classifier>-->
+<!--                                    <destFileName>jacococli.jar</destFileName>-->
+<!--                                </artifactItem>-->
+<!--                            </artifactItems>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
 
             <!-- unit tests (with mocking and code coverage agents enabled) -->
             <plugin>
@@ -224,6 +224,25 @@
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.6.0.1398</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
 
