@@ -17,7 +17,7 @@ public class Data {
 
     private String publish_year;
 
-    public String pdf_link;
+    private String pdf_link;
 
     private List<AuthorData> authors;
 

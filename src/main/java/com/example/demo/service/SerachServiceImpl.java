@@ -34,7 +34,7 @@ public class SerachServiceImpl implements SearchService{
         try{
 
             List<Author> authors = authorDao.findByNameContaining(author);
-            if (authors.size() == 0)
+            if (authors.isEmpty())
                 return ResponseVO.buildFailure("未查询到匹配的论文");
 
             List<Integer> docIds = new ArrayList<>();
@@ -64,7 +64,7 @@ public class SerachServiceImpl implements SearchService{
         try{
             List<Affiliation> affiliations
                     = affiliationDao.findByNameContaining(institution);
-            if (affiliations.size() == 0)
+            if (affiliations.isEmpty())
                 return ResponseVO.buildFailure("未查询到匹配的论文");
 
             List<Integer> docIds = new ArrayList<>();
@@ -94,7 +94,7 @@ public class SerachServiceImpl implements SearchService{
 
             List<Document> res = documentDao
                     .findByPublicationContaining(conference);
-            if (res.size() == 0)
+            if (res.isEmpty())
                 return ResponseVO.buildFailure("未查询到匹配的论文");
 
             return ResponseVO.buildSuccess(res);
@@ -113,7 +113,7 @@ public class SerachServiceImpl implements SearchService{
             List<Document> res = documentDao
                     .findByKeywordsContaining(keyword);
 
-            if (res.size() == 0)
+            if (res.isEmpty())
                 return ResponseVO.buildFailure("未查询到匹配的论文");
 
             return ResponseVO.buildSuccess(res);

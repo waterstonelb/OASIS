@@ -25,28 +25,28 @@ public class SearchController {
 
 
     @ApiOperation(value = "根据作者查询")
-    @RequestMapping(value = "/search/author", method = RequestMethod.GET)
+    @RequestMapping(value = "/docsearch/author", method = RequestMethod.GET)
     public ResponseVO<List<Document>>  searchByAuthor(@RequestParam("author") String author){
 
         return searchService.seaechByAuthor(author);
     }
 
     @ApiOperation(value = "根据机构查询")
-    @RequestMapping(value = "/search/institution", method = RequestMethod.GET)
+    @RequestMapping(value = "/docsearch/institution", method = RequestMethod.GET)
     public ResponseVO<List<Document>>  searchByInstitution(@RequestParam("institotion") String institution){
 
         return searchService.searchByInstitution(institution);
     }
 
     @ApiOperation(value = "根据会议查询")
-    @RequestMapping(value = "/search/conference", method = RequestMethod.GET)
+    @RequestMapping(value = "/docsearch/conference", method = RequestMethod.GET)
     public ResponseVO<List<Document>>  searchByConference(@RequestParam("conference") String conference){
 
         return searchService.searchByConference(conference);
     }
 
     @ApiOperation(value = "根据论文关键字查询")
-    @RequestMapping(value = "/search/keyword", method = RequestMethod.GET)
+    @RequestMapping(value = "/docsearch/keyword", method = RequestMethod.GET)
     public ResponseVO<List<Document>>  searchByStudyKeyword(@RequestParam("keyword") String keyword){
 
         return searchService.searchByStudyKeyword(keyword);
