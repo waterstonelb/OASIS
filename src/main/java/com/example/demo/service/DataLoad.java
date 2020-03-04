@@ -50,6 +50,7 @@ public class DataLoad {
 
     //postconstruct注解使方法在springboot初始化完成后执行该方法
     //该方法运行较慢, 所以只在需要时使用!!!!!!!!!!!!!!!
+    //使用低压双核四线程cpu加nvme ssd(1300左右条原始数据)本地运行时间大约10分钟
     //@PostConstruct
     public void load(){
 
@@ -57,7 +58,7 @@ public class DataLoad {
         List<String> lines = new ArrayList<>();
 
         try {
-            InputStream in = this.getClass().getResourceAsStream("/data.json");
+            InputStream in = this.getClass().getResourceAsStream("/newdata.json");
             BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 
             String line;
@@ -105,9 +106,13 @@ public class DataLoad {
 
 
             try {
+                int citation_count = data.getCitation_count().length() == 0 ?
+                        0 : Integer.parseInt(data.getCitation_count());
+
             Document document = Document.builder().abst(data.getAbst())
                     .doi(data.getDoi()).keywords(data.getKeywords()).title(data.getTitle())
                     .publication(data.getPublication()).pdfLink(data.getPdf_link())
+                    .citationCount(citation_count)
                     .publicationYear(Integer.parseInt(data.getPublish_year())).build();
 
             Document docRes = documentDao.saveAndFlush(document);

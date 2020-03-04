@@ -21,6 +21,8 @@ public class Data {
 
     private String  doi;
 
+    private String citation_count;
+
     private String keywords;
 
     private String publication;
