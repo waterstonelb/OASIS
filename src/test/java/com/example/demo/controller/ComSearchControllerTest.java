@@ -35,7 +35,7 @@ class ComSearchControllerTest {
                 .keyword("").build();
         List<Document> list=new ArrayList<>();
         list.add(new Document());
-        when(comSearchService.comSearchCocument(comSearchInpVO)).thenReturn(ResponseVO.buildSuccess(list));
+        when(comSearchService.comSearchDocument(comSearchInpVO)).thenReturn(ResponseVO.buildSuccess(list));
 
         Map<String,String> map=new HashMap<>();
         map.put("authors","Pnix");
@@ -49,6 +49,6 @@ class ComSearchControllerTest {
             .content(content))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        verify(comSearchService).comSearchCocument(comSearchInpVO);
+        verify(comSearchService).comSearchDocument(comSearchInpVO);
     }
 }

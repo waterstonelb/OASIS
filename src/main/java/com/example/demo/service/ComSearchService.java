@@ -12,5 +12,5 @@ public interface ComSearchService {
      * @param comSearchInpVO POST信息
      * @return ResposeVO
      */
-    ResponseVO<List<Document>> comSearchCocument(ComSearchInpVO comSearchInpVO);
+    ResponseVO<List<Document>> comSearchDocument(ComSearchInpVO comSearchInpVO);
 }

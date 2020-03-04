@@ -2,6 +2,8 @@ package com.example.demo.dao;
 
 
 import com.example.demo.po.Document;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,14 +20,19 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
 
     List<Document> findByPublicationContaining(String conference);
 
-    @Query(value = "select * from document where " +
-            "if(?1 != '', id in (select document_id from author_publish where author_id in " +
-            "(select id from author where name like concat('%',?1,'%'))),1=1) " +
-            "and if(?2 != '',id in (select document_id from affiliation_publish where aff_id in " +
-            "(select id from affiliation where name like concat('%',?2,'%'))),1=1) " +
-            "and if(?3 != '',publication like concat('%',?3,'%'),1=1) " +
-            "and if(?4 != '',keywords like concat('%',?4,'%'),1=1);" ,nativeQuery = true)
-    List<Document> find(String author,String affiliation,String publication,String keywords);
+    Page<Document> findAll(Pageable pageable);
+
+    @Query(value = "select * from document d where " +
+            "if(?1 != '', d.id in (select ap.document_id from author_publish ap where ap.author_id in " +
+            "(select a.id from author a where a.name like concat('%',?1,'%'))),1=1) " +
+            "and if(?2 != '',d.id in (select af.document_id from affiliation_publish af where af.aff_id in " +
+            "(select aa.id from affiliation aa where aa.name like concat('%',?2,'%'))),1=1) " +
+            "and if(?3 != '',d.publication like concat('%',?3,'%'),1=1) " +
+            "and if(?4 != '',d.keywords like concat('%',?4,'%'),1=1) ;" ,nativeQuery = true)
+    Page<Document> find(String author, String affiliation, String publication, String keywords,Pageable pageable);
+
+    @Query(value = "select * from document d where d.id=?1 ;",nativeQuery = true)
+    Page<Document> findByDid(int id,Pageable pageable);
 
 
 }
