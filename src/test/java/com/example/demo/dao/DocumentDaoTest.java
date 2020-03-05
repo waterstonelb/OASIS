@@ -49,5 +49,18 @@ class DocumentDaoTest {
         System.out.println(res.getContent().get(0).getTitle());
     }
 
+    @Test
+    public void findByAuTest(){
+        PageRequest pageRequest = PageRequest.of(0, 5,
+                Sort.by(Sort.Direction.DESC, "publicationYear"));
+
+        Page<Document> res = documentDao.findByInstitution("Nanjing University", pageRequest);
+
+        for (Document d : res.getContent())
+            System.out.println(d.getDoi());
+
+    }
+
+
 
 }
