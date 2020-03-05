@@ -16,9 +16,19 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
 
     Document findFirstById(int id);
 
-    List<Document> findByKeywordsContaining(String keyword);
+    @Query(value = "select d from Document d where d.id in " +
+            "(select aup.documentId from AuthorPublish aup where aup.authorId in " +
+            "(select au.id from Author au where au.name like concat('%',?1,'%') ))")
+    Page<Document> findByAuthor(String author, Pageable pageable);
 
-    List<Document> findByPublicationContaining(String conference);
+    @Query(value = "select d from Document d where d.id in " +
+            "(select afp.documentId from AffiliationPublish afp where afp.affId in " +
+            "(select af.id from Affiliation af where af.name like concat('%',?1,'%') ))")
+    Page<Document> findByInstitution(String institution, Pageable pageable);
+
+    Page<Document> findByPublicationContaining(String publication, Pageable pageable);
+
+    Page<Document> findByKeywordsContaining(String keyword, Pageable pageable);
 
     Page<Document> findAll(Pageable pageable);
 
@@ -32,7 +42,7 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
     Page<Document> find(String author, String affiliation, String publication, String keywords,Pageable pageable);
 
     @Query(value = "select * from document d where d.id=?1 ;",nativeQuery = true)
-    Page<Document> findByDid(int id,Pageable pageable);
+    Page<Document> findByDid(int id, Pageable pageable);
 
 
 }

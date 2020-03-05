@@ -2,55 +2,47 @@ package com.example.demo.service;
 
 
 import com.example.demo.dao.*;
+import com.example.demo.dataSource.Data;
 import com.example.demo.po.*;
-import com.example.demo.vo.ResponseVO;
+import com.example.demo.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class SerachServiceImpl implements SearchService{
 
-    @Autowired
+
     private DocumentDao documentDao;
-
     @Autowired
-    private AuthorDao authorDao;
+    public void setDocumentDao(DocumentDao documentDao){
+        this.documentDao = documentDao;
+    }
 
-    @Autowired
-    private AuthorPublishDao authorPublishDao;
-
-    @Autowired
-    private AffiliationDao affiliationDao;
-
-    @Autowired
-    private AffiliationPublishDao affiliationPublishDao;
 
 
     @Override
-    public ResponseVO<List<Document>>  seaechByAuthor(String author) {
+    public ResponseVO<List<Document>>  seaechByAuthor(SearchByAuthorInpVO searchByAuthorInpVO) {
         try{
+            String author = searchByAuthorInpVO.getAuthor();
+            int page = searchByAuthorInpVO.getPage();
+            int size = searchByAuthorInpVO.getSize();
+            String sortBy = searchByAuthorInpVO.getSortby() == 0 ? "publicationYear" : "citationCount";
 
-            List<Author> authors = authorDao.findByNameContaining(author);
-            if (authors.isEmpty())
-                return ResponseVO.buildFailure("未查询到匹配的论文");
+            PageRequest pageRequest = PageRequest.of(page, size,
+                    Sort.by(Sort.Direction.DESC, sortBy));
 
-            List<Integer> docIds = new ArrayList<>();
-            for (Author authorpo : authors){
-                List<AuthorPublish> authorPublishes =
-                        authorPublishDao.findByAuthorId(authorpo.getId());
-                for (AuthorPublish ap : authorPublishes)
-                    docIds.add(ap.getDocumentId());
-            }
-
-            List<Document> res = new ArrayList<>();
-            for (Integer docId : docIds){
-                res.add(documentDao.findFirstById(docId));
-            }
+            Page<Document> queryRes = documentDao.findByAuthor(author, pageRequest);
+            long total = queryRes.getTotalElements();
+            List<Document> res = queryRes.getContent();
 
             return ResponseVO.buildSuccess(res);
+
 
         }catch (Exception ex) {
             ex.printStackTrace();
@@ -60,25 +52,18 @@ public class SerachServiceImpl implements SearchService{
     }
 
     @Override
-    public ResponseVO<List<Document>>  searchByInstitution(String institution) {
+    public ResponseVO<List<Document>>  searchByInstitution(SearchByInstitutionInpVO searchByInstitutionInpVO) {
         try{
-            List<Affiliation> affiliations
-                    = affiliationDao.findByNameContaining(institution);
-            if (affiliations.isEmpty())
-                return ResponseVO.buildFailure("未查询到匹配的论文");
+            String institution = searchByInstitutionInpVO.getInstitution();
+            int page = searchByInstitutionInpVO.getPage();
+            int size = searchByInstitutionInpVO.getSize();
+            String sortBy = searchByInstitutionInpVO.getSortby() == 0 ? "publicationYear" : "citationCount";
 
-            List<Integer> docIds = new ArrayList<>();
-            for (Affiliation aff : affiliations){
-                List<AffiliationPublish> affiliationPublishes =
-                        affiliationPublishDao.findByAffId(aff.getId());
-                for (AffiliationPublish ap : affiliationPublishes)
-                    docIds.add(ap.getDocumentId());
-            }
-
-            List<Document> res = new ArrayList<>();
-            for (Integer docId : docIds){
-                res.add(documentDao.findFirstById(docId));
-            }
+            PageRequest pageRequest = PageRequest.of(page, size,
+                    Sort.by(Sort.Direction.DESC, sortBy));
+            Page<Document> queryRes = documentDao.findByInstitution(institution, pageRequest);
+            long total = queryRes.getTotalElements();
+            List<Document> res = queryRes.getContent();
 
             return ResponseVO.buildSuccess(res);
 
@@ -89,15 +74,20 @@ public class SerachServiceImpl implements SearchService{
     }
 
     @Override
-    public ResponseVO<List<Document>>  searchByConference(String conference) {
+    public ResponseVO<List<Document>>  searchByConference(SearchByConferenceInpVO searchByConferenceInpVO) {
         try{
-
-            List<Document> res = documentDao
-                    .findByPublicationContaining(conference);
-            if (res.isEmpty())
-                return ResponseVO.buildFailure("未查询到匹配的论文");
+            String conference = searchByConferenceInpVO.getConference();
+            int page = searchByConferenceInpVO.getPage();
+            int size = searchByConferenceInpVO.getSize();
+            String sortBy = searchByConferenceInpVO.getSortby() == 0 ? "publicationYear" : "citationCount";
+            PageRequest pageRequest = PageRequest.of(page, size,
+                    Sort.by(Sort.Direction.DESC, sortBy));
+            Page<Document> queryRes = documentDao.findByPublicationContaining(conference, pageRequest);
+            long total = queryRes.getTotalElements();
+            List<Document> res = queryRes.getContent();
 
             return ResponseVO.buildSuccess(res);
+
 
         }catch (Exception ex) {
             ex.printStackTrace();
@@ -107,14 +97,17 @@ public class SerachServiceImpl implements SearchService{
 
 
     @Override
-    public ResponseVO<List<Document>>  searchByStudyKeyword(String keyword) {
+    public ResponseVO<List<Document>>  searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO) {
         try{
-
-            List<Document> res = documentDao
-                    .findByKeywordsContaining(keyword);
-
-            if (res.isEmpty())
-                return ResponseVO.buildFailure("未查询到匹配的论文");
+            String keyword = searchByKeywordInpVO.getKeyword();
+            int page = searchByKeywordInpVO.getPage();
+            int size = searchByKeywordInpVO.getSize();
+            String sortBy = searchByKeywordInpVO.getSortby() == 0 ? "publicationYear" : "citationCount";
+            PageRequest pageRequest = PageRequest.of(page, size,
+                    Sort.by(Sort.Direction.DESC, sortBy));
+            Page<Document> queryRes = documentDao.findByKeywordsContaining(keyword, pageRequest);
+            long total = queryRes.getTotalElements();
+            List<Document> res = queryRes.getContent();
 
             return ResponseVO.buildSuccess(res);
 

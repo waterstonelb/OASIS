@@ -1,17 +1,17 @@
 package com.example.demo.service;
 
 import com.example.demo.po.Document;
-import com.example.demo.vo.ResponseVO;
+import com.example.demo.vo.*;
 
 import java.util.List;
 
 public interface SearchService {
 
-    ResponseVO<List<Document>> seaechByAuthor(String author);
+    ResponseVO<List<Document>> seaechByAuthor(SearchByAuthorInpVO searchByAuthorInpVO);
 
-    ResponseVO<List<Document>>  searchByInstitution(String institution);
+    ResponseVO<List<Document>>  searchByInstitution(SearchByInstitutionInpVO searchByInstitutionInpVO);
 
-    ResponseVO<List<Document>>  searchByConference(String conference);
+    ResponseVO<List<Document>>  searchByConference(SearchByConferenceInpVO searchByConferenceInpVO);
 
-    ResponseVO<List<Document>>  searchByStudyKeyword(String keyword);
+    ResponseVO<List<Document>>  searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO);
 }

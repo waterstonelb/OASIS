@@ -3,13 +3,10 @@ package com.example.demo.controller;
 
 import com.example.demo.po.Document;
 import com.example.demo.service.SearchService;
-import com.example.demo.vo.ResponseVO;
+import com.example.demo.vo.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,30 +22,34 @@ public class SearchController {
 
 
     @ApiOperation(value = "根据作者查询")
-    @RequestMapping(value = "/docsearch/author", method = RequestMethod.GET)
-    public ResponseVO<List<Document>>  searchByAuthor(@RequestParam("author") String author){
+    @RequestMapping(value = "/docsearch/author", method = RequestMethod.POST)
+    public ResponseVO<List<Document>>
+    searchByAuthor(@RequestBody SearchByAuthorInpVO searchByAuthorInpVO){
 
-        return searchService.seaechByAuthor(author);
+        return searchService.seaechByAuthor(searchByAuthorInpVO);
     }
 
     @ApiOperation(value = "根据机构查询")
-    @RequestMapping(value = "/docsearch/institution", method = RequestMethod.GET)
-    public ResponseVO<List<Document>>  searchByInstitution(@RequestParam("institotion") String institution){
+    @RequestMapping(value = "/docsearch/institution", method = RequestMethod.POST)
+    public ResponseVO<List<Document>>
+    searchByInstitution(@RequestBody SearchByInstitutionInpVO searchByInstitutionInpVO){
 
-        return searchService.searchByInstitution(institution);
+        return searchService.searchByInstitution(searchByInstitutionInpVO);
     }
 
     @ApiOperation(value = "根据会议查询")
-    @RequestMapping(value = "/docsearch/conference", method = RequestMethod.GET)
-    public ResponseVO<List<Document>>  searchByConference(@RequestParam("conference") String conference){
+    @RequestMapping(value = "/docsearch/conference", method = RequestMethod.POST)
+    public ResponseVO<List<Document>>
+    searchByConference(@RequestBody SearchByConferenceInpVO searchByConferenceInpVO){
 
-        return searchService.searchByConference(conference);
+        return searchService.searchByConference(searchByConferenceInpVO);
     }
 
     @ApiOperation(value = "根据论文关键字查询")
-    @RequestMapping(value = "/docsearch/keyword", method = RequestMethod.GET)
-    public ResponseVO<List<Document>>  searchByStudyKeyword(@RequestParam("keyword") String keyword){
+    @RequestMapping(value = "/docsearch/keyword", method = RequestMethod.POST)
+    public ResponseVO<List<Document>>
+    searchByStudyKeyword(@RequestBody SearchByKeywordInpVO searchByKeywordInpVO){
 
-        return searchService.searchByStudyKeyword(keyword);
+        return searchService.searchByStudyKeyword(searchByKeywordInpVO);
     }
 }
