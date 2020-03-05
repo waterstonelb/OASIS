@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +23,11 @@ public class SerachServiceImpl implements SearchService{
         this.documentDao = documentDao;
     }
 
+    private AuthorDao authorDao;
+    @Autowired
+    public void setAuthorDao(AuthorDao authorDao){
+        this.documentDao = authorDao;
+    }
 
 
     @Override
@@ -38,6 +44,11 @@ public class SerachServiceImpl implements SearchService{
             Page<Document> queryRes = documentDao.findByAuthor(author, pageRequest);
             long total = queryRes.getTotalElements();
             List<Document> res = queryRes.getContent();
+
+            List<DocumentVO> vores = new ArrayList<>();
+
+            for (Document document : res)
+                vores.add(new DocumentVO(document, authorDao.))
 
             return ResponseVO.buildSuccess(new SearchVO(total, res));
 
