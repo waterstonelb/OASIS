@@ -1,6 +1,7 @@
 package com.example.demo.vo;
 
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,6 +13,8 @@ public class ComSearchInpVO {
     String conference;
     String keyword;
     int size;
+
+    @ApiModelProperty("页号, 从0开始")
     int page;
 
     public ComSearchInpVO(String authors, String institution, String conference, String keyword, int size, int page) {
