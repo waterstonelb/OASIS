@@ -51,7 +51,7 @@ pipeline {
                 //sh "docker tag ${APP_NAME}:${APP_VERSION} ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
 
                 //sh "docker push ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
-                sh "docker rmi $(docker images | grep ${APP_NAME} | grep -v ${APP_VERSION}) "
+                sh 'docker rmi $(docker images | grep ${APP_NAME} | grep -v ${APP_VERSION}) '
                 echo 'Delete Success'
             }
 
