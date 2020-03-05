@@ -48,10 +48,5 @@ class DocumentDaoTest {
         System.out.println(res.getContent().get(0).getTitle());
     }
 
-    @Test
-    void normalPageFind(){
-        Page<Document> res=documentDao.findAll(pr);
-        System.out.println(res.getTotalElements());
 
-    }
 }
