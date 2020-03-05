@@ -4,6 +4,7 @@ import com.example.demo.po.Document;
 import com.example.demo.service.ComSearchService;
 import com.example.demo.vo.ComSearchInpVO;
 import com.example.demo.vo.ResponseVO;
+import com.example.demo.vo.SearchVO;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -37,7 +38,7 @@ class ComSearchControllerTest {
                 .page(0).build();
         List<Document> list=new ArrayList<>();
         list.add(new Document());
-        when(comSearchService.comSearchDocument(comSearchInpVO)).thenReturn(ResponseVO.buildSuccess(list));
+        when(comSearchService.comSearchDocument(comSearchInpVO)).thenReturn(ResponseVO.buildSuccess(new SearchVO(10,list)));
 
         Map<String,String> map=new HashMap<>();
         map.put("authors","Pnix");

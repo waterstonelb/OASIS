@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,25 +23,19 @@ class DocumentDaoTest {
     @Autowired
     DocumentDao documentDao;
 
-    PageRequest pr;
-
-    @Before
-    public void setUp(){
-        pr=PageRequest.of(0,1);
-    }
-
 
     @Test
-    void findSuccess() {
-
-        assertEquals(1, documentDao.findFirstById(1).getId());
-    }
-
-    @Test
-    void pageFindTest(){
-        Page<Document> res=documentDao.find("Ali","Dallas","34th","",pr);
+    void findByAuthorTest(){
+        Page<Document> res=documentDao.findByAuthor("Ali", PageRequest.of(0,10));
+        System.out.println(res.getTotalElements());
         System.out.println(res.getContent().size());
-        assertEquals(1,res.getTotalElements());
+    }
+    @Test
+    void comFindTest(){
+        Page<Document> res=documentDao.comFind("Ali","Dallas","34th",null,
+                PageRequest.of(0,10, Sort.Direction.DESC,""));
+        System.out.println(res.getTotalElements());
+        System.out.println(res.getContent().size());
     }
 
 }
