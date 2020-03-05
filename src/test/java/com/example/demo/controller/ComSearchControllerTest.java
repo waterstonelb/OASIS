@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.po.Document;
 import com.example.demo.service.ComSearchService;
 import com.example.demo.vo.ComSearchInpVO;
+import com.example.demo.vo.DocumentVO;
 import com.example.demo.vo.ResponseVO;
 import com.example.demo.vo.SearchVO;
 import net.minidev.json.JSONObject;
@@ -30,14 +31,14 @@ class ComSearchControllerTest {
         comSearchController.setComSearchService(comSearchService);
         MockMvc mockMvc=standaloneSetup(comSearchController).build();
         ComSearchInpVO comSearchInpVO=ComSearchInpVO.builder()
-                .authors("Pnix")
+                .authors("Penix")
                 .institution("Google")
                 .conference("ACM")
                 .keyword("")
                 .size(2)
                 .page(0).build();
-        List<Document> list=new ArrayList<>();
-        list.add(new Document());
+        List<DocumentVO> list=new ArrayList<>();
+        list.add(DocumentVO.builder().build());
         when(comSearchService.comSearchDocument(comSearchInpVO)).thenReturn(ResponseVO.buildSuccess(new SearchVO(10,list)));
 
         Map<String,String> map=new HashMap<>();
