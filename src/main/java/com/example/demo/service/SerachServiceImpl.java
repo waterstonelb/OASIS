@@ -26,7 +26,7 @@ public class SerachServiceImpl implements SearchService{
     private AuthorDao authorDao;
     @Autowired
     public void setAuthorDao(AuthorDao authorDao){
-        this.documentDao = authorDao;
+        this.authorDao = authorDao;
     }
 
 
@@ -45,12 +45,12 @@ public class SerachServiceImpl implements SearchService{
             long total = queryRes.getTotalElements();
             List<Document> res = queryRes.getContent();
 
-            List<DocumentVO> vores = new ArrayList<>();
+            List<DocumentVO> resVO = new ArrayList<>();
 
             for (Document document : res)
-                vores.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
+                resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
-            return ResponseVO.buildSuccess(new SearchVO(total, res));
+            return ResponseVO.buildSuccess(new SearchVO(total, resVO));
 
 
         }catch (Exception ex) {
@@ -74,7 +74,14 @@ public class SerachServiceImpl implements SearchService{
             long total = queryRes.getTotalElements();
             List<Document> res = queryRes.getContent();
 
-            return ResponseVO.buildSuccess(new SearchVO(total, res));
+            List<DocumentVO> resVO = new ArrayList<>();
+
+            for (Document document : res)
+                resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
+
+            return ResponseVO.buildSuccess(new SearchVO(total, resVO));
+
+
 
         }catch (Exception ex) {
             ex.printStackTrace();
@@ -95,7 +102,12 @@ public class SerachServiceImpl implements SearchService{
             long total = queryRes.getTotalElements();
             List<Document> res = queryRes.getContent();
 
-            return ResponseVO.buildSuccess(new SearchVO(total, res));
+            List<DocumentVO> resVO = new ArrayList<>();
+
+            for (Document document : res)
+                resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
+
+            return ResponseVO.buildSuccess(new SearchVO(total, resVO));
 
 
         }catch (Exception ex) {
@@ -118,7 +130,12 @@ public class SerachServiceImpl implements SearchService{
             long total = queryRes.getTotalElements();
             List<Document> res = queryRes.getContent();
 
-            return ResponseVO.buildSuccess(new SearchVO(total, res));
+            List<DocumentVO> resVO = new ArrayList<>();
+
+            for (Document document : res)
+                resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
+
+            return ResponseVO.buildSuccess(new SearchVO(total, resVO));
 
         }catch (Exception ex) {
             ex.printStackTrace();
