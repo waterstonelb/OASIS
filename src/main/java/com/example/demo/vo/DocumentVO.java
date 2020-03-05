@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,9 +15,29 @@ import java.util.List;
 @Builder
 public class DocumentVO {
 
-    @ApiModelProperty("文章信息")
-    private Document document;
-
     @ApiModelProperty("作者信息")
-    private List<Author> authors;
+    List<AuthorSimpleVO> authors;
+
+    String title;
+    int date;
+    String publication;
+    String abst;
+    String keysords;
+    int citations;
+    int docId;
+    public DocumentVO(Document document,List<Author> authorList){
+        this.title=document.getTitle();
+        this.date=document.getPublicationYear();
+        this.abst=document.getAbst();
+        this.publication=document.getPublication();
+        this.citations=document.getCitationCount();
+        this.keysords=document.getKeywords();
+        this.docId=document.getId();
+        this.authors=new ArrayList<>();
+        for (Author a: authorList ) {
+            this.authors.add(new AuthorSimpleVO(a.getId(),a.getName()));
+        }
+    }
+
+
 }

@@ -47,7 +47,7 @@ public class ComSearchServiceImpl implements ComSearchService {
 
             List<DocumentVO> resVO = new ArrayList<>();
 
-            for (Document document : res)
+            for (Document document : res.getContent())
                 resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
             if(!res.isEmpty()) {
