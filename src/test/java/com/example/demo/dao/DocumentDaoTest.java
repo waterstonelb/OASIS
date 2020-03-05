@@ -25,7 +25,7 @@ class DocumentDaoTest {
 
     @Before
     public void setUp(){
-        pr=PageRequest.of(0,2);
+        pr=PageRequest.of(0,1);
     }
 
 
@@ -39,14 +39,7 @@ class DocumentDaoTest {
     void pageFindTest(){
         Page<Document> res=documentDao.find("Ali","Dallas","34th","",pr);
         System.out.println(res.getContent().size());
-//        assertEquals(2,res.getTotalElements());
+        assertEquals(1,res.getTotalElements());
     }
-    @Test
-    void normalQueryPage(){
-        //PageRequest pr=PageRequest.of(0,2);
-        Page<Document> res=documentDao.findByDid(2,pr);
-        System.out.println(res.getContent().get(0).getTitle());
-    }
-
 
 }

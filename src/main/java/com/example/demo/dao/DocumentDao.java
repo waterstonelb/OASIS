@@ -20,7 +20,6 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
 
     List<Document> findByPublicationContaining(String conference);
 
-    Page<Document> findAll(Pageable pageable);
 
     @Query(value = "select * from document d where " +
             "if(?1 != '', d.id in (select ap.document_id from author_publish ap where ap.author_id in " +
