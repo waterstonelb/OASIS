@@ -24,7 +24,7 @@ public class SearchController {
 
     @ApiOperation(value = "根据作者查询")
     @RequestMapping(value = "/author", method = RequestMethod.POST)
-    public ResponseVO<List<Document>>
+    public ResponseVO<SearchVO>
     searchByAuthor(@RequestBody SearchByAuthorInpVO searchByAuthorInpVO){
 
         return searchService.seaechByAuthor(searchByAuthorInpVO);
@@ -32,7 +32,7 @@ public class SearchController {
 
     @ApiOperation(value = "根据机构查询")
     @RequestMapping(value = "/institution", method = RequestMethod.POST)
-    public ResponseVO<List<Document>>
+    public ResponseVO<SearchVO>
     searchByInstitution(@RequestBody SearchByInstitutionInpVO searchByInstitutionInpVO){
 
         return searchService.searchByInstitution(searchByInstitutionInpVO);
@@ -40,7 +40,7 @@ public class SearchController {
 
     @ApiOperation(value = "根据会议查询")
     @RequestMapping(value = "/conference", method = RequestMethod.POST)
-    public ResponseVO<List<Document>>
+    public ResponseVO<SearchVO>
     searchByConference(@RequestBody SearchByConferenceInpVO searchByConferenceInpVO){
 
         return searchService.searchByConference(searchByConferenceInpVO);
@@ -48,7 +48,7 @@ public class SearchController {
 
     @ApiOperation(value = "根据论文关键字查询")
     @RequestMapping(value = "/keyword", method = RequestMethod.POST)
-    public ResponseVO<List<Document>>
+    public ResponseVO<SearchVO>
     searchByStudyKeyword(@RequestBody SearchByKeywordInpVO searchByKeywordInpVO){
 
         return searchService.searchByStudyKeyword(searchByKeywordInpVO);
