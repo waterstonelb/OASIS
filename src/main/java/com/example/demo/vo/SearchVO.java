@@ -15,7 +15,7 @@ public class SearchVO {
     private long total;
 
     @ApiModelProperty("搜索结果(分页)")
-    private List<Document> documents;
+    private List<DocumentVO> documents;
 
 
 

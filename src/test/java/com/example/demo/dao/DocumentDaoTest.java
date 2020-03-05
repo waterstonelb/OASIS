@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,5 +36,19 @@ class DocumentDaoTest {
         System.out.println(res.getTotalElements());
         System.out.println(res.getContent().size());
     }
+
+    @Test
+    public void findByAuTest(){
+        PageRequest pageRequest = PageRequest.of(0, 5,
+                Sort.by(Sort.Direction.DESC, "publicationYear"));
+
+        Page<Document> res = documentDao.findByInstitution("Nanjing University", pageRequest);
+
+        for (Document d : res.getContent())
+            System.out.println(d.getDoi());
+
+    }
+
+
 
 }
