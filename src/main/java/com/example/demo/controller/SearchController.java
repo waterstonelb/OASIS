@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/search/document")
 public class SearchController {
 
     private SearchService searchService;
@@ -22,7 +23,7 @@ public class SearchController {
 
 
     @ApiOperation(value = "根据作者查询")
-    @RequestMapping(value = "/docsearch/author", method = RequestMethod.POST)
+    @RequestMapping(value = "/author", method = RequestMethod.POST)
     public ResponseVO<List<Document>>
     searchByAuthor(@RequestBody SearchByAuthorInpVO searchByAuthorInpVO){
 
@@ -30,7 +31,7 @@ public class SearchController {
     }
 
     @ApiOperation(value = "根据机构查询")
-    @RequestMapping(value = "/docsearch/institution", method = RequestMethod.POST)
+    @RequestMapping(value = "/institution", method = RequestMethod.POST)
     public ResponseVO<List<Document>>
     searchByInstitution(@RequestBody SearchByInstitutionInpVO searchByInstitutionInpVO){
 
@@ -38,7 +39,7 @@ public class SearchController {
     }
 
     @ApiOperation(value = "根据会议查询")
-    @RequestMapping(value = "/docsearch/conference", method = RequestMethod.POST)
+    @RequestMapping(value = "/conference", method = RequestMethod.POST)
     public ResponseVO<List<Document>>
     searchByConference(@RequestBody SearchByConferenceInpVO searchByConferenceInpVO){
 
@@ -46,7 +47,7 @@ public class SearchController {
     }
 
     @ApiOperation(value = "根据论文关键字查询")
-    @RequestMapping(value = "/docsearch/keyword", method = RequestMethod.POST)
+    @RequestMapping(value = "/keyword", method = RequestMethod.POST)
     public ResponseVO<List<Document>>
     searchByStudyKeyword(@RequestBody SearchByKeywordInpVO searchByKeywordInpVO){
 

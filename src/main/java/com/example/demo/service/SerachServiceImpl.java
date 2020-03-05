@@ -25,7 +25,7 @@ public class SerachServiceImpl implements SearchService{
 
 
     @Override
-    public ResponseVO<List<Document>>  seaechByAuthor(SearchByAuthorInpVO searchByAuthorInpVO) {
+    public ResponseVO<SearchVO>  seaechByAuthor(SearchByAuthorInpVO searchByAuthorInpVO) {
         try{
             String author = searchByAuthorInpVO.getAuthor();
             int page = searchByAuthorInpVO.getPage();
@@ -39,7 +39,7 @@ public class SerachServiceImpl implements SearchService{
             long total = queryRes.getTotalElements();
             List<Document> res = queryRes.getContent();
 
-            return ResponseVO.buildSuccess(res);
+            return ResponseVO.buildSuccess(new SearchVO(total, res));
 
 
         }catch (Exception ex) {
@@ -50,7 +50,7 @@ public class SerachServiceImpl implements SearchService{
     }
 
     @Override
-    public ResponseVO<List<Document>>  searchByInstitution(SearchByInstitutionInpVO searchByInstitutionInpVO) {
+    public ResponseVO<SearchVO>  searchByInstitution(SearchByInstitutionInpVO searchByInstitutionInpVO) {
         try{
             String institution = searchByInstitutionInpVO.getInstitution();
             int page = searchByInstitutionInpVO.getPage();
@@ -63,7 +63,7 @@ public class SerachServiceImpl implements SearchService{
             long total = queryRes.getTotalElements();
             List<Document> res = queryRes.getContent();
 
-            return ResponseVO.buildSuccess(res);
+            return ResponseVO.buildSuccess(new SearchVO(total, res));
 
         }catch (Exception ex) {
             ex.printStackTrace();
@@ -72,7 +72,7 @@ public class SerachServiceImpl implements SearchService{
     }
 
     @Override
-    public ResponseVO<List<Document>>  searchByConference(SearchByConferenceInpVO searchByConferenceInpVO) {
+    public ResponseVO<SearchVO>  searchByConference(SearchByConferenceInpVO searchByConferenceInpVO) {
         try{
             String conference = searchByConferenceInpVO.getConference();
             int page = searchByConferenceInpVO.getPage();
@@ -84,7 +84,7 @@ public class SerachServiceImpl implements SearchService{
             long total = queryRes.getTotalElements();
             List<Document> res = queryRes.getContent();
 
-            return ResponseVO.buildSuccess(res);
+            return ResponseVO.buildSuccess(new SearchVO(total, res));
 
 
         }catch (Exception ex) {
@@ -95,7 +95,7 @@ public class SerachServiceImpl implements SearchService{
 
 
     @Override
-    public ResponseVO<List<Document>>  searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO) {
+    public ResponseVO<SearchVO>  searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO) {
         try{
             String keyword = searchByKeywordInpVO.getKeyword();
             int page = searchByKeywordInpVO.getPage();
@@ -107,7 +107,7 @@ public class SerachServiceImpl implements SearchService{
             long total = queryRes.getTotalElements();
             List<Document> res = queryRes.getContent();
 
-            return ResponseVO.buildSuccess(res);
+            return ResponseVO.buildSuccess(new SearchVO(total, res));
 
         }catch (Exception ex) {
             ex.printStackTrace();

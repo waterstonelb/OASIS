@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface SearchService {
 
-    ResponseVO<List<Document>> seaechByAuthor(SearchByAuthorInpVO searchByAuthorInpVO);
+    ResponseVO<SearchVO> seaechByAuthor(SearchByAuthorInpVO searchByAuthorInpVO);
 
-    ResponseVO<List<Document>>  searchByInstitution(SearchByInstitutionInpVO searchByInstitutionInpVO);
+    ResponseVO<SearchVO>  searchByInstitution(SearchByInstitutionInpVO searchByInstitutionInpVO);
 
-    ResponseVO<List<Document>>  searchByConference(SearchByConferenceInpVO searchByConferenceInpVO);
+    ResponseVO<SearchVO>  searchByConference(SearchByConferenceInpVO searchByConferenceInpVO);
 
-    ResponseVO<List<Document>>  searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO);
+    ResponseVO<SearchVO>  searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO);
 }
