@@ -32,16 +32,20 @@ class ComSearchControllerTest {
                 .authors("Pnix")
                 .institution("Google")
                 .conference("ACM")
-                .keyword("").build();
+                .keyword("")
+                .size(2)
+                .page(0).build();
         List<Document> list=new ArrayList<>();
         list.add(new Document());
-        when(comSearchService.comSearchCocument(comSearchInpVO)).thenReturn(ResponseVO.buildSuccess(list));
+        when(comSearchService.comSearchDocument(comSearchInpVO)).thenReturn(ResponseVO.buildSuccess(list));
 
         Map<String,String> map=new HashMap<>();
         map.put("authors","Pnix");
         map.put("institution","Google");
         map.put("conference","ACM");
         map.put("keyword","");
+        map.put("size","2");
+        map.put("page","0");
         String content= JSONObject.toJSONString(map);
 
         String res=mockMvc.perform(post("/comsearch/document")
@@ -49,6 +53,6 @@ class ComSearchControllerTest {
             .content(content))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        verify(comSearchService).comSearchCocument(comSearchInpVO);
+        verify(comSearchService).comSearchDocument(comSearchInpVO);
     }
 }

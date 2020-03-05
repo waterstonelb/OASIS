@@ -13,8 +13,6 @@ public class Data {
     @JsonProperty("abstract")
     private String abst;
 
-    private String org_id;
-
     private String publish_year;
 
     private String pdf_link;
@@ -22,6 +20,8 @@ public class Data {
     private List<AuthorData> authors;
 
     private String  doi;
+
+    private String citation_count;
 
     private String keywords;
 

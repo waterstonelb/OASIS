@@ -24,7 +24,7 @@ public class ComSearchController {
     @ApiOperation(value = "组合查询（返回论文）")
     @PostMapping("/document")
     public ResponseVO<List<Document>> getComDocument(@RequestBody ComSearchInpVO comSearchInpVO){
-        return comSearchService.comSearchCocument(comSearchInpVO);
+        return comSearchService.comSearchDocument(comSearchInpVO);
     }
 
 

@@ -11,6 +11,7 @@ CREATE TABLE document(
     ,publication        VARCHAR(400)
     ,title              VARCHAR(200)
     ,publication_year   INT
+    ,citation_count     INT
     ,pdf_link           VARCHAR(200)
     ,PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;

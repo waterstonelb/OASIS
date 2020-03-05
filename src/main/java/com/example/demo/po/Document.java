@@ -48,6 +48,9 @@ public class Document {
     @Column(name = "publication_year")
     private int publicationYear;
 
+    @Column(name = "citation_count")
+    private int citationCount;
+
     @Column(name = "pdf_link", length = 200)
     private String pdfLink;
 
