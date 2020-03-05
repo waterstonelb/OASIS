@@ -12,14 +12,21 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'mvn package'
+                sh 'mvn clean package'
                 echo 'Build Success'
             }
         }
+        stage('Build Docker Image') {
+                    steps {
+                        echo 'Building'
+                        sh 'docker build -t ${APP_NAME}:${APP_VERSION} .'
+                        echo 'Build Success'
+                    }
+                }
         stage('Test') {
             steps{
                 echo 'Testing..'
-                sh 'mvn test'
+                sh 'mvn clean test'
                 junit 'target/surefire-reports/*.xml'
                 jacoco execPattern: 'target/jacoco.exec'
                 withSonarQubeEnv('sonarqube') {
@@ -29,13 +36,7 @@ pipeline {
             }
 
         }
-        stage('Build Docker Image') {
-            steps {
-                echo 'Building'
-                sh 'docker build -t ${APP_NAME}:${APP_VERSION} .'
-                echo 'Build Success'
-            }
-        }
+
         stage('Run Docker image') {
                 steps {
                     echo "-=- run Docker image -=-"
@@ -43,15 +44,15 @@ pipeline {
                     sh "docker run --name ${APP_NAME} -d --rm -p 8090:8090 ${APP_NAME}:${APP_VERSION}"
                 }
         }
-        stage('Push To Registry'){
+        stage('Delete old image'){
 
             steps{
-                echo 'Pushing'
-                sh "docker tag ${APP_NAME}:${APP_VERSION} ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
+                echo 'Deleting'
+                //sh "docker tag ${APP_NAME}:${APP_VERSION} ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
 
                 //sh "docker push ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
-                 //sh "docker rmi $(docker images | grep ${ORG_NAME}/${APP_NAME} | grep -v 'latest' | grep -v ${APP_VERSION} | awk '{print $3}') "
-                echo 'Pushing Success'
+                sh "docker rmi $(docker images | grep ${APP_NAME} | grep -v ${APP_VERSION}) "
+                echo 'Delete Success'
             }
 
         }
