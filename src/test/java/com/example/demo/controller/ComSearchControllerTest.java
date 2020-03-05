@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.po.Document;
 import com.example.demo.service.ComSearchService;
 import com.example.demo.vo.ComSearchInpVO;
 import com.example.demo.vo.DocumentVO;
 import com.example.demo.vo.ResponseVO;
 import com.example.demo.vo.SearchVO;
 import net.minidev.json.JSONObject;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -22,10 +21,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 
-class ComSearchControllerTest {
+public class ComSearchControllerTest {
 
     @Test
-    void getComDocument() throws Exception {
+    public void getComDocument() throws Exception {
         ComSearchService comSearchService=mock(ComSearchService.class);
         ComSearchController comSearchController=new ComSearchController();
         comSearchController.setComSearchService(comSearchService);
@@ -42,7 +41,7 @@ class ComSearchControllerTest {
         when(comSearchService.comSearchDocument(comSearchInpVO)).thenReturn(ResponseVO.buildSuccess(new SearchVO(10,list)));
 
         Map<String,String> map=new HashMap<>();
-        map.put("authors","Pnix");
+        map.put("authors","Penix");
         map.put("institution","Google");
         map.put("conference","ACM");
         map.put("keyword","");

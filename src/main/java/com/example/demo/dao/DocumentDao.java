@@ -30,11 +30,11 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
 
     Page<Document> findByKeywordsContaining(String keyword, Pageable pageable);
 
-    @Query(value = "select d from Document d left join where (?1 is null or d.id in " +
+    @Query(value = "select d from Document d where (?1 is null or d.id in " +
             "(select aup.documentId from AuthorPublish aup where aup.authorId in " +
             "(select au.id from Author au where au.name like %?1%))) " +
             "and (?2 is null or d.id in (select afp.documentId from AffiliationPublish afp where afp.affId in " +
-            "(select af.id from Affiliation af where af.name like %?2))) " +
+            "(select af.id from Affiliation af where af.name like %?2%))) " +
             "and (?3 is null or d.publication like %?3%) " +
             "and (?4 is null or d.keywords like %?4%) ")
     Page<Document> comFind(String author,String affiliation, String publication, String keywords,Pageable pageable);

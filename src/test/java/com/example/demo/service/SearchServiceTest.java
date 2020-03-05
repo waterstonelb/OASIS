@@ -1,12 +1,6 @@
 package com.example.demo.service;
 
-
-import com.example.demo.dao.DocumentDao;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.data.domain.PageRequest;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import org.junit.Test;
 
 
 public class SearchServiceTest {
