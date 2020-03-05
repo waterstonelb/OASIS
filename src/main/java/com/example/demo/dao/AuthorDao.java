@@ -19,7 +19,7 @@ public interface AuthorDao extends JpaRepository<Author, Integer> {
 
     @Query("select au from Author au where au.id in " +
             "(select aup.authorId from AuthorPublish aup where aup.documentId = ?1)")
-    List<Author> findByDocumentId(String docId);
+    List<Author> findByDocumentId(int docId);
 
 
 

@@ -48,7 +48,7 @@ public class SerachServiceImpl implements SearchService{
             List<DocumentVO> vores = new ArrayList<>();
 
             for (Document document : res)
-                vores.add(new DocumentVO(document, authorDao.))
+                vores.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
             return ResponseVO.buildSuccess(new SearchVO(total, res));
 
