@@ -22,7 +22,7 @@ public class DocumentVO {
     int date;
     String publication;
     String abst;
-    String keysords;
+    String keywords;
     int citations;
     int docId;
     public DocumentVO(Document document,List<Author> authorList){
@@ -31,7 +31,7 @@ public class DocumentVO {
         this.abst=document.getAbst();
         this.publication=document.getPublication();
         this.citations=document.getCitationCount();
-        this.keysords=document.getKeywords();
+        this.keywords=document.getKeywords();
         this.docId=document.getId();
         this.authors=new ArrayList<>();
         for (Author a: authorList ) {
