@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.po.Author;
 import com.example.demo.vo.ResponseVO;
 import com.example.demo.vo.TopAuthorVO;
 import com.example.demo.vo.TopCiteDocVO;
@@ -39,5 +40,10 @@ public class InterestingServiceTest {
     public void getTopCiteDocTest() {
         ResponseVO<List<TopCiteDocVO>> res = interestingService.getTopCiteDoc();
         assertEquals(10, res.getData().size());
+    }
+    @Test
+    public void authorRecommendTest(){
+        ResponseVO<Author> res=interestingService.authorRecommand();
+        assertEquals("Jun Sun",res.getData().getName());
     }
 }

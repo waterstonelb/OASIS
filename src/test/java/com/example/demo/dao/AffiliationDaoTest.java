@@ -12,19 +12,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class AffiliationDaoTest {
+public class AffiliationDaoTest {
 
     @Autowired
     private AffiliationDao affiliationDao;
 
     @Test
-    void existsByName() {
+    public void existsByName() {
         boolean exists = affiliationDao.existsByName("Nanjing University");
         assertTrue(exists);
     }
 
     @Test
-    void findFirstByName() {
+    public void findFirstByName() {
         Affiliation res = affiliationDao.findFirstByName("Nanjing University");
         assertEquals("Nanjing University", res.getName());
     }

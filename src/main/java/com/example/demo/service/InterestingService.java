@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.po.Author;
 import com.example.demo.vo.ResponseVO;
 import com.example.demo.vo.TopAuthorVO;
 import com.example.demo.vo.TopCiteDocVO;
@@ -17,5 +18,7 @@ public interface InterestingService {
 
 
     ResponseVO<List<TopCiteDocVO>> getTopCiteDoc();
+
+    ResponseVO<Author> authorRecommand();
 
 }

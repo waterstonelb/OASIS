@@ -1,10 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.*;
-import com.example.demo.po.Affiliation;
-import com.example.demo.po.Document;
-import com.example.demo.po.TopAffliation;
-import com.example.demo.po.TopAuthor;
+import com.example.demo.po.*;
 import com.example.demo.vo.ResponseVO;
 import com.example.demo.vo.TopAuthorVO;
 import com.example.demo.vo.TopCiteDocVO;
@@ -129,5 +126,16 @@ public class InterestingServiceImpl implements InterestingService {
             return ResponseVO.buildFailure("Error");
         }
 
+    }
+
+    @Override
+    public ResponseVO<Author> authorRecommand() {
+        try{
+            Author author=authorDao.authorRecommend();
+            return ResponseVO.buildSuccess("推荐成功",author);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseVO.buildFailure("推荐失败");
+        }
     }
 }
