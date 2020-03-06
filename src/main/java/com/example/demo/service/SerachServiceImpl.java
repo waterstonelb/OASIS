@@ -33,24 +33,25 @@ public class SerachServiceImpl implements SearchService{
     @Override
     public ResponseVO<SearchVO>  seaechByAuthor(SearchByAuthorInpVO searchByAuthorInpVO) {
         try{
-            String author = searchByAuthorInpVO.getAuthor();
-            int page = searchByAuthorInpVO.getPage();
-            int size = searchByAuthorInpVO.getSize();
-            String sortBy = searchByAuthorInpVO.getSortby() == 0 ? "publicationYear" : "citationCount";
+            PageRequest pageRequest = PageRequest.of(
+                    searchByAuthorInpVO.getPage(),
+                    searchByAuthorInpVO.getSize(),
+                    Sort.by(Sort.Direction.DESC,
+                            searchByAuthorInpVO.getSortby() == 0 ? "publicationYear" : "citationCount"));
 
-            PageRequest pageRequest = PageRequest.of(page, size,
-                    Sort.by(Sort.Direction.DESC, sortBy));
+            Page<Document> queryRes = documentDao.findByAuthor(
+                    searchByAuthorInpVO.getAuthor(),
+                    searchByAuthorInpVO.getStartTime() == null ? 0 : searchByAuthorInpVO.getStartTime(),
+                    searchByAuthorInpVO.getEndTime() == null ? 9999 : searchByAuthorInpVO.getEndTime(),
+                    pageRequest);
 
-            Page<Document> queryRes = documentDao.findByAuthor(author, pageRequest);
-            long total = queryRes.getTotalElements();
-            List<Document> res = queryRes.getContent();
 
             List<DocumentVO> resVO = new ArrayList<>();
 
-            for (Document document : res)
+            for (Document document : queryRes.getContent())
                 resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
-            return ResponseVO.buildSuccess(new SearchVO(total, resVO));
+            return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
 
         }catch (Exception ex) {
@@ -63,23 +64,26 @@ public class SerachServiceImpl implements SearchService{
     @Override
     public ResponseVO<SearchVO>  searchByInstitution(SearchByInstitutionInpVO searchByInstitutionInpVO) {
         try{
-            String institution = searchByInstitutionInpVO.getInstitution();
-            int page = searchByInstitutionInpVO.getPage();
-            int size = searchByInstitutionInpVO.getSize();
-            String sortBy = searchByInstitutionInpVO.getSortby() == 0 ? "publicationYear" : "citationCount";
+            PageRequest pageRequest = PageRequest.of(
+                    searchByInstitutionInpVO.getPage(),
+                    searchByInstitutionInpVO.getSize(),
+                    Sort.by(Sort.Direction.DESC,
+                            searchByInstitutionInpVO.getSortby() == 0 ? "publicationYear" : "citationCount"));
 
-            PageRequest pageRequest = PageRequest.of(page, size,
-                    Sort.by(Sort.Direction.DESC, sortBy));
-            Page<Document> queryRes = documentDao.findByInstitution(institution, pageRequest);
-            long total = queryRes.getTotalElements();
-            List<Document> res = queryRes.getContent();
+            Page<Document> queryRes = documentDao.findByInstitution(
+                    searchByInstitutionInpVO.getInstitution(),
+                    searchByInstitutionInpVO.getStartTime() == null ? 0 : searchByInstitutionInpVO.getStartTime(),
+                    searchByInstitutionInpVO.getEndTime() == null ? 9999 : searchByInstitutionInpVO.getEndTime(),
+                    pageRequest);
+
+
 
             List<DocumentVO> resVO = new ArrayList<>();
 
-            for (Document document : res)
+            for (Document document : queryRes.getContent())
                 resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
-            return ResponseVO.buildSuccess(new SearchVO(total, resVO));
+            return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
 
 
@@ -92,22 +96,27 @@ public class SerachServiceImpl implements SearchService{
     @Override
     public ResponseVO<SearchVO>  searchByConference(SearchByConferenceInpVO searchByConferenceInpVO) {
         try{
-            String conference = searchByConferenceInpVO.getConference();
-            int page = searchByConferenceInpVO.getPage();
-            int size = searchByConferenceInpVO.getSize();
-            String sortBy = searchByConferenceInpVO.getSortby() == 0 ? "publicationYear" : "citationCount";
-            PageRequest pageRequest = PageRequest.of(page, size,
-                    Sort.by(Sort.Direction.DESC, sortBy));
-            Page<Document> queryRes = documentDao.findByPublicationContaining(conference, pageRequest);
-            long total = queryRes.getTotalElements();
-            List<Document> res = queryRes.getContent();
+
+            PageRequest pageRequest = PageRequest.of(
+                    searchByConferenceInpVO.getPage(),
+                    searchByConferenceInpVO.getSize(),
+                    Sort.by(Sort.Direction.DESC,
+                            searchByConferenceInpVO.getSortby() == 0 ? "publicationYear" : "citationCount"));
+
+
+            Page<Document> queryRes = documentDao.findByPublication(
+                    searchByConferenceInpVO.getConference(),
+                    searchByConferenceInpVO.getStartTime() == null ? 0 : searchByConferenceInpVO.getStartTime(),
+                    searchByConferenceInpVO.getEndTime() == null ? 9999 : searchByConferenceInpVO.getEndTime(),
+                    pageRequest);
+
 
             List<DocumentVO> resVO = new ArrayList<>();
 
-            for (Document document : res)
+            for (Document document : queryRes.getContent())
                 resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
-            return ResponseVO.buildSuccess(new SearchVO(total, resVO));
+            return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
 
         }catch (Exception ex) {
@@ -120,22 +129,26 @@ public class SerachServiceImpl implements SearchService{
     @Override
     public ResponseVO<SearchVO>  searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO) {
         try{
-            String keyword = searchByKeywordInpVO.getKeyword();
-            int page = searchByKeywordInpVO.getPage();
-            int size = searchByKeywordInpVO.getSize();
-            String sortBy = searchByKeywordInpVO.getSortby() == 0 ? "publicationYear" : "citationCount";
-            PageRequest pageRequest = PageRequest.of(page, size,
-                    Sort.by(Sort.Direction.DESC, sortBy));
-            Page<Document> queryRes = documentDao.findByKeywordsContaining(keyword, pageRequest);
-            long total = queryRes.getTotalElements();
-            List<Document> res = queryRes.getContent();
+
+            PageRequest pageRequest = PageRequest.of(
+                    searchByKeywordInpVO.getPage(),
+                    searchByKeywordInpVO.getSize(),
+                    Sort.by(Sort.Direction.DESC,
+                            searchByKeywordInpVO.getSortby() == 0 ? "publicationYear" : "citationCount"));
+
+            Page<Document> queryRes = documentDao.findByKeywords(
+                    searchByKeywordInpVO.getKeyword(),
+                    searchByKeywordInpVO.getStartTime() == null ? 0 : searchByKeywordInpVO.getStartTime(),
+                    searchByKeywordInpVO.getEndTime() == null ? 9999 : searchByKeywordInpVO.getEndTime(),
+                    pageRequest);
+
 
             List<DocumentVO> resVO = new ArrayList<>();
 
-            for (Document document : res)
+            for (Document document : queryRes.getContent())
                 resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
-            return ResponseVO.buildSuccess(new SearchVO(total, resVO));
+            return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
         }catch (Exception ex) {
             ex.printStackTrace();

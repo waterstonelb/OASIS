@@ -33,6 +33,8 @@ public class ComSearchServiceImpl implements ComSearchService {
     @Override
     public ResponseVO<SearchVO> comSearchDocument(ComSearchInpVO comSearchInpVO) {
         try {
+            int startTime = comSearchInpVO.getStartTime() == null ? 0 : comSearchInpVO.getStartTime();
+            int endTime = comSearchInpVO.getEndTime() == null ? 9999 : comSearchInpVO.getEndTime();
             PageRequest pageRequest=PageRequest.of(
                     comSearchInpVO.getPage(),
                     comSearchInpVO.getSize(),
@@ -42,7 +44,10 @@ public class ComSearchServiceImpl implements ComSearchService {
                     comSearchInpVO.getAuthors(),
                     comSearchInpVO.getInstitution(),
                     comSearchInpVO.getConference(),
-                    comSearchInpVO.getKeyword(),pageRequest);
+                    comSearchInpVO.getKeyword(),
+                    startTime,
+                    endTime,
+                    pageRequest);
 
 
             List<DocumentVO> resVO = new ArrayList<>();

@@ -20,13 +20,14 @@ public class DocumentDaoTest {
 
     @Test
     public void findByAuthorTest(){
-        Page<Document> res=documentDao.findByAuthor("Ali", PageRequest.of(0,10));
+        Page<Document> res=documentDao.findByAuthor("Ali",0, 9999, PageRequest.of(0,10));
         System.out.println(res.getTotalElements());
         System.out.println(res.getContent().size());
     }
     @Test
     public void comFindTest(){
-        Page<Document> res=documentDao.comFind("Ali","Dallas","34th",null,
+        Page<Document> res=documentDao.comFind(
+                "Ali","Dallas","34th",null, 0, 9999,
                 PageRequest.of(0,10, Sort.Direction.DESC,"citationCount"));
         System.out.println(res.getTotalElements());
         System.out.println(res.getContent().size());
