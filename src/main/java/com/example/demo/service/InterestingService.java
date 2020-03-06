@@ -1,10 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.po.Author;
-import com.example.demo.vo.ResponseVO;
-import com.example.demo.vo.TopAuthorVO;
-import com.example.demo.vo.TopCiteDocVO;
-import com.example.demo.vo.TopInstitutionVO;
+import com.example.demo.vo.*;
 
 
 import java.util.List;
@@ -19,6 +15,6 @@ public interface InterestingService {
 
     ResponseVO<List<TopCiteDocVO>> getTopCiteDoc();
 
-    ResponseVO<Author> authorRecommand();
+    ResponseVO<AuthorRecommend> authorRecommand();
 
 }

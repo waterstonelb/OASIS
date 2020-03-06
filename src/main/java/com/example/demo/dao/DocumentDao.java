@@ -48,5 +48,8 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
             "and (?4 is null or d.keywords like %?4%) ")
     Page<Document> comFind(String author,String affiliation, String publication, String keywords, int startTime, int endTime, Pageable pageable);
 
+    @Query(value = "select * from document d where d.id in " +
+            "(select aup.document_id from author_publish aup where aup.author_id = ?1) limit 3",nativeQuery = true)
+    List<Document> findByAuthorId(int authorId);
 
 }

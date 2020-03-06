@@ -10,6 +10,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+import static org.junit.Assert.assertEquals;
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DocumentDaoTest {
@@ -66,6 +70,11 @@ public class DocumentDaoTest {
     }
 
 
+    @Test
+    public void findByAuthorIdTest(){
+        List<Document> res=documentDao.findByAuthorId(614);
+        assertEquals(3,res.size());
+    }
 
 
 

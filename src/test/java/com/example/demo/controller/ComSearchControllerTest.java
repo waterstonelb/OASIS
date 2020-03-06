@@ -33,7 +33,7 @@ public class ComSearchControllerTest {
                 .authors("Penix")
                 .institution("Google")
                 .conference("ACM")
-                .keyword("")
+                .keywords("")
                 .size(2)
                 .page(0).build();
         List<DocumentVO> list = new ArrayList<>();
@@ -44,7 +44,7 @@ public class ComSearchControllerTest {
         map.put("authors", "Penix");
         map.put("institution", "Google");
         map.put("conference", "ACM");
-        map.put("keyword", "");
+        map.put("keywords", "");
         map.put("size", "2");
         map.put("page", "0");
         String content = JSONObject.toJSONString(map);

@@ -35,7 +35,7 @@ public class ComSearchServiceTest {
                 .authors("Ali")
                 .institution("Dallas")
                 .conference("34th")
-                .keyword("Test ERROR")
+                .keywords("Test ERROR")
                 .page(1)
                 .size(1)
                 .sortBy(0)

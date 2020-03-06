@@ -13,7 +13,7 @@ public class ComSearchInpVO {
     String authors;
     String institution;
     String conference;
-    String keyword;
+    String keywords;
     int size;
     @ApiModelProperty("页号, 从0开始")
     int page;
