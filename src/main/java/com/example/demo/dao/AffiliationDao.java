@@ -13,5 +13,4 @@ public interface AffiliationDao extends JpaRepository<Affiliation, Integer> {
 
     Affiliation findFirstByName(String name);
 
-    List<Affiliation> findByNameContaining(String aff);
 }

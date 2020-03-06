@@ -27,7 +27,7 @@ public class SearchController {
     public ResponseVO<SearchVO>
     searchByAuthor(@RequestBody SearchByAuthorInpVO searchByAuthorInpVO){
 
-        return searchService.seaechByAuthor(searchByAuthorInpVO);
+        return searchService.searchByAuthor(searchByAuthorInpVO);
     }
 
     @ApiOperation(value = "根据机构查询")

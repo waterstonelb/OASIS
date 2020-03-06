@@ -12,5 +12,4 @@ import java.util.List;
 public interface AffiliationPublishDao extends
         JpaRepository<AffiliationPublish, AffiliationPublishPK> {
 
-    List<AffiliationPublish> findByAffId(int affId);
 }

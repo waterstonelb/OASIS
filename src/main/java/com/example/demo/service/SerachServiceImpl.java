@@ -31,7 +31,7 @@ public class SerachServiceImpl implements SearchService{
 
 
     @Override
-    public ResponseVO<SearchVO>  seaechByAuthor(SearchByAuthorInpVO searchByAuthorInpVO) {
+    public ResponseVO<SearchVO>  searchByAuthor(SearchByAuthorInpVO searchByAuthorInpVO) {
         try{
             PageRequest pageRequest = PageRequest.of(
                     searchByAuthorInpVO.getPage(),

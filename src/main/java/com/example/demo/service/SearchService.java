@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SearchService {
 
-    ResponseVO<SearchVO> seaechByAuthor(SearchByAuthorInpVO searchByAuthorInpVO);
+    ResponseVO<SearchVO> searchByAuthor(SearchByAuthorInpVO searchByAuthorInpVO);
 
     ResponseVO<SearchVO>  searchByInstitution(SearchByInstitutionInpVO searchByInstitutionInpVO);
 
