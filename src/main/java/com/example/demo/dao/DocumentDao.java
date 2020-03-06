@@ -3,6 +3,7 @@ package com.example.demo.dao;
 
 import com.example.demo.po.Document;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +16,9 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
 
 
     //Document findFirstById(int id);
+
+    @Query(value = "select d from Document d order by d.citationCount desc")
+    List<Document> findTopCiteDoc(PageRequest pageRequest);
 
     @Query(value = "select d from Document d where d.publicationYear between ?2 and ?3 and d.id in " +
             "(select aup.documentId from AuthorPublish aup where aup.authorId in " +
