@@ -2,10 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.po.Author;
 import com.example.demo.service.InterestingService;
-import com.example.demo.vo.ResponseVO;
-import com.example.demo.vo.TopAuthorVO;
-import com.example.demo.vo.TopCiteDocVO;
-import com.example.demo.vo.TopInstitutionVO;
+import com.example.demo.vo.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
@@ -64,7 +61,7 @@ public class InterestingControllerTest {
     }
     @Test
     public void auRecTest() throws Exception {
-        ResponseVO<Author> res=ResponseVO.buildSuccess(Author.builder().build());
+        ResponseVO<AuthorRecommend> res=ResponseVO.buildSuccess(AuthorRecommend.builder().build());
         when(interestingService.authorRecommand()).thenReturn(res);
         mockMvc.perform(get("/interesting/top10/authorrecommend"))
                 .andExpect(status().isOk())

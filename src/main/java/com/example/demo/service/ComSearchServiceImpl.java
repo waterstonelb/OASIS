@@ -44,7 +44,7 @@ public class ComSearchServiceImpl implements ComSearchService {
                     comSearchInpVO.getAuthors(),
                     comSearchInpVO.getInstitution(),
                     comSearchInpVO.getConference(),
-                    comSearchInpVO.getKeyword(),
+                    comSearchInpVO.getKeywords(),
                     startTime,
                     endTime,
                     pageRequest);

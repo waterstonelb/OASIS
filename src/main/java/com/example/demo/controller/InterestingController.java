@@ -3,10 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.po.Author;
 import com.example.demo.service.InterestingService;
-import com.example.demo.vo.ResponseVO;
-import com.example.demo.vo.TopAuthorVO;
-import com.example.demo.vo.TopCiteDocVO;
-import com.example.demo.vo.TopInstitutionVO;
+import com.example.demo.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +48,7 @@ public class InterestingController {
 
     @ApiOperation("作者推荐")
     @GetMapping("/authorrecommend")
-    public ResponseVO<Author> authorRecommend(){
+    public ResponseVO<AuthorRecommend> authorRecommend(){
         return interestingService.authorRecommand();
     }
 }

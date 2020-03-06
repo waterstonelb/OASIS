@@ -1,10 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.po.Author;
-import com.example.demo.vo.ResponseVO;
-import com.example.demo.vo.TopAuthorVO;
-import com.example.demo.vo.TopCiteDocVO;
-import com.example.demo.vo.TopInstitutionVO;
+import com.example.demo.vo.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
 
 @RunWith(SpringRunner.class)
@@ -43,7 +40,7 @@ public class InterestingServiceTest {
     }
     @Test
     public void authorRecommendTest(){
-        ResponseVO<Author> res=interestingService.authorRecommand();
+        ResponseVO<AuthorRecommend> res=interestingService.authorRecommand();
         assertEquals("Jun Sun",res.getData().getName());
     }
 }

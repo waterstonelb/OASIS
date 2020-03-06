@@ -2,10 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.*;
 import com.example.demo.po.*;
-import com.example.demo.vo.ResponseVO;
-import com.example.demo.vo.TopAuthorVO;
-import com.example.demo.vo.TopCiteDocVO;
-import com.example.demo.vo.TopInstitutionVO;
+import com.example.demo.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -129,10 +126,16 @@ public class InterestingServiceImpl implements InterestingService {
     }
 
     @Override
-    public ResponseVO<Author> authorRecommand() {
+    public ResponseVO<AuthorRecommend> authorRecommand() {
         try{
             Author author=authorDao.authorRecommend();
-            return ResponseVO.buildSuccess("推荐成功",author);
+            List<Document> documents=documentDao.findByAuthorId(author.getId());
+            int citation=0;
+            for(Document d:documents){
+                citation+=d.getCitationCount();
+            }
+            AuthorRecommend authorRecommend=new AuthorRecommend(author,citation,documents);
+            return ResponseVO.buildSuccess(authorRecommend);
         }catch (Exception e){
             e.printStackTrace();
             return ResponseVO.buildFailure("推荐失败");
