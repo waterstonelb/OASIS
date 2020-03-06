@@ -123,13 +123,11 @@ public class InterestingServiceImpl implements InterestingService {
                         )
                 );
             }
+            return ResponseVO.buildSuccess(topCiteDocVOS);
         }catch (Exception ex){
             ex.printStackTrace();
             return ResponseVO.buildFailure("Error");
         }
 
-
-
-        return null;
     }
 }
