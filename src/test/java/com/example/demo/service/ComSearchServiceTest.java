@@ -29,4 +29,17 @@ public class ComSearchServiceTest {
                 .build());
         assertEquals(1,res.getData().getDocuments().size());
     }
+    @Test
+    public void searchNULL(){
+        ResponseVO<SearchVO> res=comSearchService.comSearchDocument(ComSearchInpVO.builder()
+                .authors("Ali")
+                .institution("Dallas")
+                .conference("34th")
+                .keyword("Test ERROR")
+                .page(1)
+                .size(1)
+                .sortBy(0)
+                .build());
+        assertEquals("未查询到匹配的论文",res.getMessage());
+    }
 }
