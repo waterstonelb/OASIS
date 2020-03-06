@@ -25,33 +25,33 @@ public class ComSearchControllerTest {
 
     @Test
     public void getComDocument() throws Exception {
-        ComSearchService comSearchService=mock(ComSearchService.class);
-        ComSearchController comSearchController=new ComSearchController();
+        ComSearchService comSearchService = mock(ComSearchService.class);
+        ComSearchController comSearchController = new ComSearchController();
         comSearchController.setComSearchService(comSearchService);
-        MockMvc mockMvc=standaloneSetup(comSearchController).build();
-        ComSearchInpVO comSearchInpVO=ComSearchInpVO.builder()
+        MockMvc mockMvc = standaloneSetup(comSearchController).build();
+        ComSearchInpVO comSearchInpVO = ComSearchInpVO.builder()
                 .authors("Penix")
                 .institution("Google")
                 .conference("ACM")
                 .keyword("")
                 .size(2)
                 .page(0).build();
-        List<DocumentVO> list=new ArrayList<>();
+        List<DocumentVO> list = new ArrayList<>();
         list.add(DocumentVO.builder().build());
-        when(comSearchService.comSearchDocument(comSearchInpVO)).thenReturn(ResponseVO.buildSuccess(new SearchVO(10,list)));
+        when(comSearchService.comSearchDocument(comSearchInpVO)).thenReturn(ResponseVO.buildSuccess(new SearchVO(10, list)));
 
-        Map<String,String> map=new HashMap<>();
-        map.put("authors","Penix");
-        map.put("institution","Google");
-        map.put("conference","ACM");
-        map.put("keyword","");
-        map.put("size","2");
-        map.put("page","0");
-        String content= JSONObject.toJSONString(map);
+        Map<String, String> map = new HashMap<>();
+        map.put("authors", "Penix");
+        map.put("institution", "Google");
+        map.put("conference", "ACM");
+        map.put("keyword", "");
+        map.put("size", "2");
+        map.put("page", "0");
+        String content = JSONObject.toJSONString(map);
 
-        String res=mockMvc.perform(post("/comsearch/document")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(content))
+        mockMvc.perform(post("/comsearch/document")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
         verify(comSearchService).comSearchDocument(comSearchInpVO);
