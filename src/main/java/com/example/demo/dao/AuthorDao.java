@@ -22,7 +22,8 @@ public interface AuthorDao extends JpaRepository<Author, Integer> {
             "(select aup.authorId from AuthorPublish aup where aup.documentId = ?1)")
     List<Author> findByDocumentId(int docId);
 
-
+    @Query(value = "select * from author where id = (select author_id from author_publish group by author_id order by count(*) desc limit 1) ;",nativeQuery = true)
+    Author authorRecommend();
 
     Author findFirstById(int auid);
 

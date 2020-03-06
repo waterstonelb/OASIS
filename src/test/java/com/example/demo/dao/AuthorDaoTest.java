@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class AuthorDaoTest {
+public class AuthorDaoTest {
     @Autowired
     private AuthorDao authorDao;
 
     @Test
-    void findFirstByNameAndAffiliation() {
+    public void findFirstByNameAndAffiliation() {
         Author author = authorDao.
                 findFirstByNameAndAffiliation("Jia Liu", "Nanjing University");
 
@@ -26,14 +26,14 @@ class AuthorDaoTest {
     }
 
     @Test
-    void existsByNameAndAffiliation() {
+    public void existsByNameAndAffiliation() {
         boolean exists = authorDao
                 .existsByNameAndAffiliation("dhfvysdfguydsgefy", "sdyuwgduwfdytfw");
         assertFalse(exists);
     }
 
     @Test
-    void findByNameContaining() {
+    public void findByNameContaining() {
         List<Author> authors = authorDao
                 .findByNameContaining("Jia Liu");
 
@@ -41,9 +41,13 @@ class AuthorDaoTest {
     }
 
     @Test
-    void findByDocumentId() {
+    public void findByDocumentId() {
         List<Author> authors = authorDao
                 .findByDocumentId(33);
         assert authors.size() > 0;
+    }
+    @Test
+    public void authorRecommendTEST(){
+        assertEquals("Jun Sun",authorDao.authorRecommend().getName());
     }
 }

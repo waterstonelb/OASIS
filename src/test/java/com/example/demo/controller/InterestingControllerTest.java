@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.po.Author;
 import com.example.demo.service.InterestingService;
 import com.example.demo.vo.ResponseVO;
 import com.example.demo.vo.TopAuthorVO;
@@ -61,4 +62,14 @@ public class InterestingControllerTest {
                 .andReturn().getResponse().getContentAsString();
         verify(interestingService).getTopCiteDoc();
     }
+    @Test
+    public void auRecTest() throws Exception {
+        ResponseVO<Author> res=ResponseVO.buildSuccess(Author.builder().build());
+        when(interestingService.authorRecommand()).thenReturn(res);
+        mockMvc.perform(get("/interesting/top10/authorrecommend"))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        verify(interestingService).authorRecommand();
+    }
+
 }

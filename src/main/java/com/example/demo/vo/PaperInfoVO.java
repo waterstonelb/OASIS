@@ -19,17 +19,21 @@ public class PaperInfoVO {
     String publicationTitle;
     String abst;
     String pdf_link;
+    String keywords;
+    int year;
     int articleCtiationCount;
     int referenceCount;
     List<AuthorSimpleVO> authors;
 
     public PaperInfoVO(Document document, List<Author> authorList,int referenceCount){
+        this.year=document.getPublicationYear();
         this.abst=document.getAbst();
         this.title=document.getTitle();
         this.articleCtiationCount=document.getCitationCount();
         this.pdf_link=document.getPdfLink();
         this.publicationTitle=document.getPublication();
         this.referenceCount=referenceCount;
+        this.keywords=document.getKeywords();
         this.authors=new ArrayList<>();
         for(Author author:authorList){
             authors.add(new AuthorSimpleVO(author));

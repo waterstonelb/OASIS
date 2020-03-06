@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.po.Author;
 import com.example.demo.service.InterestingService;
 import com.example.demo.vo.ResponseVO;
 import com.example.demo.vo.TopAuthorVO;
@@ -46,5 +47,11 @@ public class InterestingController {
     @GetMapping("/paper")
     public ResponseVO<List<TopCiteDocVO>> getTopCiteDoc(){
         return interestingService.getTopCiteDoc();
+    }
+
+    @ApiOperation("作者推荐")
+    @GetMapping("/authorrecommend")
+    public ResponseVO<Author> authorRecommend(){
+        return interestingService.authorRecommand();
     }
 }

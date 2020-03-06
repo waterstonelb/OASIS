@@ -11,7 +11,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class AuthorPublishDaoTest {
+public class AuthorPublishDaoTest {
 
     @Autowired
     private AuthorPublishDao authorPublishDao;
