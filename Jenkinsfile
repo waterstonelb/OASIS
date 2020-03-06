@@ -29,9 +29,9 @@ pipeline {
                 sh 'mvn clean test'
                 junit 'target/surefire-reports/*.xml'
                 jacoco execPattern: 'target/jacoco.exec'
-                withSonarQubeEnv('sonarqube') {
-                    sh "mvn sonar:sonar -Dproject.settings=sonar-project.properties"
-                }
+//                 withSonarQubeEnv('sonarqube') {
+//                     sh "mvn sonar:sonar -Dproject.settings=sonar-project.properties"
+//                 }
                 echo 'Test Success'
             }
 
