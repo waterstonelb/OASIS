@@ -113,7 +113,7 @@ public class InterestingServiceImpl implements InterestingService {
         try{
             List<TopCiteDocVO> topCiteDocVOS = new ArrayList<>();
             List<Document> topDocs = documentDao.findTopCiteDoc(
-                    PageRequest.of(0, 10));
+                    PageRequest.of(0, TOPNUM));
             for (Document document : topDocs){
                 topCiteDocVOS.add(
                         new TopCiteDocVO(

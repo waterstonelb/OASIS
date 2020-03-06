@@ -12,18 +12,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class PaperInfoServiceImplTest {
+public class PaperInfoServiceImplTest {
 
     @Autowired
     PaperInfoServiceImpl paperInfoService;
 
     @Test
-    void getPaperInfoSuccess() {
+    public void getPaperInfoSuccess() {
         ResponseVO<PaperInfoVO> res=paperInfoService.getPaperInfo(2);
         assert res.getData().getAuthors().size()>0;
     }
     @Test
-    void getPaperInfoFail(){
+    public void getPaperInfoFail(){
         ResponseVO<PaperInfoVO> res=paperInfoService.getPaperInfo(1000000);
         assertEquals("查询失败",res.getMessage());
     }

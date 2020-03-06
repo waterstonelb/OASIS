@@ -17,7 +17,7 @@ class AuthorPublishDaoTest {
     private AuthorPublishDao authorPublishDao;
 
     @Test
-    void findByAuthorId() {
+    public void findByAuthorId() {
         List<AuthorPublish> authorPublish = authorPublishDao.findByAuthorId(1);
         assert authorPublish.size() > 0;
 

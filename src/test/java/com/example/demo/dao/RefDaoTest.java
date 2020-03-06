@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class RefDaoTest {
+public class RefDaoTest {
 
     @Autowired
     RefDao refDao;
 
     @Test
-    void countByDocId() {
+    public void countByDocId() {
 
         assert refDao.countByDocId(2)>0;
     }
