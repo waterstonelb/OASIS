@@ -24,6 +24,38 @@ public class DocumentDaoTest {
         System.out.println(res.getTotalElements());
         System.out.println(res.getContent().size());
     }
+
+    @Test
+    public void findByInsTest(){
+        Page<Document> res = documentDao.findByInstitution("Nanjing University",
+                0, 9999,
+                PageRequest.of(0, 5));
+        System.out.println(res.getTotalElements());
+        System.out.println(res.getContent().size());
+    }
+
+    @Test
+    public void findByPubTest(){
+        Page<Document> res = documentDao.findByPublication(
+                "2019 34th IEEE/ACM International Conference"
+        ,0, 9999, PageRequest.of(0, 10));
+
+        System.out.println(res.getTotalElements());
+        System.out.println(res.getContent().size());
+    }
+
+    @Test
+    public void findByKwTest(){
+        Page<Document> res = documentDao.findByKeywords(
+                "Object oriented"
+                ,0, 9999
+                ,PageRequest.of(0, 5)
+        );
+        System.out.println(res.getTotalElements());
+        System.out.println(res.getContent().size());
+    }
+
+
     @Test
     public void comFindTest(){
         Page<Document> res=documentDao.comFind(
