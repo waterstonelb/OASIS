@@ -3,6 +3,7 @@ package com.example.demo.dao;
 
 import com.example.demo.po.Document;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +15,11 @@ import java.util.List;
 public interface DocumentDao extends JpaRepository<Document, Integer> {
 
 
+
     //Document findFirstById(int id);
+
+    @Query(value = "select d from Document d order by d.citationCount desc")
+    List<Document> findTopCiteDoc(PageRequest pageRequest);
 
     @Query(value = "select d from Document d where d.publicationYear between ?2 and ?3 and d.id in " +
             "(select aup.documentId from AuthorPublish aup where aup.authorId in " +
@@ -32,6 +37,8 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
     @Query(value = "select d from Document d where d.publicationYear between ?2 and ?3 and d.keywords like concat('%',?1,'%')")
     Page<Document> findByKeywords(String keyword, int startTime, int endTime, Pageable pageable);
 
+    Document findById(int id);
+
     @Query(value = "select d from Document d where d.publicationYear between ?5 and ?6 and (?1 is null or d.id in " +
             "(select aup.documentId from AuthorPublish aup where aup.authorId in " +
             "(select au.id from Author au where au.name like %?1%))) " +
@@ -40,18 +47,6 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
             "and (?3 is null or d.publication like %?3%) " +
             "and (?4 is null or d.keywords like %?4%) ")
     Page<Document> comFind(String author,String affiliation, String publication, String keywords, int startTime, int endTime, Pageable pageable);
-
-//    @Query(value = "select * from document d where " +
-//            "if(?1 != '', d.id in (select ap.document_id from author_publish ap where ap.author_id in " +
-//            "(select a.id from author a where a.name like concat('%',?1,'%'))),1=1) " +
-//            "and if(?2 != '',d.id in (select af.document_id from affiliation_publish af where af.aff_id in " +
-//            "(select aa.id from affiliation aa where aa.name like concat('%',?2,'%'))),1=1) " +
-//            "and if(?3 != '',d.publication like concat('%',?3,'%'),1=1) " +
-//            "and if(?4 != '',d.keywords like concat('%',?4,'%'),1=1); " ,nativeQuery = true)
-//    Page<Document> find(String author, String affiliation, String publication, String keywords,Pageable pageable);
-
-//    @Query(value = "select * from document d where d.id=?1 ;",nativeQuery = true)
-//    Page<Document> findByDid(int id, Pageable pageable);
 
 
 }

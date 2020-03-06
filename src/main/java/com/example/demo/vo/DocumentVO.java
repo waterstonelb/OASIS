@@ -37,7 +37,7 @@ public class DocumentVO {
         this.docId=document.getId();
         this.authors=new ArrayList<>();
         for (Author a: authorList ) {
-            this.authors.add(new AuthorSimpleVO(a.getId(),a.getName()));
+            this.authors.add(new AuthorSimpleVO(a));
         }
     }
 
