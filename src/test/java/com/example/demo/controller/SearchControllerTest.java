@@ -6,10 +6,7 @@ import com.example.demo.vo.*;
 import net.minidev.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -23,20 +20,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class SearchControllerTest {
 
     private SearchService searchService;
-
-    private SearchController searchController;
 
     private MockMvc mockMvc;
 
     @Before
     public void initialize() {
         searchService = mock(SearchService.class);
-        searchController = new SearchController(searchService);
+        SearchController searchController = new SearchController(searchService);
         mockMvc = standaloneSetup(searchController).build();
     }
 
