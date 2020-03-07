@@ -1,4 +1,4 @@
-package com.example.demo.dataSource;
+package com.example.demo.datasource;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

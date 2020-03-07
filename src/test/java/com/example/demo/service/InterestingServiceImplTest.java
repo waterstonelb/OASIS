@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.po.Author;
+import com.example.demo.service.serviceinterface.InterestingService;
 import com.example.demo.vo.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,10 +15,10 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class InterestingServiceTest {
+public class InterestingServiceImplTest {
 
     @Autowired
-    InterestingService interestingService;
+    InterestingServiceImpl interestingService;
 
 
     @Test

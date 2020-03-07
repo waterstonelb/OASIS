@@ -1,14 +1,11 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.po.Document;
-import com.example.demo.service.SearchService;
+import com.example.demo.service.serviceinterface.SearchService;
 import com.example.demo.vo.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @CrossOrigin
 @RestController

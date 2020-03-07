@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.ComSearchService;
+import com.example.demo.service.serviceinterface.ComSearchService;
 import com.example.demo.vo.ComSearchInpVO;
 import com.example.demo.vo.DocumentVO;
 import com.example.demo.vo.ResponseVO;

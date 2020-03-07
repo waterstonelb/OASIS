@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.po.Author;
-import com.example.demo.service.InterestingService;
+import com.example.demo.service.serviceinterface.InterestingService;
 import com.example.demo.vo.*;
 import org.junit.Before;
 import org.junit.Test;

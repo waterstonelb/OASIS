@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.service.SearchService;
+import com.example.demo.service.serviceinterface.SearchService;
 import com.example.demo.vo.*;
 import net.minidev.json.JSONObject;
 import org.junit.Before;
