@@ -7,9 +7,11 @@ import com.example.demo.datasource.Data;
 import com.example.demo.datasource.RefData;
 import com.example.demo.po.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class DataLoad {
 
@@ -91,6 +94,7 @@ public class DataLoad {
         /*--------------------Write to database-------------------------------*/
 
         writeToDB(filData);
+        log.info("加载原始文章数据成功");
     }
 
     private void writeToDB(List<Data> filData){
@@ -203,7 +207,7 @@ public class DataLoad {
 
 
         }catch (Exception ex){
-                ex.printStackTrace();
+                log.warn("加载某个文章信息出现错误");
             }
 
         }

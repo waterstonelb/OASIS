@@ -4,13 +4,16 @@ import com.example.demo.dao.*;
 import com.example.demo.po.*;
 import com.example.demo.service.serviceinterface.InterestingService;
 import com.example.demo.vo.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Service
 public class InterestingServiceImpl implements InterestingService {
 
@@ -68,9 +71,10 @@ public class InterestingServiceImpl implements InterestingService {
                         )
                 );
             }
+            log.info("查找top10作者成功");
             return ResponseVO.buildSuccess(topAuthorVOS);
         }catch (Exception ex){
-            ex.printStackTrace();
+            log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
 
@@ -94,10 +98,11 @@ public class InterestingServiceImpl implements InterestingService {
                         )
                 );
             }
+            log.info("查询top10机构成功");
             return ResponseVO.buildSuccess(topInstitutionVOS);
 
         }catch (Exception ex){
-            ex.printStackTrace();
+            log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
 
@@ -118,9 +123,10 @@ public class InterestingServiceImpl implements InterestingService {
                         )
                 );
             }
+            log.info("查询top10文章成功");
             return ResponseVO.buildSuccess(topCiteDocVOS);
         }catch (Exception ex){
-            ex.printStackTrace();
+            log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
 
@@ -136,9 +142,11 @@ public class InterestingServiceImpl implements InterestingService {
                 citation+=d.getCitationCount();
             }
             AuthorRecommend authorRecommend=new AuthorRecommend(author,citation,documents);
+
+            log.info("推荐成功");
             return ResponseVO.buildSuccess(authorRecommend);
         }catch (Exception e){
-            e.printStackTrace();
+            log.error(e.getLocalizedMessage());
             return ResponseVO.buildFailure("推荐失败");
         }
     }
