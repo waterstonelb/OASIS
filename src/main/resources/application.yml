@@ -15,4 +15,4 @@ server:
   port: 8090
 logging:
   file:
-    path: /var/log/tomcat
+    path: /var/log/shkb
