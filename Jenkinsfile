@@ -37,6 +37,15 @@ pipeline {
 
         }
 
+        stage('Push to SonarQube') {
+                    steps{
+                        withSonarQubeEnv('sonarqube') {
+                            sh "mvn sonar:sonar -Dproject.settings=sonar-project.properties"
+                        }
+                    }
+
+                }
+
         stage('Run Docker image') {
                 steps {
                     echo "-=- run Docker image -=-"
