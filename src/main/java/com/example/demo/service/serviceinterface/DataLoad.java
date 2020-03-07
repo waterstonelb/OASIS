@@ -1,16 +1,15 @@
-package com.example.demo.service;
+package com.example.demo.service.serviceinterface;
 
 import com.example.demo.dao.*;
-import com.example.demo.dataSource.AuthorData;
-import com.example.demo.dataSource.ContextData;
-import com.example.demo.dataSource.Data;
-import com.example.demo.dataSource.RefData;
+import com.example.demo.datasource.AuthorData;
+import com.example.demo.datasource.ContextData;
+import com.example.demo.datasource.Data;
+import com.example.demo.datasource.RefData;
 import com.example.demo.po.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

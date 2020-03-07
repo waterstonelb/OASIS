@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dao.AuthorDao;
 import com.example.demo.dao.DocumentDao;
 import com.example.demo.po.Document;
+import com.example.demo.service.serviceinterface.ComSearchService;
 import com.example.demo.vo.ComSearchInpVO;
 import com.example.demo.vo.DocumentVO;
 import com.example.demo.vo.ResponseVO;

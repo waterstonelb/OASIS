@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.service.serviceinterface.SearchService;
 import com.example.demo.vo.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,18 +11,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SearchServiceTest {
+public class SearchServiceImplTest {
 
     @Autowired
-    SearchService searchService;
+    SearchServiceImpl searchService;
 
     @Test
     public void searchByAuTest(){
         ResponseVO<SearchVO> res = searchService.searchByAuthor(
                 SearchByAuthorInpVO.builder()
-                .author("Ali")
-                .size(2)
-                .page(0).build()
+                        .author("Ali")
+                        .size(2)
+                        .page(0).build()
         );
         assert res.getData().getDocuments().size() > 0;
     }
@@ -30,9 +31,9 @@ public class SearchServiceTest {
     public void searchByInsTest(){
         ResponseVO<SearchVO> res = searchService.searchByInstitution(
                 SearchByInstitutionInpVO.builder()
-                .institution("Dallas")
-                .size(2)
-                .page(0).build()
+                        .institution("Dallas")
+                        .size(2)
+                        .page(0).build()
         );
         assert res.getData().getDocuments().size() > 0;
     }
@@ -41,9 +42,9 @@ public class SearchServiceTest {
     public void searchByConTest(){
         ResponseVO<SearchVO> res = searchService.searchByConference(
                 SearchByConferenceInpVO.builder()
-                .conference("34th")
-                .size(2)
-                .page(0).build()
+                        .conference("34th")
+                        .size(2)
+                        .page(0).build()
         );
 
         assert res.getData().getDocuments().size() > 0;

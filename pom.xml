@@ -189,6 +189,18 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
+                <configuration>
+                    <excludes>
+                        <!-- Exclude class from test coverage -->
+                        <exclude>**/*com/example/demo/DemoApplication.class</exclude>
+                        <!-- Exclude full package from test coverage -->
+                        <exclude>**/*com/example/demo/vo/*</exclude>
+                        <exclude>**/*com/example/demo/po/*</exclude>
+                        <exclude>**/*com/example/demo/datasource/*</exclude>
+                        <exclude>**/*com/example/demo/service/serviceinterface/*</exclude>
+                    </excludes>
+
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

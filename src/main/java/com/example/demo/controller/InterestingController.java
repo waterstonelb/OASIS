@@ -1,10 +1,8 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.po.Author;
-import com.example.demo.service.InterestingService;
+import com.example.demo.service.serviceinterface.InterestingService;
 import com.example.demo.vo.*;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

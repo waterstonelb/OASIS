@@ -3,6 +3,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.*;
 import com.example.demo.po.*;
+import com.example.demo.service.serviceinterface.SearchService;
 import com.example.demo.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SerachServiceImpl implements SearchService{
+public class SearchServiceImpl implements SearchService {
 
 
     private DocumentDao documentDao;

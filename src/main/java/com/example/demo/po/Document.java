@@ -2,13 +2,10 @@ package com.example.demo.po;
 
 
 
-import com.example.demo.dataSource.AuthorData;
-import com.example.demo.dataSource.RefData;
 import lombok.*;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter

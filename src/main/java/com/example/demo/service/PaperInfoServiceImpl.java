@@ -6,17 +6,16 @@ import com.example.demo.dao.DocumentDao;
 import com.example.demo.dao.RefDao;
 import com.example.demo.po.Author;
 import com.example.demo.po.Document;
+import com.example.demo.service.serviceinterface.PaperInfoService;
 import com.example.demo.vo.PaperInfoVO;
 import com.example.demo.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PaperInfoServiceImpl implements PaperInfoService{
+public class PaperInfoServiceImpl implements PaperInfoService {
 
     private DocumentDao documentDao;
     private AuthorDao authorDao;

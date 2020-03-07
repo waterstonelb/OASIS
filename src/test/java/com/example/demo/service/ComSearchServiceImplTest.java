@@ -14,9 +14,9 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ComSearchServiceTest {
+public class ComSearchServiceImplTest {
     @Autowired
-    ComSearchService comSearchService;
+    ComSearchServiceImpl comSearchService;
     @Test
     public void comSearchCocument() {
         ResponseVO<SearchVO> res=comSearchService.comSearchDocument(ComSearchInpVO.builder()
