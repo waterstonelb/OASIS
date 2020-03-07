@@ -5,6 +5,7 @@ import com.example.demo.dao.*;
 import com.example.demo.po.*;
 import com.example.demo.service.serviceinterface.SearchService;
 import com.example.demo.vo.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class SearchServiceImpl implements SearchService {
 
@@ -52,11 +54,12 @@ public class SearchServiceImpl implements SearchService {
             for (Document document : queryRes.getContent())
                 resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
+            log.info("查询成功");
             return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
 
         }catch (Exception ex) {
-            ex.printStackTrace();
+            log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
 
@@ -84,12 +87,13 @@ public class SearchServiceImpl implements SearchService {
             for (Document document : queryRes.getContent())
                 resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
+            log.info("查询成功");
             return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
 
 
         }catch (Exception ex) {
-            ex.printStackTrace();
+            log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
     }
@@ -117,11 +121,12 @@ public class SearchServiceImpl implements SearchService {
             for (Document document : queryRes.getContent())
                 resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
+            log.info("查询成功");
             return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
 
         }catch (Exception ex) {
-            ex.printStackTrace();
+            log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
     }
@@ -149,10 +154,11 @@ public class SearchServiceImpl implements SearchService {
             for (Document document : queryRes.getContent())
                 resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
+            log.info("查询成功");
             return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
         }catch (Exception ex) {
-            ex.printStackTrace();
+            log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
     }

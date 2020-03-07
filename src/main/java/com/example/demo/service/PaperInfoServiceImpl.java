@@ -9,11 +9,13 @@ import com.example.demo.po.Document;
 import com.example.demo.service.serviceinterface.PaperInfoService;
 import com.example.demo.vo.PaperInfoVO;
 import com.example.demo.vo.ResponseVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class PaperInfoServiceImpl implements PaperInfoService {
 
@@ -39,10 +41,13 @@ public class PaperInfoServiceImpl implements PaperInfoService {
             Document document=documentDao.findById(documentId);
             List<Author> authors=authorDao.findByDocumentId(documentId);
             int refereneceCount=refDao.countByDocId(documentId);
+
+            log.info("查询成功");
             return ResponseVO.buildSuccess("查询成功",
                     new PaperInfoVO(document,authors,10));
+
         }catch (Exception e){
-            e.printStackTrace();
+            log.error(e.getLocalizedMessage());
             return ResponseVO.buildFailure("查询失败");
         }
     }

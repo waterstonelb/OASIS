@@ -8,6 +8,7 @@ import com.example.demo.vo.ComSearchInpVO;
 import com.example.demo.vo.DocumentVO;
 import com.example.demo.vo.ResponseVO;
 import com.example.demo.vo.SearchVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +16,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-
+@Slf4j
 @Service
 public class ComSearchServiceImpl implements ComSearchService {
     private DocumentDao documentDao;
@@ -57,12 +59,17 @@ public class ComSearchServiceImpl implements ComSearchService {
                 resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
 
             if(!res.isEmpty()) {
+                log.info("组合查询成功");
                 return ResponseVO.buildSuccess("组合查询成功", new SearchVO(res.getTotalElements(), resVO));
+
             }
-            else
+            else {
+                log.info(new Date().toString() + "未查询到匹配的论文");
                 return ResponseVO.buildFailure("未查询到匹配的论文");
+            }
+
         }catch (Exception e){
-            e.printStackTrace();
+            log.error(e.getLocalizedMessage());
             return ResponseVO.buildFailure("组合查询失败");
         }
 
