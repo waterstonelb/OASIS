@@ -13,8 +13,6 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 server:
   port: 8090
-
 logging:
-  level: info
   file:
     path: /var/log/tomcat
