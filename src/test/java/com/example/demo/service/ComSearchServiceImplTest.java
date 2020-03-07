@@ -42,4 +42,19 @@ public class ComSearchServiceImplTest {
                 .build());
         assertEquals("未查询到匹配的论文",res.getMessage());
     }
+    @Test
+    public void searchError(){
+        ResponseVO<SearchVO> res=comSearchService.comSearchDocument(ComSearchInpVO.builder()
+                .authors("Ali")
+                .institution("Dallas")
+                .conference("34th")
+                .keywords("Test ERROR")
+                .page(1)
+                .size(1)
+                .startTime(-1)
+                .endTime(-10)
+                .sortBy(0)
+                .build());
+        assertEquals("未查询到匹配的论文",res.getMessage());
+    }
 }
