@@ -16,17 +16,17 @@ pipeline {
                 echo 'Build Success'
             }
         }
-        stage('Build Docker Image') {
-                    steps {
-                        echo 'Building'
-                        sh 'docker build -t ${APP_NAME}:${APP_VERSION} .'
-                        echo 'Build Success'
-                    }
-                }
+//         stage('Build Docker Image') {
+//                     steps {
+//                         echo 'Building'
+//                         sh 'docker build -t ${APP_NAME}:${APP_VERSION} .'
+//                         echo 'Build Success'
+//                     }
+//                 }
         stage('Test') {
             steps{
                 echo 'Testing..'
-                sh 'mvn clean test'
+                sh 'mvn test'
                 junit 'target/surefire-reports/*.xml'
                 jacoco execPattern: 'target/jacoco.exec'
                 withSonarQubeEnv('sonarqube') {
@@ -45,24 +45,30 @@ pipeline {
                     }
 
                 }
-
-        stage('Run Docker image') {
-                steps {
-                    echo "-=- run Docker image -=-"
-                    sh 'docker stop ${APP_NAME}'
-                    sh "docker run --name ${APP_NAME} -d -v shkb:/var/log/shkb --rm -p 8090:8090 ${APP_NAME}:${APP_VERSION}"
-                }
+        stage('Deploy to Service'){
+                    steps{
+                        sh "rsync target/*.jar shkb@39.97.108.99"
+                        sh "rsync target/*.jar shkb@123.56.253.41"
+                    }
         }
-        stage('Delete old image'){
 
-            steps{
-                echo 'Deleting'
-                //sh "docker tag ${APP_NAME}:${APP_VERSION} ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
-
-                //sh "docker push ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
-                //sh 'docker rmi $(docker images | grep ${APP_NAME} | grep -v ${APP_VERSION}) '
-                echo 'Delete Success'
-            }
+//         stage('Run Docker image') {
+//                 steps {
+//                     echo "-=- run Docker image -=-"
+//                     sh 'docker stop ${APP_NAME}'
+//                     sh "docker run --name ${APP_NAME} -d -v shkb:/var/log/shkb --rm -p 8090:8090 ${APP_NAME}:${APP_VERSION}"
+//                 }
+//         }
+//         stage('Delete old image'){
+//
+//             steps{
+//                 echo 'Deleting'
+//                 //sh "docker tag ${APP_NAME}:${APP_VERSION} ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
+//
+//                 //sh "docker push ${ORG_NAME}/shkb/${APP_NAME}:${APP_VERSION}"
+//                 //sh 'docker rmi $(docker images | grep ${APP_NAME} | grep -v ${APP_VERSION}) '
+//                 echo 'Delete Success'
+//             }
 
         }
     }
