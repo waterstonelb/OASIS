@@ -44,8 +44,8 @@ pipeline {
         }
         stage('Deploy to Service'){
                 steps{
-                    sh "rsync target/*.jar shkb@39.97.108.99"
-                    sh "rsync target/*.jar shkb@123.56.253.41"
+                    sh "rsync target/*.jar shkb@39.97.108.99:~/"
+                    sh "rsync target/*.jar shkb@123.56.253.41:~/"
                 }
         }
 
