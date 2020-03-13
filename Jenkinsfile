@@ -29,27 +29,24 @@ pipeline {
                 sh 'mvn test'
                 junit 'target/surefire-reports/*.xml'
                 jacoco execPattern: 'target/jacoco.exec'
-                withSonarQubeEnv('sonarqube') {
-                    sh "mvn sonar:sonar -Dproject.settings=sonar-project.properties"
-                }
                 echo 'Test Success'
             }
 
         }
 
         stage('Push to SonarQube') {
-                    steps{
-                        withSonarQubeEnv('sonarqube') {
-                            sh "mvn sonar:sonar -Dproject.settings=sonar-project.properties"
-                        }
+                steps{
+                    withSonarQubeEnv('sonarqube') {
+                        sh "mvn sonar:sonar -Dproject.settings=sonar-project.properties"
                     }
-
                 }
+
+        }
         stage('Deploy to Service'){
-                    steps{
-                        sh "rsync target/*.jar shkb@39.97.108.99"
-                        sh "rsync target/*.jar shkb@123.56.253.41"
-                    }
+                steps{
+                    sh "rsync target/*.jar shkb@39.97.108.99"
+                    sh "rsync target/*.jar shkb@123.56.253.41"
+                }
         }
 
 //         stage('Run Docker image') {
@@ -70,6 +67,6 @@ pipeline {
 //                 echo 'Delete Success'
 //             }
 
-        }
+
     }
 }
