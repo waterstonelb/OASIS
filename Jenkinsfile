@@ -44,8 +44,15 @@ pipeline {
         }
         stage('Deploy to Service'){
                 steps{
+                    sh "/home/shkb/jar.sh"
+                    sh "cp target/*jar /home/shkb/"
+                    sh "nohup java -jar demo-0.0.1-SNAPSHOT.jar &"
+                    sh "ssh shkb@39.97.108.99 ./jar.sh"
                     sh "rsync target/*.jar shkb@39.97.108.99:~/"
+                    sh "ssh shkb@39.97.108.99 'nohup java -jar demo-0.0.1-SNAPSHOT.jar &'"
+                    sh "ssh shkb@123.56.253.41 ./jar.sh"
                     sh "rsync target/*.jar shkb@123.56.253.41:~/"
+                    sh "ssh shkb@123.56.253.41 'nohup java -jar demo-0.0.1-SNAPSHOT.jar &'"
                 }
         }
 
