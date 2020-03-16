@@ -60,7 +60,7 @@ public class DataLoad {
         List<String> lines = new ArrayList<>();
 
         try {
-            InputStream in = this.getClass().getResourceAsStream("/newdata.json");
+            InputStream in = this.getClass().getResourceAsStream("/data.json");
             BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 
             String line;
