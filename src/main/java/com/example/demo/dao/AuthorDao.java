@@ -27,6 +27,8 @@ public interface AuthorDao extends JpaRepository<Author, Integer> {
 
     Author findFirstById(int auid);
 
+    Author findById(int id);
+
 
 
 

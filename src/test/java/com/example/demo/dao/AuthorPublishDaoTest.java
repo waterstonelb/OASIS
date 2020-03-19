@@ -22,4 +22,22 @@ public class AuthorPublishDaoTest {
         assert authorPublish.size() > 0;
 
     }
+
+    @Test
+    public void countByAuthorId() {
+    }
+
+    @Test
+    public void sumCitationCountByAuthorId() {
+    }
+
+    @Test
+    public void findAuthorKeyWords() {
+        List<String> res = authorPublishDao.findAuthorKeyWords(166);
+        assert res.size() > 0;
+    }
+
+    @Test
+    public void findTopAuthor() {
+    }
 }
