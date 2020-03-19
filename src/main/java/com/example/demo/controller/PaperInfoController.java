@@ -19,6 +19,7 @@ public class PaperInfoController {
         this.paperInfoService = paperInfoService;
     }
 
+
     @ApiOperation(value = "查询具体文章信息")
     @GetMapping("/info")
     public ResponseVO<PaperInfoVO> getPaperInfo(@RequestParam int documentId){

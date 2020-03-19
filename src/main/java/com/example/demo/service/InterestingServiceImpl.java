@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.*;
-import com.example.demo.po.*;
+import com.example.demo.po.Author;
+import com.example.demo.po.Document;
+import com.example.demo.po.TopAffliation;
+import com.example.demo.po.TopAuthor;
 import com.example.demo.service.serviceinterface.InterestingService;
 import com.example.demo.vo.*;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
