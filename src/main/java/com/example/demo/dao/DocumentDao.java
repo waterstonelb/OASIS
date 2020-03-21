@@ -52,4 +52,6 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
             "(select aup.document_id from author_publish aup where aup.author_id = ?1) limit 3",nativeQuery = true)
     List<Document> findByAuthorId(int authorId);
 
+    boolean existsByPdfLink(String pdfLink);
+
 }
