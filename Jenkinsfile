@@ -43,23 +43,22 @@ pipeline {
                 }
 
         }
-        def remote1 = [:]
-            remote1.name = 'service1'
-            remote1.host = '39.97.108.99'
-            remote1.user = 'shkb'
-            remote1.password = 'shkb'
-            remote1.allowAnyHosts = true
 
-        def remote2 = [:]
-            remote2.name = 'service2'
-            remote2.host = '123.56.253.41'
-            remote2.user = 'shkb'
-            remote2.password = 'shkb'
-            remote2.allowAnyHosts = true
         stage('Deploy to Service'){
                 steps{
+                    def remote1 = [:]
+                    remote1.name = 'service1'
+                    remote1.host = '39.97.108.99'
+                    remote1.user = 'shkb'
+                    remote1.password = 'shkb'
+                    remote1.allowAnyHosts = true
 
-
+                    def remote2 = [:]
+                    remote2.name = 'service2'
+                    remote2.host = '123.56.253.41'
+                    remote2.user = 'shkb'
+                    remote2.password = 'shkb'
+                    remote2.allowAnyHosts = true
                     sh "/home/shkb/jar.sh"
                     sh "cp target/*jar /home/shkb/"
                     sh "nohup java -jar demo-0.0.1-SNAPSHOT.jar &"
