@@ -61,4 +61,16 @@ public class SearchServiceImplTest {
         );
         assert res.getData().getDocuments().size() > 0;
     }
+
+    @Test
+    public void searchByAffiliation() {
+        ResponseVO<SearchVO> res = searchService.searchByAffiliation(
+                SearchByAffiliationIdVO
+                        .builder()
+                        .affId(4)
+                        .size(2)
+                        .page(0)
+                        .build());
+        assert res.getData().getDocuments().size() > 0;
+    }
 }
