@@ -142,4 +142,30 @@ public class SearchControllerTest {
 
         verify(searchService).searchByStudyKeyword(searchByKeywordInpVO);
     }
+
+    @Test
+    public void searchByAffiliationId() throws Exception {
+        SearchByAffiliationIdVO s= SearchByAffiliationIdVO.builder()
+                .affId(0)
+                .page(0)
+                .size(2)
+                .build();
+        List<DocumentVO> list=new ArrayList<>();
+        list.add(DocumentVO.builder().build());
+        when(searchService.searchByAffiliation(s))
+                .thenReturn(ResponseVO.buildSuccess(new SearchVO(10,list)));
+
+        Map<String,String> map=new HashMap<>();
+        map.put("affId","0");
+        map.put("size","2");
+        map.put("page","0");
+        String content= JSONObject.toJSONString(map);
+        mockMvc.perform(post("/search/document/affiliation")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        verify(searchService).searchByAffiliation(s);
+    }
 }

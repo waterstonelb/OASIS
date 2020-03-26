@@ -162,4 +162,37 @@ public class SearchServiceImpl implements SearchService {
             return ResponseVO.buildFailure("Error");
         }
     }
+
+    @Override
+    public ResponseVO<SearchVO> searchByAffiliation(SearchByAffiliationIdVO searchByAffiliationIdVO) {
+        try{
+            PageRequest pageRequest = PageRequest.of(
+                    searchByAffiliationIdVO.getPage(),
+                    searchByAffiliationIdVO.getSize(),
+                    Sort.by(Sort.Direction.DESC,
+                            searchByAffiliationIdVO.getSortby() == 0 ? "publicationYear" : "citationCount"));
+
+            Page<Document> queryRes = documentDao.findByAffId(
+                    searchByAffiliationIdVO.getAffId(),
+                    searchByAffiliationIdVO.getStartTime() == null ? 0 : searchByAffiliationIdVO.getStartTime(),
+                    searchByAffiliationIdVO.getEndTime() == null ? 9999 : searchByAffiliationIdVO.getEndTime(),
+                    pageRequest);
+
+
+
+            List<DocumentVO> resVO = new ArrayList<>();
+
+            for (Document document : queryRes.getContent())
+                resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
+
+            log.info("查询成功");
+            return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
+
+
+
+        }catch (Exception ex) {
+            log.error(ex.getLocalizedMessage());
+            return ResponseVO.buildFailure("Error");
+        }
+    }
 }

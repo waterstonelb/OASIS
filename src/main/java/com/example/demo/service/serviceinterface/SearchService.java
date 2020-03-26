@@ -14,4 +14,11 @@ public interface SearchService {
     ResponseVO<SearchVO>  searchByConference(SearchByConferenceInpVO searchByConferenceInpVO);
 
     ResponseVO<SearchVO>  searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO);
+
+    /**
+     * 用于机构详情页面查询
+     * @param searchByAffiliationIdVO 输入
+     * @return SearchVO
+     */
+    ResponseVO<SearchVO> searchByAffiliation(SearchByAffiliationIdVO searchByAffiliationIdVO);
 }

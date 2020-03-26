@@ -51,4 +51,10 @@ public class SearchController {
 
         return searchService.searchByStudyKeyword(searchByKeywordInpVO);
     }
+
+    @ApiOperation("查询具体机构的论文")
+    @RequestMapping(value = "/affiliation",method = RequestMethod.POST)
+    public ResponseVO<SearchVO> searchByAffiliationId(@RequestBody SearchByAffiliationIdVO searchByAffiliationIdVO){
+        return searchService.searchByAffiliation(searchByAffiliationIdVO);
+    }
 }

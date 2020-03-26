@@ -31,6 +31,12 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
             "(select af.id from Affiliation af where af.name like concat('%',?1,'%') ))")
     Page<Document> findByInstitution(String institution, int startTime, int endTim, Pageable pageable);
 
+    @Query(value = "select d from Document d where d.publicationYear between ?2 and ?3 and d.id in " +
+            "(select afp.documentId from AffiliationPublish afp where afp.affId in " +
+            "(select af.id from Affiliation af where af.id=?1))")
+    Page<Document> findByAffId(int affId, int startTime, int endTim, Pageable pageable);
+
+
     @Query(value = "select d from Document d where d.publicationYear between ?2 and ?3 and d.publication like concat('%',?1,'%')")
     Page<Document> findByPublication(String publication, int startTime, int endTim, Pageable pageable);
 
