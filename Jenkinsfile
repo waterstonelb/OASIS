@@ -48,7 +48,7 @@ pipeline {
                 steps{
                     sh "/home/shkb/jar.sh"
                     sh "cp target/*jar /home/shkb/"
-                    sh "nohup java -jar demo-0.0.1-SNAPSHOT.jar &"
+                    sh "nohup java -jar /home/shkb/demo-0.0.1-SNAPSHOT.jar &"
                     sh "ssh shkb@39.97.108.99 ./jar.sh"
                     sh "rsync target/*.jar shkb@39.97.108.99:~/"
                     //sshScript remote: remote1, script: "./start.sh"
