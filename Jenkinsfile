@@ -43,33 +43,20 @@ pipeline {
                 }
 
         }
+
         stage('Deploy to Service'){
                 steps{
-                    def remote1 = [:]
-                        remote1.name = 'service1'
-                        remote1.host = '39.97.108.99'
-                        remote1.user = 'shkb'
-                        remote1.password = 'shkb'
-                        remote1.allowAnyHosts = true
-
-                    def remote2 = [:]
-                        remote2.name = 'service2'
-                        remote2.host = '123.56.253.41'
-                        remote2.user = 'shkb'
-                        remote2.password = 'shkb'
-                        remote2.allowAnyHosts = true
-
                     sh "/home/shkb/jar.sh"
                     sh "cp target/*jar /home/shkb/"
                     sh "/home/shkb/start.sh"
                     sh "ssh shkb@39.97.108.99 ./jar.sh"
                     sh "rsync target/*.jar shkb@39.97.108.99:~/"
-                    sshScript remote: remote1, script: "./start.sh"
-                    //sh "ssh shkb@39.97.108.99 ./start.sh"
+                    //sshScript remote: remote1, script: "./start.sh"
+                    sh "ssh shkb@39.97.108.99 ./start.sh &"
                     sh "ssh shkb@123.56.253.41 ./jar.sh"
                     sh "rsync target/*.jar shkb@123.56.253.41:~/"
-                    sshScript remote: remote2, script: "./start.sh"
-                    //sh "ssh shkb@123.56.253.41 ./start.sh"
+                    //sshScript remote: remote2, script: "./start.sh"
+                    sh "ssh shkb@123.56.253.41 ./start.sh &"
                 }
         }
 
