@@ -4,9 +4,10 @@ import com.example.demo.dao.AuthorDao;
 import com.example.demo.dao.AuthorPublishDao;
 import com.example.demo.dao.DocumentDao;
 import com.example.demo.po.Author;
+import com.example.demo.po.AuthorDirectInfo;
 import com.example.demo.service.serviceinterface.AuthorService;
-import com.example.demo.vo.AuthorVO;
-import com.example.demo.vo.ResponseVO;
+import com.example.demo.vo.*;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,63 @@ public class AuthorServiceImpl implements AuthorService {
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             return ResponseVO.buildFailure("查询错误，请检查您的Id");
+        }
+    }
+
+    @Override
+    public ResponseVO<AuthorMapVO> getAuthorMap(int authorId) {
+        try {
+            int MAX_SIZE=3;
+            List<AuthorDirectInfo> directInfos=authorPublishDao.getAuthorDirect(authorId);
+            List<AuthorMapNode> nodes=new ArrayList<>();
+            List<AuthorMapLink> links=new ArrayList<>();
+            HashMap<Integer,Integer> map=new HashMap<>();
+            for (AuthorDirectInfo a:directInfos) {
+                if(a.getId()!=authorId) {
+                    map.put(a.getId(),1);
+                    links.add(AuthorMapLink.builder()
+                            .source(Integer.toString(authorId))
+                            .target(Integer.toString(a.getId()))
+                            .value(a.getCount())
+                            .build());
+                }else
+                    map.put(a.getId(),directInfos.size()-1);
+            }
+            //二次查询亲戚节点之间的关系
+            for (AuthorDirectInfo a:directInfos) {
+                if(a.getId()!=authorId){
+                    List<AuthorDirectInfo> relation=authorPublishDao.getAuthorDirect(a.getId());
+                    for (AuthorDirectInfo b:relation) {
+                        if(b.getId()!=a.getId()&&map.containsKey(b.getId())){
+                            map.put(b.getId(),map.get(b.getId())+1);
+                            boolean flag=true;
+                            for (AuthorMapLink t:links) {
+                                if((t.getSource().equals(Integer.toString(a.getId()))&&t.getTarget().equals(Integer.toString(b.getId())))
+                                        ||(t.getSource().equals(Integer.toString(b.getId()))&&t.getTarget().equals(Integer.toString(a.getId())))){
+                                    flag=false;
+                                    break;
+                                }
+                            }
+                            if(flag) {
+                                links.add(AuthorMapLink.builder()
+                                        .source(Integer.toString(a.getId()))
+                                        .target(Integer.toString(b.getId()))
+                                        .value(b.getCount())
+                                        .build());
+                            }
+                        }
+                    }
+                }
+            }
+            for (AuthorDirectInfo a:directInfos) {
+                nodes.add(new AuthorMapNode(a,map.get(a.getId())*MAX_SIZE));
+            }
+            log.info("作者关系图建立成功");
+            return ResponseVO.buildSuccess(new AuthorMapVO(nodes,links));
+        }catch (Exception e){
+            log.error("AuthorMap服务失败");
+            log.error(e.getLocalizedMessage());
+            return ResponseVO.buildFailure("AuthorMap服务失败");
         }
     }
 }

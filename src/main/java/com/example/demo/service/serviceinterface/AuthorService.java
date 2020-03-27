@@ -1,5 +1,6 @@
 package com.example.demo.service.serviceinterface;
 
+import com.example.demo.vo.AuthorMapVO;
 import com.example.demo.vo.AuthorVO;
 import com.example.demo.vo.ResponseVO;
 
@@ -9,10 +10,17 @@ import com.example.demo.vo.ResponseVO;
 public interface AuthorService {
 
     /**
-     *查询作者详细信息
-     *
+     * 查询作者详细信息
      * @param authorId 作者ID
-     * @return AuthorVO
+     * @return {@link AuthorVO}
      */
     ResponseVO<AuthorVO> getAuthorInfo(int authorId);
+
+    /**
+     * 获取作者关系图
+     * @param authorId 作者ID
+     * @return {@link AuthorMapVO}
+     */
+    ResponseVO<AuthorMapVO> getAuthorMap(int authorId);
+
 }

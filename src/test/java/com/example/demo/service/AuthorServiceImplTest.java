@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.vo.AuthorMapVO;
 import com.example.demo.vo.AuthorVO;
 import com.example.demo.vo.ResponseVO;
 import org.junit.Test;
@@ -21,5 +22,11 @@ public class AuthorServiceImplTest {
     public void getAuthorInfo() {
         ResponseVO<AuthorVO> res=authorService.getAuthorInfo(599);
         assert res.getData().getKeywords().size()>0;
+    }
+
+    @Test
+    public void getAuthorMap() {
+        ResponseVO<AuthorMapVO> res=authorService.getAuthorMap(5);
+        assert res.getData().getNodes().size()>0;
     }
 }
