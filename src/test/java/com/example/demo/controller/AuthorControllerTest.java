@@ -39,4 +39,13 @@ public class AuthorControllerTest {
                 .andReturn().getResponse().getContentAsString();
         verify(authorService).getAuthorInfo(0);
     }
+
+    @Test
+    public void getAuthorMap() throws Exception {
+        String mockres=mockMvc.perform(get("/author/map")
+                .param("authorId", "5"))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        verify(authorService).getAuthorMap(5);
+    }
 }
