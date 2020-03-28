@@ -2,6 +2,8 @@ package com.example.demo.dao;
 
 import com.example.demo.po.AuthorDirectInfo;
 import com.example.demo.po.AuthorPublish;
+import com.example.demo.vo.figure.AuthorLink;
+import com.example.demo.vo.figure.AuthorNode;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +56,17 @@ public class AuthorPublishDaoTest {
         List<Integer> res=authorPublishDao.getAuthorRelations(5);
         assert res.size()>0;
     }
+
+    @Test
+    public void getAllAuthorNodesTest() {
+        List<AuthorNode> authorNodes = authorPublishDao.getAllAuthorNodes();
+        assert authorNodes.size() > 0;
+    }
+
+    @Test
+    public void getAllAuthorLinksTest() {
+        List<AuthorLink> authorLinks = authorPublishDao.getAllAuthorLinks();
+        assert authorLinks.size() > 0;
+    }
+
 }
