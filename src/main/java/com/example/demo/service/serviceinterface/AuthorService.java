@@ -1,7 +1,7 @@
 package com.example.demo.service.serviceinterface;
 
-import com.example.demo.vo.AuthorMapVO;
-import com.example.demo.vo.AuthorVO;
+import com.example.demo.vo.author.AuthorMapVO;
+import com.example.demo.vo.author.AuthorVO;
 import com.example.demo.vo.ResponseVO;
 
 /**

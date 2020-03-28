@@ -1,4 +1,4 @@
-package com.example.demo.vo;
+package com.example.demo.vo.search;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchByAuthorInpVO {
+public class SearchByKeywordInpVO {
 
-    private String author;
+    private String keyword;
 
-    int size;
+    private int size;
 
     @ApiModelProperty("页号, 从0开始")
-    int page;
+    private int page;
 
 
     @ApiModelProperty("排序标准: 0最新, 1(被)引用次数最多")

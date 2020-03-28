@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.service.serviceinterface.PaperInfoService;
 
-import com.example.demo.vo.PaperInfoVO;
+import com.example.demo.vo.paper.PaperInfoVO;
 import com.example.demo.vo.ResponseVO;
 import org.junit.Before;
 import org.junit.Test;

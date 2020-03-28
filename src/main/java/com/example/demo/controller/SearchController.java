@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.service.serviceinterface.SearchService;
 import com.example.demo.vo.*;
+import com.example.demo.vo.search.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,15 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.vo.AuthorMapVO;
-import com.example.demo.vo.AuthorVO;
+import com.example.demo.vo.author.AuthorMapVO;
+import com.example.demo.vo.author.AuthorVO;
 import com.example.demo.vo.ResponseVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

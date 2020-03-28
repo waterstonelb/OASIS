@@ -1,11 +1,8 @@
 package com.example.demo.service.serviceinterface;
 
-import com.example.demo.po.Document;
-import com.example.demo.vo.ComSearchInpVO;
+import com.example.demo.vo.search.ComSearchInpVO;
 import com.example.demo.vo.ResponseVO;
-import com.example.demo.vo.SearchVO;
-
-import java.util.List;
+import com.example.demo.vo.search.SearchVO;
 
 public interface ComSearchService {
     /**

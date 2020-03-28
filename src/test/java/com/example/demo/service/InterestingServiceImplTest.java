@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.service.serviceinterface.InterestingService;
 import com.example.demo.vo.*;
+import com.example.demo.vo.author.AuthorRecommend;
+import com.example.demo.vo.top.TopAuthorVO;
+import com.example.demo.vo.top.TopCiteDocVO;
+import com.example.demo.vo.top.TopInstitutionVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

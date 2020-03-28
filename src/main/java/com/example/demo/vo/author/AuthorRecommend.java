@@ -1,7 +1,8 @@
-package com.example.demo.vo;
+package com.example.demo.vo.author;
 
 import com.example.demo.po.Author;
 import com.example.demo.po.Document;
+import com.example.demo.vo.paper.SimplePaperVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

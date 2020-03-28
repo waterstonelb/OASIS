@@ -1,15 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.serviceinterface.AffiliationService;
-import com.example.demo.service.serviceinterface.AuthorService;
-import com.example.demo.vo.AffiliationVO;
-import com.example.demo.vo.AuthorVO;
+import com.example.demo.vo.affiliation.AffiliationVO;
 import com.example.demo.vo.ResponseVO;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

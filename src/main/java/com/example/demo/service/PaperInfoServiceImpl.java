@@ -7,7 +7,7 @@ import com.example.demo.dao.RefDao;
 import com.example.demo.po.Author;
 import com.example.demo.po.Document;
 import com.example.demo.service.serviceinterface.PaperInfoService;
-import com.example.demo.vo.PaperInfoVO;
+import com.example.demo.vo.paper.PaperInfoVO;
 import com.example.demo.vo.ResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

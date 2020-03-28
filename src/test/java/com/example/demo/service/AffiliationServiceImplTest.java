@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.vo.AffiliationVO;
+import com.example.demo.vo.affiliation.AffiliationVO;
 import com.example.demo.vo.ResponseVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;

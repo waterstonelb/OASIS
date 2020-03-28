@@ -1,4 +1,4 @@
-package com.example.demo.vo;
+package com.example.demo.vo.paper;
 
 import com.example.demo.po.Document;
 import lombok.AllArgsConstructor;

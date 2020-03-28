@@ -1,10 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.serviceinterface.ComSearchService;
-import com.example.demo.vo.ComSearchInpVO;
-import com.example.demo.vo.DocumentVO;
+import com.example.demo.vo.search.ComSearchInpVO;
+import com.example.demo.vo.paper.DocumentVO;
 import com.example.demo.vo.ResponseVO;
-import com.example.demo.vo.SearchVO;
+import com.example.demo.vo.search.SearchVO;
 import net.minidev.json.JSONObject;
 import org.junit.Test;
 import org.springframework.http.MediaType;
