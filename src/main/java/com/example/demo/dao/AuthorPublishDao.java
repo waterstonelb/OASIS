@@ -77,7 +77,6 @@ public interface AuthorPublishDao extends JpaRepository<AuthorPublish, AuthorPub
      * 获取所有作者节点信息
      * @return List<AuthorNode>
      */
-
     @Query("select new com.example.demo.vo.figure.AuthorNode(a.name, count(ap.authorId), a.id) from " +
             "AuthorPublish ap, Author a where ap.authorId = a.id " +
             "group by a.id")

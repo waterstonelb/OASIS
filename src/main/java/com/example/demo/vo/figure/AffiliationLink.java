@@ -5,15 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AffiliationFigureVO {
-    private List<AffiliationNode> nodes;
+public class AffiliationLink {
 
-    private List<AffiliationLink> links;
+    private int source;
 
+    private int target;
+
+    private long weight;
 }

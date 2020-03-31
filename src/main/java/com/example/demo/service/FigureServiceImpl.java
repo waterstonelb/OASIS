@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.AuthorDao;
+import com.example.demo.dao.AffiliationPublishDao;
 import com.example.demo.dao.AuthorPublishDao;
-import com.example.demo.po.AuthorPublish;
 import com.example.demo.service.serviceinterface.FigureService;
 import com.example.demo.vo.ResponseVO;
 import com.example.demo.vo.figure.*;
@@ -21,6 +20,13 @@ public class FigureServiceImpl implements FigureService {
     public void setAuthorPublishDao(AuthorPublishDao authorPublishDao){
         this.authorPublishDao = authorPublishDao;
     }
+
+    private AffiliationPublishDao affiliationPublishDao;
+    @Autowired
+    public void setAffiliationPublishDao(AffiliationPublishDao affiliationPublishDao){
+        this.affiliationPublishDao = affiliationPublishDao;
+    }
+
     @Override
     public ResponseVO<AuthorFigureVO> getAuthorFigure() {
         try {
@@ -38,7 +44,17 @@ public class FigureServiceImpl implements FigureService {
 
     @Override
     public ResponseVO<AffiliationFigureVO> getAffiliationFigure() {
-        return null;
+        try {
+            List<AffiliationNode> affiliationNodes = affiliationPublishDao.getAllAffiliationNodes();
+            List<AffiliationLink> affiliationLinks = affiliationPublishDao.getAllAffiliationLinks();
+            log.info("机构关系大图建立成功");
+            return ResponseVO.buildSuccess(new AffiliationFigureVO(affiliationNodes, affiliationLinks));
+        }catch (Exception ex){
+            log.error("机构关系大图建立失败");
+            log.error(ex.getLocalizedMessage());
+            return ResponseVO.buildFailure("机构关系大图建立失败");
+        }
+
     }
 
     @Override
