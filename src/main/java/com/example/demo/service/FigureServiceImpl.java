@@ -2,14 +2,19 @@ package com.example.demo.service;
 
 import com.example.demo.dao.AffiliationPublishDao;
 import com.example.demo.dao.AuthorPublishDao;
+import com.example.demo.dao.DocumentDao;
+import com.example.demo.po.Document;
 import com.example.demo.service.serviceinterface.FigureService;
 import com.example.demo.vo.ResponseVO;
 import com.example.demo.vo.figure.*;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -25,6 +30,12 @@ public class FigureServiceImpl implements FigureService {
     @Autowired
     public void setAffiliationPublishDao(AffiliationPublishDao affiliationPublishDao){
         this.affiliationPublishDao = affiliationPublishDao;
+    }
+
+    private DocumentDao documentDao;
+    @Autowired
+    public void setDocumentDao(DocumentDao documentDao){
+        this.documentDao = documentDao;
     }
 
     @Override
@@ -59,6 +70,63 @@ public class FigureServiceImpl implements FigureService {
 
     @Override
     public ResponseVO<FieldFigureVO> getFieldFigure() {
-        return null;
+        try {
+
+            List<String> docLines = documentDao.findAllKeywords();
+            List<String> filteredLines = docLines.stream().filter(s -> !s.isEmpty()).collect(Collectors.toList());
+            List<String> kwlist = filteredLines.stream().map(s -> s.split(",")).
+                    flatMap(Arrays::stream).distinct().collect(Collectors.toList());
+
+            Map<String, Integer> kwIdMap = new HashMap<>();
+            for (int i = 0; i < kwlist.size(); i++)
+                kwIdMap.put(kwlist.get(i), i);
+
+            Map<Integer, Long> nodes = new HashMap<>();
+            Map<IdLink, Long> links = new HashMap<>();
+
+            for (String line : filteredLines) {
+                String[] kws = line.split(",");
+                for (String kw : kws) {
+                    int kwId = kwIdMap.get(kw);
+                    if (!nodes.containsKey(kwId))
+                        nodes.put(kwId, 1L);
+                    else
+                        nodes.put(kwId, nodes.get(kwId) + 1);
+                }
+                for (int i = 0; i < kws.length - 1; i++) {
+                    for (int j = 0; j < kws.length; j++) {
+                        String s1 = kws[i];
+                        String s2 = kws[j];
+                        int source = Math.min(kwIdMap.get(s1), kwIdMap.get(s2));
+                        int target = Math.max(kwIdMap.get(s1), kwIdMap.get(s2));
+                        IdLink idLink = new IdLink(source, target);
+
+                        if (!links.containsKey(idLink))
+                            links.put(idLink, 1L);
+                        else
+                            links.put(idLink, links.get(idLink) + 1);
+                    }
+                }
+            }
+
+
+            List<FieldNode> fieldNodes = new ArrayList<>();
+            List<FieldLink> fieldLinks = new ArrayList<>();
+            for (Map.Entry<Integer, Long> entry : nodes.entrySet())
+                fieldNodes.add(new FieldNode(kwlist.get(entry.getKey()),
+                        entry.getValue(), entry.getKey()));
+            for (Map.Entry<IdLink, Long> entry : links.entrySet())
+                fieldLinks.add(new FieldLink(entry.getKey().getSource(),
+                        entry.getKey().getTarget(), entry.getValue()));
+
+            log.info("领域关系大图建立成功");
+
+            return ResponseVO.buildSuccess(new FieldFigureVO(fieldNodes, fieldLinks));
+
+        }catch (Exception ex){
+            log.error("领域关系大图建立失败");
+            log.error(ex.getLocalizedMessage());
+            return ResponseVO.buildFailure("领域关系大图建立失败");
+        }
     }
 }

@@ -1,20 +1,20 @@
 package com.example.demo.vo.figure;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FieldFigureVO {
-    List<FieldNode> nodes;
+public class FieldLink {
 
-    List<FieldLink> links;
+    private int source;
+
+    private int target;
+
+    private long weight;
+
 }

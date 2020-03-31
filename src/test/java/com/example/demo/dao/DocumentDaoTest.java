@@ -76,6 +76,17 @@ public class DocumentDaoTest {
         assertEquals(3,res.size());
     }
 
+    @Test
+    public void findByIdTest(){
+        Document res = documentDao.findById(6);
+        assertEquals(6, res.getId().intValue());
+    }
+
+    @Test
+    public void getAllKeyWordsTest(){
+        List<String> res = documentDao.findAllKeywords();
+        assert res.size() > 0;
+    }
 
 
 }
