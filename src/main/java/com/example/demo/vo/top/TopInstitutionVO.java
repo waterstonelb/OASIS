@@ -1,4 +1,4 @@
-package com.example.demo.vo;
+package com.example.demo.vo.top;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

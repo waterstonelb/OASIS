@@ -1,4 +1,4 @@
-package com.example.demo.vo;
+package com.example.demo.vo.search;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchByInstitutionInpVO {
+public class SearchByConferenceInpVO {
 
-    private String institution;
+    private String conference;
 
     private int size;
 

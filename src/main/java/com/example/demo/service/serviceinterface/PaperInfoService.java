@@ -1,7 +1,7 @@
 package com.example.demo.service.serviceinterface;
 
 
-import com.example.demo.vo.PaperInfoVO;
+import com.example.demo.vo.paper.PaperInfoVO;
 import com.example.demo.vo.ResponseVO;
 
 public interface PaperInfoService {

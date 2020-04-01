@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.service.serviceinterface.SearchService;
 import com.example.demo.vo.*;
+import com.example.demo.vo.search.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

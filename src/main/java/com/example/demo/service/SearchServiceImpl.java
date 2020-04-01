@@ -5,6 +5,8 @@ import com.example.demo.dao.*;
 import com.example.demo.po.*;
 import com.example.demo.service.serviceinterface.SearchService;
 import com.example.demo.vo.*;
+import com.example.demo.vo.paper.DocumentVO;
+import com.example.demo.vo.search.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

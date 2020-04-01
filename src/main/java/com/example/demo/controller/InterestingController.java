@@ -3,6 +3,10 @@ package com.example.demo.controller;
 
 import com.example.demo.service.serviceinterface.InterestingService;
 import com.example.demo.vo.*;
+import com.example.demo.vo.author.AuthorRecommend;
+import com.example.demo.vo.top.TopAuthorVO;
+import com.example.demo.vo.top.TopCiteDocVO;
+import com.example.demo.vo.top.TopInstitutionVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

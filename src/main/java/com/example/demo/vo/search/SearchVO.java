@@ -1,6 +1,6 @@
-package com.example.demo.vo;
+package com.example.demo.vo.search;
 
-import com.example.demo.po.Document;
+import com.example.demo.vo.paper.DocumentVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

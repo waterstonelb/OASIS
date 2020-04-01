@@ -1,4 +1,4 @@
-package com.example.demo.vo;
+package com.example.demo.vo.author;
 
 import com.example.demo.po.AuthorDirectInfo;
 import lombok.AllArgsConstructor;

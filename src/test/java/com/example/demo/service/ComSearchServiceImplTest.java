@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.vo.ComSearchInpVO;
+import com.example.demo.vo.search.ComSearchInpVO;
 import com.example.demo.vo.ResponseVO;
-import com.example.demo.vo.SearchVO;
+import com.example.demo.vo.search.SearchVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

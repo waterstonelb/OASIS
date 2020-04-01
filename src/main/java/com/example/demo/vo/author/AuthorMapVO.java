@@ -1,9 +1,9 @@
-package com.example.demo.vo;
+package com.example.demo.vo.author;
 
-import lombok.AllArgsConstructor;
+import com.example.demo.vo.author.AuthorMapLink;
+import com.example.demo.vo.author.AuthorMapNode;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;

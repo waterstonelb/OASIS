@@ -2,9 +2,9 @@ package com.example.demo.controller;
 
 
 import com.example.demo.service.serviceinterface.ComSearchService;
-import com.example.demo.vo.ComSearchInpVO;
+import com.example.demo.vo.search.ComSearchInpVO;
 import com.example.demo.vo.ResponseVO;
-import com.example.demo.vo.SearchVO;
+import com.example.demo.vo.search.SearchVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

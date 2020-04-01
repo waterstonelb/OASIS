@@ -60,4 +60,7 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
 
     boolean existsByPdfLink(String pdfLink);
 
+    @Query("select d.keywords from Document d")
+    List<String> findAllKeywords();
+
 }

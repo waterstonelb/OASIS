@@ -1,7 +1,8 @@
-package com.example.demo.vo;
+package com.example.demo.vo.paper;
 
 import com.example.demo.po.Author;
 import com.example.demo.po.Document;
+import com.example.demo.vo.author.AuthorSimpleVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

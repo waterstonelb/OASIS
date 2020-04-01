@@ -4,6 +4,8 @@ import com.example.demo.po.Affiliation;
 import com.example.demo.po.AffiliationPublish;
 import com.example.demo.po.AffiliationPublishPK;
 import com.example.demo.po.TopAffliation;
+import com.example.demo.vo.figure.AffiliationLink;
+import com.example.demo.vo.figure.AffiliationNode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,5 +23,23 @@ public interface AffiliationPublishDao extends
             "(select af.id from Affiliation af where af.name = '')" +
             "group by afp.affId order by count (afp.documentId) desc")
     Page<TopAffliation> findTopAffliation(Pageable pageable);
+
+    /**
+     * 获取所有机构节点信息
+     * @return List<AffiliationNode>
+     */
+    @Query("select new com.example.demo.vo.figure.AffiliationNode(a.name, count(ap.affId), a.id) from " +
+            "AffiliationPublish ap, Affiliation a where ap.affId = a.id " +
+            "group by a.id")
+    List<AffiliationNode> getAllAffiliationNodes();
+
+    /**
+     * 获取所有机构关系信息
+     * @return List<AffiliationLink>
+     */
+    @Query("select new com.example.demo.vo.figure.AffiliationLink(ap1.affId, ap2.affId, count(ap1.affId)) " +
+            "from AffiliationPublish ap1, AffiliationPublish ap2 where ap1.documentId = ap2.documentId " +
+            "and ap1.affId < ap2.affId group by ap1.affId, ap2.affId")
+    List<AffiliationLink> getAllAffiliationLinks();
 
 }

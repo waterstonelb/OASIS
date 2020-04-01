@@ -1,19 +1,22 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.serviceinterface.ComSearchService;
-import com.example.demo.vo.ComSearchInpVO;
-import com.example.demo.vo.DocumentVO;
+import com.example.demo.vo.search.ComSearchInpVO;
+import com.example.demo.vo.paper.DocumentVO;
 import com.example.demo.vo.ResponseVO;
-import com.example.demo.vo.SearchVO;
+import com.example.demo.vo.search.SearchVO;
 import net.minidev.json.JSONObject;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.nio.channels.spi.SelectorProvider;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

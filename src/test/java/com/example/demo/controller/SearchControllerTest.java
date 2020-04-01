@@ -3,6 +3,8 @@ package com.example.demo.controller;
 
 import com.example.demo.service.serviceinterface.SearchService;
 import com.example.demo.vo.*;
+import com.example.demo.vo.paper.DocumentVO;
+import com.example.demo.vo.search.*;
 import net.minidev.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;

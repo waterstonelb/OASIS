@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.serviceinterface.AffiliationService;
-import com.example.demo.vo.AffiliationVO;
+import com.example.demo.vo.affiliation.AffiliationVO;
 import com.example.demo.vo.ResponseVO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

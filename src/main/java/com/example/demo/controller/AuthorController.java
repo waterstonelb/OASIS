@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.serviceinterface.AuthorService;
-import com.example.demo.vo.AuthorMapVO;
-import com.example.demo.vo.AuthorVO;
+import com.example.demo.vo.author.AuthorMapVO;
+import com.example.demo.vo.author.AuthorVO;
 import com.example.demo.vo.ResponseVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
