@@ -13,6 +13,7 @@ import com.example.demo.vo.author.AuthorMapVO;
 import com.example.demo.vo.author.AuthorVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -67,6 +68,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    @Cacheable(value = "authorRelationCache")
     public ResponseVO<AuthorMapVO> getAuthorMap(int authorId) {
         try {
             int MAX_SIZE=3;

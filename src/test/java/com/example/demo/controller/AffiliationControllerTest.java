@@ -5,6 +5,7 @@ import com.example.demo.vo.affiliation.AffiliationVO;
 import com.example.demo.vo.ResponseVO;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.*;

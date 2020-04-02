@@ -10,6 +10,7 @@ import com.example.demo.vo.figure.*;
 import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 
@@ -39,6 +40,7 @@ public class FigureServiceImpl implements FigureService {
     }
 
     @Override
+    @Cacheable(value = "authorFigureCache")
     public ResponseVO<AuthorFigureVO> getAuthorFigure() {
         try {
             List<AuthorNode> authorNodes = authorPublishDao.getAllAuthorNodes();
@@ -54,6 +56,7 @@ public class FigureServiceImpl implements FigureService {
     }
 
     @Override
+    @Cacheable(value = "affiliationFigureCache")
     public ResponseVO<AffiliationFigureVO> getAffiliationFigure() {
         try {
             List<AffiliationNode> affiliationNodes = affiliationPublishDao.getAllAffiliationNodes();
@@ -69,6 +72,7 @@ public class FigureServiceImpl implements FigureService {
     }
 
     @Override
+    @Cacheable(value = "fieldFigureCache")
     public ResponseVO<FieldFigureVO> getFieldFigure() {
         try {
 
