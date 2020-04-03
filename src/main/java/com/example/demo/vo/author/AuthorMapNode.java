@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthorMapNode implements Cloneable{
     String name;
     String authorName;
-    long symbolsize;
+    long symbolSize;
 
     public Object clone(){
         AuthorMapNode a;
@@ -31,6 +31,6 @@ public class AuthorMapNode implements Cloneable{
     public AuthorMapNode(AuthorDirectInfo a,long count){
         this.name=Integer.toString(a.getId());
         this.authorName=a.getAuthorname();
-        this.symbolsize=count;
+        this.symbolSize =count;
     }
 }
