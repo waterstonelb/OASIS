@@ -19,8 +19,7 @@ public interface AffiliationPublishDao extends
         JpaRepository<AffiliationPublish, AffiliationPublishPK> {
 
     @Query("select new com.example.demo.po.TopAffliation(afp.affId, count (afp.documentId))" +
-            " from AffiliationPublish afp where afp.affId <> " +
-            "(select af.id from Affiliation af where af.name = '')" +
+            " from AffiliationPublish afp " +
             "group by afp.affId order by count (afp.documentId) desc")
     Page<TopAffliation> findTopAffliation(Pageable pageable);
 

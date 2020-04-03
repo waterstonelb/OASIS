@@ -165,13 +165,15 @@ public class DataLoad implements DataLoadService {
             /*--------------load affiliation and affiliation publish message--------------*/
             boolean afexists = affiliationDao.existsByName(adata.getAffiliation());
 
+            boolean afEmpty = adata.getAffiliation().isEmpty();
+
             if (afexists){
                 int afid = affiliationDao.findFirstByName(adata.getAffiliation()).getId();
                 AffiliationPublish affiliationPublish = AffiliationPublish.builder()
                         .affId(afid).documentId(docId).build();
                 affiliationPublishDao.saveAndFlush(affiliationPublish);
             }
-            else{
+            else if (!afEmpty){
                 Affiliation affiliation = Affiliation.builder()
                         .name(adata.getAffiliation()).build();
                 Affiliation afRes = affiliationDao.saveAndFlush(affiliation);
