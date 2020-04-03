@@ -24,8 +24,8 @@
             maxElementsInMemory = "100"
             overflowToDisk = "false"
             diskPersistent = "false"
-            timeToIdleSeconds = "120"
-            timeToLiveSeconds = "180"
+            timeToIdleSeconds = "1200"
+            timeToLiveSeconds = "1800"
             memoryStoreEvictionPolicy = "LRU"/>
 
     <cache
@@ -34,8 +34,8 @@
             maxElementsInMemory = "100"
             overflowToDisk = "false"
             diskPersistent = "false"
-            timeToIdleSeconds = "120"
-            timeToLiveSeconds = "180"
+            timeToIdleSeconds = "1200"
+            timeToLiveSeconds = "1800"
             memoryStoreEvictionPolicy = "LRU"/>
 
 
@@ -45,8 +45,8 @@
             maxElementsInMemory = "100"
             overflowToDisk = "false"
             diskPersistent = "false"
-            timeToIdleSeconds = "120"
-            timeToLiveSeconds = "180"
+            timeToIdleSeconds = "1200"
+            timeToLiveSeconds = "1800"
             memoryStoreEvictionPolicy = "LRU"/>
     <cache
             name = "authorRelationCache"
@@ -54,8 +54,8 @@
             maxElementsInMemory = "100"
             overflowToDisk = "false"
             diskPersistent = "false"
-            timeToIdleSeconds = "120"
-            timeToLiveSeconds = "180"
+            timeToIdleSeconds = "1200"
+            timeToLiveSeconds = "1800"
             memoryStoreEvictionPolicy = "LRU"/>
 
 
