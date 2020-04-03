@@ -48,6 +48,15 @@
             timeToIdleSeconds = "1200"
             timeToLiveSeconds = "1800"
             memoryStoreEvictionPolicy = "LRU"/>
+    <cache
+            name = "authorRelationCache"
+            eternal = "false"
+            maxElementsInMemory = "100"
+            overflowToDisk = "false"
+            diskPersistent = "false"
+            timeToIdleSeconds = "120"
+            timeToLiveSeconds = "180"
+            memoryStoreEvictionPolicy = "LRU"/>
 
 
 
