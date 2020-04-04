@@ -170,4 +170,29 @@ public class SearchControllerTest {
 
         verify(searchService).searchByAffiliation(s);
     }
+
+    @Test
+    public void searchByAuthorId() throws Exception {
+        SearchByAuthorIdVO s= SearchByAuthorIdVO.builder()
+                .authorId(0)
+                .page(0)
+                .size(2)
+                .build();
+        List<DocumentVO> list=new ArrayList<>();
+        list.add(DocumentVO.builder().build());
+        when(searchService.searchByAuthorId(s))
+                .thenReturn(ResponseVO.buildSuccess(new SearchVO(10,list)));
+        Map<String,String> map=new HashMap<>();
+        map.put("authorId","0");
+        map.put("size","2");
+        map.put("page","0");
+        String content= JSONObject.toJSONString(map);
+        mockMvc.perform(post("/search/document/authorid")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        verify(searchService).searchByAuthorId(s);
+    }
 }
