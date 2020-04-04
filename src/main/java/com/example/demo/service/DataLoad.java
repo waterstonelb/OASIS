@@ -165,7 +165,7 @@ public class DataLoad implements DataLoadService {
             /*--------------load affiliation and affiliation publish message--------------*/
             boolean afexists = affiliationDao.existsByName(adata.getAffiliation());
 
-            boolean afEmpty = adata.getAffiliation().isEmpty();
+            boolean afEmpty = adata.getAffiliation()==null || adata.getAffiliation().isEmpty();
 
             if (afexists){
                 int afid = affiliationDao.findFirstByName(adata.getAffiliation()).getId();
