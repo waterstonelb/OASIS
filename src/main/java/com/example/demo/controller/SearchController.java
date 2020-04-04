@@ -16,7 +16,7 @@ public class SearchController {
     private SearchService searchService;
 
     @Autowired
-    public SearchController(SearchService searchService){
+    public SearchController(SearchService searchService) {
         this.searchService = searchService;
     }
 
@@ -24,7 +24,7 @@ public class SearchController {
     @ApiOperation(value = "根据作者查询")
     @RequestMapping(value = "/author", method = RequestMethod.POST)
     public ResponseVO<SearchVO>
-    searchByAuthor(@RequestBody SearchByAuthorInpVO searchByAuthorInpVO){
+    searchByAuthor(@RequestBody SearchByAuthorInpVO searchByAuthorInpVO) {
 
         return searchService.searchByAuthor(searchByAuthorInpVO);
     }
@@ -32,7 +32,7 @@ public class SearchController {
     @ApiOperation(value = "根据机构查询")
     @RequestMapping(value = "/institution", method = RequestMethod.POST)
     public ResponseVO<SearchVO>
-    searchByInstitution(@RequestBody SearchByInstitutionInpVO searchByInstitutionInpVO){
+    searchByInstitution(@RequestBody SearchByInstitutionInpVO searchByInstitutionInpVO) {
 
         return searchService.searchByInstitution(searchByInstitutionInpVO);
     }
@@ -40,7 +40,7 @@ public class SearchController {
     @ApiOperation(value = "根据会议查询")
     @RequestMapping(value = "/conference", method = RequestMethod.POST)
     public ResponseVO<SearchVO>
-    searchByConference(@RequestBody SearchByConferenceInpVO searchByConferenceInpVO){
+    searchByConference(@RequestBody SearchByConferenceInpVO searchByConferenceInpVO) {
 
         return searchService.searchByConference(searchByConferenceInpVO);
     }
@@ -48,14 +48,20 @@ public class SearchController {
     @ApiOperation(value = "根据论文关键字查询")
     @RequestMapping(value = "/keyword", method = RequestMethod.POST)
     public ResponseVO<SearchVO>
-    searchByStudyKeyword(@RequestBody SearchByKeywordInpVO searchByKeywordInpVO){
+    searchByStudyKeyword(@RequestBody SearchByKeywordInpVO searchByKeywordInpVO) {
 
         return searchService.searchByStudyKeyword(searchByKeywordInpVO);
     }
 
-    @ApiOperation("查询具体机构的论文")
-    @RequestMapping(value = "/affiliation",method = RequestMethod.POST)
-    public ResponseVO<SearchVO> searchByAffiliationId(@RequestBody SearchByAffiliationIdVO searchByAffiliationIdVO){
+    @ApiOperation("查询具体机构Id的论文")
+    @RequestMapping(value = "/affiliation", method = RequestMethod.POST)
+    public ResponseVO<SearchVO> searchByAffiliationId(@RequestBody SearchByAffiliationIdVO searchByAffiliationIdVO) {
         return searchService.searchByAffiliation(searchByAffiliationIdVO);
+    }
+
+    @ApiOperation(value = "根据作者Id查询")
+    @RequestMapping(value = "/authorid", method = RequestMethod.POST)
+    public ResponseVO<SearchVO> searchByAuthorId(@RequestBody SearchByAuthorIdVO searchByAuthorIdVO) {
+        return searchService.searchByAuthorId(searchByAuthorIdVO);
     }
 }
