@@ -16,7 +16,14 @@ public interface SearchService {
     /**
      * 用于机构详情页面查询
      * @param searchByAffiliationIdVO 输入
-     * @return SearchVO
+     * @return {@link SearchVO}
      */
     ResponseVO<SearchVO> searchByAffiliation(SearchByAffiliationIdVO searchByAffiliationIdVO);
+
+    /**
+     * 用于作业页面详情查询
+     * @param searchByAuthorIdVO 输入
+     * @return {@link SearchVO}
+     */
+    ResponseVO<SearchVO> searchByAuthorId(SearchByAuthorIdVO searchByAuthorIdVO);
 }

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -23,21 +24,23 @@ public class SearchServiceImpl implements SearchService {
 
 
     private DocumentDao documentDao;
+
     @Autowired
-    public void setDocumentDao(DocumentDao documentDao){
+    public void setDocumentDao(DocumentDao documentDao) {
         this.documentDao = documentDao;
     }
 
     private AuthorDao authorDao;
+
     @Autowired
-    public void setAuthorDao(AuthorDao authorDao){
+    public void setAuthorDao(AuthorDao authorDao) {
         this.authorDao = authorDao;
     }
 
 
     @Override
-    public ResponseVO<SearchVO>  searchByAuthor(SearchByAuthorInpVO searchByAuthorInpVO) {
-        try{
+    public ResponseVO<SearchVO> searchByAuthor(SearchByAuthorInpVO searchByAuthorInpVO) {
+        try {
             PageRequest pageRequest = PageRequest.of(
                     searchByAuthorInpVO.getPage(),
                     searchByAuthorInpVO.getSize(),
@@ -60,7 +63,7 @@ public class SearchServiceImpl implements SearchService {
             return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
 
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
@@ -68,8 +71,8 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public ResponseVO<SearchVO>  searchByInstitution(SearchByInstitutionInpVO searchByInstitutionInpVO) {
-        try{
+    public ResponseVO<SearchVO> searchByInstitution(SearchByInstitutionInpVO searchByInstitutionInpVO) {
+        try {
             PageRequest pageRequest = PageRequest.of(
                     searchByInstitutionInpVO.getPage(),
                     searchByInstitutionInpVO.getSize(),
@@ -83,7 +86,6 @@ public class SearchServiceImpl implements SearchService {
                     pageRequest);
 
 
-
             List<DocumentVO> resVO = new ArrayList<>();
 
             for (Document document : queryRes.getContent())
@@ -93,16 +95,15 @@ public class SearchServiceImpl implements SearchService {
             return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
 
-
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
     }
 
     @Override
-    public ResponseVO<SearchVO>  searchByConference(SearchByConferenceInpVO searchByConferenceInpVO) {
-        try{
+    public ResponseVO<SearchVO> searchByConference(SearchByConferenceInpVO searchByConferenceInpVO) {
+        try {
 
             PageRequest pageRequest = PageRequest.of(
                     searchByConferenceInpVO.getPage(),
@@ -127,7 +128,7 @@ public class SearchServiceImpl implements SearchService {
             return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
 
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
@@ -135,8 +136,8 @@ public class SearchServiceImpl implements SearchService {
 
 
     @Override
-    public ResponseVO<SearchVO>  searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO) {
-        try{
+    public ResponseVO<SearchVO> searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO) {
+        try {
 
             PageRequest pageRequest = PageRequest.of(
                     searchByKeywordInpVO.getPage(),
@@ -159,7 +160,7 @@ public class SearchServiceImpl implements SearchService {
             log.info("查询成功");
             return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
         }
@@ -167,7 +168,7 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public ResponseVO<SearchVO> searchByAffiliation(SearchByAffiliationIdVO searchByAffiliationIdVO) {
-        try{
+        try {
             PageRequest pageRequest = PageRequest.of(
                     searchByAffiliationIdVO.getPage(),
                     searchByAffiliationIdVO.getSize(),
@@ -181,7 +182,6 @@ public class SearchServiceImpl implements SearchService {
                     pageRequest);
 
 
-
             List<DocumentVO> resVO = new ArrayList<>();
 
             for (Document document : queryRes.getContent())
@@ -191,10 +191,40 @@ public class SearchServiceImpl implements SearchService {
             return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
 
 
-
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             log.error(ex.getLocalizedMessage());
             return ResponseVO.buildFailure("Error");
+        }
+    }
+
+    @Override
+    public ResponseVO<SearchVO> searchByAuthorId(SearchByAuthorIdVO searchByAuthorIdVO) {
+        try {
+            PageRequest pageRequest = PageRequest.of(
+                    searchByAuthorIdVO.getPage(),
+                    searchByAuthorIdVO.getSize(),
+                    Sort.by(Sort.Direction.DESC,
+                            searchByAuthorIdVO.getSortby() == 0 ? "publicationYear" : "citationCount"));
+            Page<Document> res = documentDao.getByAuthorId(
+                    searchByAuthorIdVO.getAuthorId(),
+                    searchByAuthorIdVO.getStartTime() == null ? 0 : searchByAuthorIdVO.getStartTime(),
+                    searchByAuthorIdVO.getEndTime() == null ? 9999 : searchByAuthorIdVO.getEndTime(),
+                    pageRequest);
+            List<DocumentVO> resVO = new ArrayList<>();
+            for (Document document : res.getContent())
+                resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
+
+            if (!res.isEmpty()) {
+                log.info("查询成功");
+                return ResponseVO.buildSuccess("查询成功", new SearchVO(res.getTotalElements(), resVO));
+
+            } else {
+                log.info(new Date().toString() + "未查询到匹配的论文");
+                return ResponseVO.buildFailure("未查询到匹配的论文");
+            }
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            return ResponseVO.buildFailure("作者详情文章查询失败");
         }
     }
 }

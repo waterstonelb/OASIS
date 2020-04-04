@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -72,5 +73,17 @@ public class SearchServiceImplTest {
                         .page(0)
                         .build());
         assert res.getData().getDocuments().size() > 0;
+    }
+
+    @Test
+    public void searchByAuthorId() {
+        ResponseVO<SearchVO> res=searchService.searchByAuthorId(
+                SearchByAuthorIdVO.builder()
+                        .authorId(5)
+                        .size(2)
+                        .page(0)
+                        .build()
+        );
+        assertTrue(res.getData().getDocuments().size()>0);
     }
 }
