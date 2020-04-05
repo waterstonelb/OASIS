@@ -4,6 +4,7 @@ import com.example.demo.po.Affiliation;
 import com.example.demo.po.TopAffliation;
 import com.example.demo.vo.figure.AffiliationLink;
 import com.example.demo.vo.figure.AffiliationNode;
+import io.swagger.models.auth.In;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 

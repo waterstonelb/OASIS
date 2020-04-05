@@ -24,8 +24,8 @@ public class FigureControllerTest {
         FigureService figureService = mock(FigureService.class);
         FigureController figureController = new FigureController(figureService);
         MockMvc mockMvc = standaloneSetup(figureController).build();
-        AuthorFigureVO authorFigureVO = AuthorFigureVO.builder()
-                .links(new ArrayList<>()).nodes(new ArrayList<>()).build();
+        AuthorFigureVO authorFigureVO = new AuthorFigureVO(new ArrayList<>(), new ArrayList<>());
+
         when(figureService.getAuthorFigure()).thenReturn(ResponseVO.buildSuccess(authorFigureVO));
 
         mockMvc.perform(
@@ -42,8 +42,7 @@ public class FigureControllerTest {
         FigureService figureService = mock(FigureService.class);
         FigureController figureController = new FigureController(figureService);
         MockMvc mockMvc = standaloneSetup(figureController).build();
-        AffiliationFigureVO affiliationFigureVO = AffiliationFigureVO.builder()
-                .links(new ArrayList<>()).nodes(new ArrayList<>()).build();
+        AffiliationFigureVO affiliationFigureVO = new AffiliationFigureVO(new ArrayList<>(), new ArrayList<>());
         when(figureService.getAffiliationFigure()).thenReturn(ResponseVO.buildSuccess(affiliationFigureVO));
 
         mockMvc.perform(
@@ -59,8 +58,7 @@ public class FigureControllerTest {
         FigureService figureService = mock(FigureService.class);
         FigureController figureController = new FigureController(figureService);
         MockMvc mockMvc = standaloneSetup(figureController).build();
-        FieldFigureVO fieldFigureVO = FieldFigureVO.builder()
-                .links(new ArrayList<>()).nodes(new ArrayList<>()).build();
+        FieldFigureVO fieldFigureVO = new FieldFigureVO(new ArrayList<>(), new ArrayList<>());
         when(figureService.getFieldFigure()).thenReturn(ResponseVO.buildSuccess(fieldFigureVO));
         mockMvc.perform(
                 get("/figure/fields"))

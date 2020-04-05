@@ -11,6 +11,8 @@ import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class FigureServiceImpl implements FigureService {
+
+    private int TOP = 100;
 
     private AuthorPublishDao authorPublishDao;
     @Autowired
@@ -45,6 +49,27 @@ public class FigureServiceImpl implements FigureService {
         try {
             List<AuthorNode> authorNodes = authorPublishDao.getAllAuthorNodes();
             List<AuthorLink> authorLinks = authorPublishDao.getAllAuthorLinks();
+
+            authorNodes.sort((o1, o2) -> (int)(o1.getWeight() - o2.getWeight()));
+            Set<Integer> topIdSet = authorNodes
+                    .subList(authorNodes.size() - TOP, authorNodes.size())
+                    .stream().map(AuthorNode::getId).collect(Collectors.toSet());
+            //set of top100 ids and ids which have relations with top100
+            Set<Integer> idSet = new HashSet<>();
+
+            for (AuthorLink authorLink : authorLinks){
+                if (topIdSet.contains(authorLink.getSource())
+                        || topIdSet.contains(authorLink.getTarget())){
+                    idSet.add(authorLink.getSource());
+                    idSet.add(authorLink.getTarget());
+                }
+            }
+            authorNodes = authorNodes.stream()
+                    .filter(an -> idSet.contains(an.getId())).collect(Collectors.toList());
+            authorLinks = authorLinks.stream()
+                    .filter(al -> idSet.contains(al.getSource()) && idSet.contains(al.getTarget()))
+                    .collect(Collectors.toList());
+
             log.info("作者关系大图建立成功");
             return ResponseVO.buildSuccess(new AuthorFigureVO(authorNodes, authorLinks));
         }catch (Exception ex){
@@ -61,6 +86,29 @@ public class FigureServiceImpl implements FigureService {
         try {
             List<AffiliationNode> affiliationNodes = affiliationPublishDao.getAllAffiliationNodes();
             List<AffiliationLink> affiliationLinks = affiliationPublishDao.getAllAffiliationLinks();
+            affiliationNodes.sort((o1, o2) -> (int)(o1.getWeight() - o2.getWeight()));
+
+
+            Set<Integer> topIdSet = affiliationNodes
+                    .subList(affiliationNodes.size() - TOP, affiliationNodes.size())
+                    .stream().map(AffiliationNode::getId).collect(Collectors.toSet());
+            //set of top100 ids and ids which have relations with top100
+            Set<Integer> idSet = new HashSet<>();
+
+
+            for (AffiliationLink affiliationLink : affiliationLinks){
+                if (topIdSet.contains(affiliationLink.getSource())
+                        || topIdSet.contains(affiliationLink.getTarget())){
+                    idSet.add(affiliationLink.getSource());
+                    idSet.add(affiliationLink.getTarget());
+                }
+            }
+            affiliationNodes = affiliationNodes.stream()
+                    .filter(an -> idSet.contains(an.getId())).collect(Collectors.toList());
+            affiliationLinks = affiliationLinks.stream()
+                    .filter(al -> idSet.contains(al.getSource()) && idSet.contains(al.getTarget()))
+                    .collect(Collectors.toList());
+
             log.info("机构关系大图建立成功");
             return ResponseVO.buildSuccess(new AffiliationFigureVO(affiliationNodes, affiliationLinks));
         }catch (Exception ex){
@@ -113,7 +161,6 @@ public class FigureServiceImpl implements FigureService {
                 }
             }
 
-
             List<FieldNode> fieldNodes = new ArrayList<>();
             List<FieldLink> fieldLinks = new ArrayList<>();
             for (Map.Entry<Integer, Long> entry : nodes.entrySet())
@@ -122,6 +169,29 @@ public class FigureServiceImpl implements FigureService {
             for (Map.Entry<IdLink, Long> entry : links.entrySet())
                 fieldLinks.add(new FieldLink(entry.getKey().getSource(),
                         entry.getKey().getTarget(), entry.getValue()));
+            /*---------------------------------------------------------------------*/
+
+            fieldNodes.sort(((o1, o2) -> (int)(o1.getWeight() - o2.getWeight())));
+
+            Set<Integer> topIdSet = fieldNodes
+                    .subList(fieldNodes.size() - TOP, fieldNodes.size())
+                    .stream().map(FieldNode::getId).collect(Collectors.toSet());
+            //set of top100 ids and ids which have relations with top100
+            Set<Integer> idSet = new HashSet<>();
+
+            for (FieldLink fieldLink: fieldLinks){
+                if (topIdSet.contains(fieldLink.getSource())
+                        || topIdSet.contains(fieldLink.getTarget())){
+                    idSet.add(fieldLink.getSource());
+                    idSet.add(fieldLink.getTarget());
+                }
+            }
+
+            fieldNodes = fieldNodes.stream()
+                    .filter(fn -> idSet.contains(fn.getId())).collect(Collectors.toList());
+            fieldLinks = fieldLinks.stream()
+                    .filter(fl -> idSet.contains(fl.getSource()) && idSet.contains(fl.getTarget()))
+                    .collect(Collectors.toList());
 
             log.info("领域关系大图建立成功");
 

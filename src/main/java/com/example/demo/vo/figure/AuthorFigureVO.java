@@ -6,14 +6,31 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class AuthorFigureVO {
-    private List<AuthorNode> nodes;
+    private List<String> nodes;
 
-    private List<AuthorLink> links;
+    private List<String> links;
+
+    public AuthorFigureVO(List<AuthorNode> authorNodes, List<AuthorLink> authorLinks){
+        Map<Integer,Integer> idToIndex = new HashMap<>();
+        for(int i = 0; i < authorNodes.size(); i++)
+            idToIndex.put(authorNodes.get(i).getId(), i);
+        nodes = authorNodes.stream()
+                .map(an -> an.getName() + "|" + an.getWeight()
+                     + "|" + idToIndex.get(an.getId()).toString())
+                .collect(Collectors.toList());
+        links = authorLinks.stream()
+                .map(al -> idToIndex.get(al.getSource()).toString()
+                      + "|"  + idToIndex.get(al.getTarget()).toString()
+                      + "|"  + al.getWeight())
+                .collect(Collectors.toList());
+
+    }
 }

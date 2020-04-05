@@ -5,15 +5,32 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class AffiliationFigureVO {
-    private List<AffiliationNode> nodes;
+    private List<String> nodes;
 
-    private List<AffiliationLink> links;
+    private List<String> links;
+
+    public AffiliationFigureVO(List<AffiliationNode> affiliationNodes,
+                               List<AffiliationLink> affiliationLinks){
+        Map<Integer,Integer> idToIndex = new HashMap<>();
+        for(int i = 0; i < affiliationNodes.size(); i++)
+            idToIndex.put(affiliationNodes.get(i).getId(), i);
+        nodes = affiliationNodes.stream()
+                .map(an -> an.getName() + "|" + an.getWeight()
+                        + "|" + idToIndex.get(an.getId()).toString())
+                .collect(Collectors.toList());
+        links = affiliationLinks.stream()
+                .map(al -> idToIndex.get(al.getSource()).toString()
+                        + "|"  + idToIndex.get(al.getTarget()).toString()
+                        + "|"  + al.getWeight())
+                .collect(Collectors.toList());
+    }
 
 }
