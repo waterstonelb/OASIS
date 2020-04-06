@@ -1,6 +1,8 @@
 package com.example.demo.dao;
 
 import com.example.demo.po.Affiliation;
+import com.example.demo.po.AffiliationTable;
+import com.example.demo.po.HindexEntry;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)
@@ -35,19 +37,19 @@ public class AffiliationDaoTest {
     @Test
     public void getPaperCount() {
         int res=affiliationDao.getPaperCount(710);
-        assert res>0;
+        assertTrue(res>0);
     }
 
     @Test
     public void getCitationCount() {
         int res=affiliationDao.getCitationCount(4);
-        assert res>0;
+        assertTrue(res>0);
     }
 
     @Test
     public void getAuthorCount() {
         int res=affiliationDao.getAuthorCount(4);
-        assert res>0;
+        assertTrue(res>0);
     }
 
     @Test
@@ -58,6 +60,25 @@ public class AffiliationDaoTest {
              ) {
             System.out.println(i);
         }
-        assert res.size()>0;
+        assertFalse(res.isEmpty());
+    }
+
+    @Test
+    public void getHindexListByYear() {
+        List<HindexEntry> res=affiliationDao.getHindexListWithYear(4);
+        assertFalse(res.isEmpty());
+    }
+
+    @Test
+    public void getCitationByYear() {
+        List<AffiliationTable> res=affiliationDao.getCitationWithYear(270);
+        assertFalse(res.isEmpty());
+    }
+
+    @Test
+    public void getPaperCountByYear() {
+        List<AffiliationTable> res=affiliationDao.getPaperCountWithYear(270);
+
+        assertFalse(res.isEmpty());
     }
 }

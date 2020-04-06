@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.Assert.*;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,7 +27,7 @@ public class AuthorPublishDaoTest {
     @Test
     public void findByAuthorId() {
         List<AuthorPublish> authorPublish = authorPublishDao.findByAuthorId(1);
-        assert authorPublish.size() > 0;
+        assertFalse(authorPublish.isEmpty());
 
     }
 
@@ -50,25 +52,25 @@ public class AuthorPublishDaoTest {
     @Test
     public void getAuthorDirect() {
         List<AuthorDirectInfo> res=authorPublishDao.getAuthorDirect(5);
-        assert res.size()>0;
+        assertFalse(res.isEmpty());
     }
 
     @Test
     public void getAuthorRelations() {
         List<Integer> res=authorPublishDao.getAuthorRelations(5);
-        assert res.size()>0;
+        assertFalse(res.isEmpty());
     }
 
     @Test
     public void getAllAuthorNodesTest() {
         List<AuthorNode> authorNodes = authorPublishDao.getAllAuthorNodes();
-        assert authorNodes.size() > 0;
+        assertFalse(authorNodes.isEmpty());
     }
 
     @Test
     public void getAllAuthorLinksTest() {
         List<AuthorLink> authorLinks = authorPublishDao.getAllAuthorLinks();
-        assert authorLinks.size() > 0;
+        assertFalse(authorLinks.isEmpty());
     }
 
 }

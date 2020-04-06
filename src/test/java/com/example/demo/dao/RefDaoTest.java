@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,6 +18,6 @@ public class RefDaoTest {
     @Test
     public void countByDocId() {
 
-        assert refDao.countByDocId(2)>0;
+        assertTrue(refDao.countByDocId(2)>0);
     }
 }

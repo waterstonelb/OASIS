@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.po.Affiliation;
 import com.example.demo.po.TopAffliation;
 import com.example.demo.vo.field.FieldPieVO;
 import com.example.demo.vo.figure.AffiliationLink;
@@ -17,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)
@@ -30,21 +29,28 @@ public class AffiliationPublishDaoTest {
     public void findTopAffliationTest(){
         Page<TopAffliation> topAffliations = affiliationPublishDao
                 .findTopAffliation(PageRequest.of(0, 10));
-        assert topAffliations.getContent().size() > 0;
+        assertFalse(topAffliations.isEmpty());
     }
 
     @Test
     public void getAllAffiliationNodesTest(){
         List<AffiliationNode> affiliationNodes = affiliationPublishDao
                 .getAllAffiliationNodes();
-        assert affiliationNodes.size() > 0;
+        assertFalse(affiliationNodes.isEmpty());
     }
 
     @Test
     public void getAllAffiliationLinksTest(){
         List<AffiliationLink> affiliationLinks = affiliationPublishDao
                 .getAllAffiliationLinks();
-        assert affiliationLinks.size() > 0;
+        assertFalse(affiliationLinks.isEmpty());
+    }
+
+    @Test
+    public void findAffiliationKeyWords() {
+        List<String> res=affiliationPublishDao.findAffiliationKeyWords(270);
+        System.out.println(res.size());
+        assertFalse(res.isEmpty());
     }
 
     @Test

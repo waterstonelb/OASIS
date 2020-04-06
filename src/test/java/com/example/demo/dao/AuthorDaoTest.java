@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,14 +37,14 @@ public class AuthorDaoTest {
         List<Author> authors = authorDao
                 .findByNameContaining("Jia Liu");
 
-        assert authors.size() > 0;
+        assertFalse(authors.isEmpty());
     }
 
     @Test
     public void findByDocumentId() {
         List<Author> authors = authorDao
                 .findByDocumentId(33);
-        assert authors.size() > 0;
+        assertFalse(authors.isEmpty());
     }
     @Test
     public void authorRecommendTEST(){

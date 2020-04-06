@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,7 +20,7 @@ public class PaperInfoServiceImplTest {
     @Test
     public void getPaperInfoSuccess() {
         ResponseVO<PaperInfoVO> res=paperInfoService.getPaperInfo(2);
-        assert res.getData().getAuthors().size()>0;
+        assertFalse(res.getData().getAuthors().isEmpty());
     }
     @Test
     public void getPaperInfoFail(){

@@ -44,7 +44,7 @@ public class PaperInfoServiceImpl implements PaperInfoService {
 
             log.info("查询成功");
             return ResponseVO.buildSuccess("查询成功",
-                    new PaperInfoVO(document,authors,10));
+                    new PaperInfoVO(document,authors,refereneceCount));
 
         }catch (Exception e){
             log.error(e.getLocalizedMessage());
