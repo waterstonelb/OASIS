@@ -58,6 +58,16 @@
             timeToLiveSeconds = "1800"
             memoryStoreEvictionPolicy = "LRU"/>
 
+    <cache
+            name = "keywordsCache"
+            eternal = "false"
+            maxElementsInMemory = "100"
+            overflowToDisk = "false"
+            diskPersistent = "false"
+            timeToIdleSeconds = "1200"
+            timeToLiveSeconds = "1800"
+            memoryStoreEvictionPolicy = "LRU"/>
+
 
 
     <!-- maxElementsInMemory 内存中最大缓存对象数，看着自己的heap大小来搞 -->

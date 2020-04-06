@@ -4,8 +4,10 @@ import com.example.demo.po.Affiliation;
 import com.example.demo.po.AffiliationPublish;
 import com.example.demo.po.AffiliationPublishPK;
 import com.example.demo.po.TopAffliation;
+import com.example.demo.vo.field.FieldPieVO;
 import com.example.demo.vo.figure.AffiliationLink;
 import com.example.demo.vo.figure.AffiliationNode;
+import com.example.demo.vo.figure.FieldFigureVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -40,5 +42,14 @@ public interface AffiliationPublishDao extends
             "from AffiliationPublish ap1, AffiliationPublish ap2 where ap1.documentId = ap2.documentId " +
             "and ap1.affId < ap2.affId group by ap1.affId, ap2.affId")
     List<AffiliationLink> getAllAffiliationLinks();
+
+    /**
+     * 研究方向相关机构信息
+     * @return List<FieldPieVO>
+     */
+    @Query("select new com.example.demo.vo.field.FieldPieVO(af.name,count(af.id), af.id) from Affiliation af, AffiliationPublish afp " +
+            "where af.id = afp.affId and exists (select d.id from Document d " +
+            "where afp.documentId = d.id and d.keywords like concat('%', ?1, '%')) group by af.id")
+    List<FieldPieVO> getAffiliationOnField(String field);
 
 }

@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 
 import com.example.demo.po.Document;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -144,6 +145,7 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
      * 查询全部关键词
      * @return {@link List<String>}
      */
+    @Cacheable("keywordsCache")
     @Query("select d.keywords from Document d")
     List<String> findAllKeywords();
 

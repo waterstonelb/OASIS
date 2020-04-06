@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.po.Affiliation;
 import com.example.demo.po.TopAffliation;
+import com.example.demo.vo.field.FieldPieVO;
 import com.example.demo.vo.figure.AffiliationLink;
 import com.example.demo.vo.figure.AffiliationNode;
 import io.swagger.models.auth.In;
@@ -44,5 +45,12 @@ public class AffiliationPublishDaoTest {
         List<AffiliationLink> affiliationLinks = affiliationPublishDao
                 .getAllAffiliationLinks();
         assert affiliationLinks.size() > 0;
+    }
+
+    @Test
+    public void getAffiliationOnFieldTest(){
+        List<FieldPieVO> fieldPieVOS = affiliationPublishDao
+                .getAffiliationOnField("software");
+        assert fieldPieVOS.size() > 0;
     }
 }
