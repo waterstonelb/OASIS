@@ -17,6 +17,11 @@ spring:
       config: classpath:/ehcache.xml
 server:
   port: 8080
+  compression:
+    enabled: true
+    min-response-size: 400KB
+    mime-types: [application/json]
+
 logging:
   file:
     path: /var/log/shkb
