@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 
 @RunWith(SpringRunner.class)
@@ -25,8 +26,7 @@ public class DocumentDaoTest {
     @Test
     public void findByAuthorTest(){
         Page<Document> res=documentDao.findByAuthor("Ali",0, 9999, PageRequest.of(0,10));
-        System.out.println(res.getTotalElements());
-        System.out.println(res.getContent().size());
+        assertFalse(res.getContent().isEmpty());
     }
 
     @Test
@@ -34,8 +34,7 @@ public class DocumentDaoTest {
         Page<Document> res = documentDao.findByInstitution("Nanjing University",
                 0, 9999,
                 PageRequest.of(0, 5));
-        System.out.println(res.getTotalElements());
-        System.out.println(res.getContent().size());
+        assertFalse(res.getContent().isEmpty());
     }
 
     @Test
@@ -43,9 +42,7 @@ public class DocumentDaoTest {
         Page<Document> res = documentDao.findByPublication(
                 "2019 34th IEEE/ACM International Conference"
         ,0, 9999, PageRequest.of(0, 10));
-
-        System.out.println(res.getTotalElements());
-        System.out.println(res.getContent().size());
+        assertFalse(res.getContent().isEmpty());
     }
 
     @Test
@@ -55,8 +52,7 @@ public class DocumentDaoTest {
                 ,0, 9999
                 ,PageRequest.of(0, 5)
         );
-        System.out.println(res.getTotalElements());
-        System.out.println(res.getContent().size());
+        assertFalse(res.getContent().isEmpty());
     }
 
 
@@ -65,8 +61,7 @@ public class DocumentDaoTest {
         Page<Document> res=documentDao.comFind(
                 "Ali","Dallas","34th",null, 0, 9999,
                 PageRequest.of(0,10, Sort.Direction.DESC,"citationCount"));
-        System.out.println(res.getTotalElements());
-        System.out.println(res.getContent().size());
+        assertFalse(res.getContent().isEmpty());
     }
 
 
@@ -85,7 +80,7 @@ public class DocumentDaoTest {
     @Test
     public void getAllKeyWordsTest(){
         List<String> res = documentDao.findAllKeywords();
-        assert res.size() > 0;
+        assertFalse(res.isEmpty());
     }
 
 

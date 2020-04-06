@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.Assert.*;
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AuthorServiceImplTest {
@@ -19,12 +22,12 @@ public class AuthorServiceImplTest {
     @Test
     public void getAuthorInfo() {
         ResponseVO<AuthorVO> res=authorService.getAuthorInfo(599);
-        assert res.getData().getKeywords().size()>0;
+        assertFalse(res.getData().getKeywords().isEmpty());
     }
 
     @Test
     public void getAuthorMap() {
         ResponseVO<AuthorMapVO> res=authorService.getAuthorMap(5);
-        assert res.getData().getNodes().size()>0;
+        assertFalse(res.getData().getNodes().isEmpty());
     }
 }

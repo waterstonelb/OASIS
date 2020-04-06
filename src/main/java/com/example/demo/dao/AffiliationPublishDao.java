@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.po.*;
 import com.example.demo.po.Affiliation;
 import com.example.demo.po.AffiliationPublish;
 import com.example.demo.po.AffiliationPublishPK;
@@ -42,6 +43,17 @@ public interface AffiliationPublishDao extends
             "from AffiliationPublish ap1, AffiliationPublish ap2 where ap1.documentId = ap2.documentId " +
             "and ap1.affId < ap2.affId group by ap1.affId, ap2.affId")
     List<AffiliationLink> getAllAffiliationLinks();
+
+    /**
+     * 查询机构的所有关键词
+     * @param id affId
+     * @return {@link List<String>}
+     */
+    @Query("select d.keywords from AffiliationPublish a inner join Document d " +
+            "on a.documentId=d.id where a.affId=?1 and d.keywords <> '' ")
+    List<String> findAffiliationKeyWords(int id);
+
+
 
     /**
      * 研究方向相关机构信息

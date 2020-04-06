@@ -40,6 +40,11 @@ public interface AuthorPublishDao extends JpaRepository<AuthorPublish, AuthorPub
             "on a.documentId=d.id where a.authorId=?1")
     int sumCitationCountByAuthorId(int id);
 
+    /**
+     * 查询作者的所有关键词
+     * @param id authorId
+     * @return {@link List<String>}
+     */
     @Query("select d.keywords from AuthorPublish a inner join Document d " +
             "on a.documentId=d.id where a.authorId=?1")
     List<String> findAuthorKeyWords(int id);
