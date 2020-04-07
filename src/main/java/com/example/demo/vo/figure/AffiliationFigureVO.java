@@ -24,7 +24,7 @@ public class AffiliationFigureVO {
             idToIndex.put(affiliationNodes.get(i).getId(), i);
         nodes = affiliationNodes.stream()
                 .map(an -> an.getName() + "|" + an.getWeight()
-                        + "|" + idToIndex.get(an.getId()).toString())
+                        + "|" + an.getId())
                 .collect(Collectors.toList());
         links = affiliationLinks.stream()
                 .map(al -> idToIndex.get(al.getSource()).toString()
