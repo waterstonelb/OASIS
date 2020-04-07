@@ -50,4 +50,10 @@ public class AuthorDaoTest {
     public void authorRecommendTEST(){
         assertEquals("Jun Sun",authorDao.authorRecommend().getName());
     }
+
+    @Test
+    public void getHindexList() {
+        List<Integer> res=authorDao.getHindexList(4);
+        assertFalse(res.isEmpty());
+    }
 }

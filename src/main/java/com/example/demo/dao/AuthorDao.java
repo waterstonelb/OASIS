@@ -28,7 +28,8 @@ public interface AuthorDao extends JpaRepository<Author, Integer> {
 
     Author findById(int id);
 
-
+    @Query("select d.citationCount from AuthorPublish a join Document d on d.id=a.documentId where a.authorId=?1")
+    List<Integer> getHindexList(int authorId);
 
 
 }
