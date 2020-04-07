@@ -18,13 +18,15 @@ public class AuthorVO {
     private String affiliation;
     private List<String> keywords;
     private int paperCount;
+    private int hindex;
     private int citationCount;
 
-    public AuthorVO(Author author,List<String> keywords,int paperCount,int citationCount){
+    public AuthorVO(Author author,List<String> keywords,int paperCount,int hindex,int citationCount){
         this.name=author.getName();
         this.affiliation=author.getAffiliation();
         this.keywords=new ArrayList<>(keywords);
         this.paperCount=paperCount;
+        this.hindex=hindex;
         this.citationCount=citationCount;
     }
 }
