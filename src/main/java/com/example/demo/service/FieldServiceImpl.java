@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 @Service
 public class FieldServiceImpl implements FieldService {
 
+    private final int PIE_TOP = 40;
+
     private DocumentDao documentDao;
 
     @Autowired
@@ -51,6 +53,7 @@ public class FieldServiceImpl implements FieldService {
                 fieldWcVOS.add(FieldWcVO.builder().name(entry.getKey())
                         .value(entry.getValue()).build());
 
+
             log.info("领域云图建立成功");
             return ResponseVO.buildSuccess(fieldWcVOS);
         }catch (Exception ex){
@@ -63,8 +66,16 @@ public class FieldServiceImpl implements FieldService {
     @Override
     public ResponseVO<List<FieldPieVO>> getFieldPie(String field) {
         try {
+            List<FieldPieVO> fieldPieVOS = affiliationPublishDao.getAffiliationOnField(field);
+            fieldPieVOS.sort((o1, o2) -> (int)(o2.getValue() - o1.getValue()));
+            int top = Math.min(fieldPieVOS.size(), PIE_TOP);
+            List<FieldPieVO> res = fieldPieVOS.subList(0, top);
+            FieldPieVO others = FieldPieVO.builder().id(-1).name("others").value(0).build();
+            for(FieldPieVO fieldPieVO : fieldPieVOS.subList(top, fieldPieVOS.size()))
+                others.setValue(others.getValue() + fieldPieVO.getValue());
+            res.add(others);
             log.info("领域饼图建立成功");
-            return ResponseVO.buildSuccess(affiliationPublishDao.getAffiliationOnField(field));
+            return ResponseVO.buildSuccess(res);
         }catch (Exception ex){
             log.error("领域饼图建立失败");
             log.error(ex.getLocalizedMessage());
