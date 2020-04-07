@@ -24,7 +24,7 @@ public class AuthorFigureVO {
             idToIndex.put(authorNodes.get(i).getId(), i);
         nodes = authorNodes.stream()
                 .map(an -> an.getName() + "|" + an.getWeight()
-                     + "|" + idToIndex.get(an.getId()).toString())
+                     + "|" + an.getId())
                 .collect(Collectors.toList());
         links = authorLinks.stream()
                 .map(al -> idToIndex.get(al.getSource()).toString()
