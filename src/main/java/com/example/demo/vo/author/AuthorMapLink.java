@@ -1,11 +1,15 @@
 package com.example.demo.vo.author;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class AuthorMapLink implements Cloneable{
     String source;
@@ -19,7 +23,7 @@ public class AuthorMapLink implements Cloneable{
         } catch (CloneNotSupportedException e) {
             log.error("AuthorMapLink clone fail");
             log.error(e.getLocalizedMessage());
-            return null;
+            return new AuthorMapLink();
         }
     }
 }

@@ -81,7 +81,7 @@ public class AffiliationServiceImpl implements AffiliationService {
             if (list.size() > 0)
                 list.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 
-            float max_num=0;
+            float max_num=1;
             for (int i = 0; i < Math.min(list.size(), 10); i++)
                 max_num+=list.get(i).getValue();
             for (int i = 0; i < Math.min(list.size(), 10); i++)
