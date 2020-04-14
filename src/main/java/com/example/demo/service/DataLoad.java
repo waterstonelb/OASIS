@@ -79,7 +79,7 @@ public class DataLoad implements DataLoadService {
             }
             br.close();
         }catch (IOException ex){
-            ex.printStackTrace();
+            log.error(ex.getLocalizedMessage());
         }
 
         /*------------------Transfer json to object---------------------------*/
@@ -89,7 +89,7 @@ public class DataLoad implements DataLoadService {
             for (String line : lines)
                 originalData.add(objectMapper.readValue(line, Data.class));
         }catch (Exception ex){
-            ex.printStackTrace();
+            log.error(ex.getLocalizedMessage());
         }
 
         /*-------------------------------Filter-------------------------------*/
