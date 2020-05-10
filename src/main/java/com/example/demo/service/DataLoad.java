@@ -229,5 +229,16 @@ public class DataLoad implements DataLoadService {
         }
     }
 
+    //@PostConstruct
+    private void changePdfLinkFormat(){
+        List<Document> docs = documentDao.findAll();
+        for (Document document : docs){
+            String linkNum = document.getPdfLink().split("=")[1];
+            String newLink = "https://ieeexplore.ieee.org/document/" + linkNum;
+            document.setPdfLink(newLink);
+            documentDao.saveAndFlush(document);
+        }
+
+    }
 
 }
