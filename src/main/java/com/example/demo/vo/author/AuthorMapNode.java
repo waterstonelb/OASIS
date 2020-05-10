@@ -25,7 +25,7 @@ public class AuthorMapNode implements Cloneable{
         } catch (CloneNotSupportedException e) {
             log.error("AuthorMapNode clone fail");
             log.error(e.getLocalizedMessage());
-            return null;
+            return new AuthorMapNode();
         }
     }
     public AuthorMapNode(AuthorDirectInfo a,long count){

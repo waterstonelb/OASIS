@@ -59,8 +59,10 @@ public class AuthorServiceImpl implements AuthorService {
             List<String> authorKeys = new ArrayList<>();
             for (int i = 0; i < Math.min(list.size(), 5); i++)
                 authorKeys.add(list.get(i).getKey());
+            List<Integer> hlist=authorDao.getHindexList(authorId);
+            int hindex=countHindex(hlist);
             log.info("作者信息查询成功");
-            return ResponseVO.buildSuccess(new AuthorVO(author, authorKeys, paperCount, citationCount));
+            return ResponseVO.buildSuccess(new AuthorVO(author, authorKeys, paperCount, hindex,citationCount));
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             return ResponseVO.buildFailure("查询错误，请检查您的Id");
@@ -123,5 +125,17 @@ public class AuthorServiceImpl implements AuthorService {
             log.error(e.getLocalizedMessage());
             return ResponseVO.buildFailure("AuthorMap服务失败");
         }
+    }
+    private int countHindex(List<Integer> hlist){
+        hlist.sort(Integer::compareTo);
+        int len=hlist.size();
+        int hindex=0;
+        for (int i=0; i < len; i++) {
+            if(hlist.get(i)>=len-i){
+                hindex=len-i;
+                break;
+            }
+        }
+        return hindex;
     }
 }
