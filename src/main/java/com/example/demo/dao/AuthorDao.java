@@ -11,9 +11,10 @@ import java.util.List;
 public interface AuthorDao extends JpaRepository<Author, Integer> {
 
 
-    Author findFirstByNameAndAffiliation(String name, String aff);
+    boolean existsByIeeeId(String ieeeId);
 
-    boolean existsByNameAndAffiliation(String name, String aff);
+    Author findFirstByIeeeId(String ieeeId);
+
 
     List<Author> findByNameContaining(String author);
 

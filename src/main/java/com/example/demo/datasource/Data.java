@@ -27,8 +27,6 @@ public class Data {
 
     private String publication;
 
-    private List<RefData> ref;
-
     private String title;
 
 }

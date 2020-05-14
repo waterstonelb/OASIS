@@ -3,7 +3,6 @@ package com.example.demo.service;
 
 import com.example.demo.dao.AuthorDao;
 import com.example.demo.dao.DocumentDao;
-import com.example.demo.dao.RefDao;
 import com.example.demo.po.Author;
 import com.example.demo.po.Document;
 import com.example.demo.service.serviceinterface.PaperInfoService;
@@ -21,13 +20,11 @@ public class PaperInfoServiceImpl implements PaperInfoService {
 
     private DocumentDao documentDao;
     private AuthorDao authorDao;
-    private RefDao refDao;
 
     @Autowired
-    public PaperInfoServiceImpl(DocumentDao documentDao, AuthorDao authorDao, RefDao refDao) {
+    public PaperInfoServiceImpl(DocumentDao documentDao, AuthorDao authorDao) {
         this.authorDao = authorDao;
         this.documentDao = documentDao;
-        this.refDao = refDao;
     }
 
     /**
@@ -40,7 +37,7 @@ public class PaperInfoServiceImpl implements PaperInfoService {
         try{
             Document document=documentDao.findById(documentId);
             List<Author> authors=authorDao.findByDocumentId(documentId);
-            int refereneceCount=refDao.countByDocId(documentId);
+            int refereneceCount = 0;
 
             log.info("查询成功");
             return ResponseVO.buildSuccess("查询成功",

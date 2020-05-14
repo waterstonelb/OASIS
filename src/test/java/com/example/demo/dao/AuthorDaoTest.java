@@ -17,20 +17,6 @@ public class AuthorDaoTest {
     @Autowired
     private AuthorDao authorDao;
 
-    @Test
-    public void findFirstByNameAndAffiliation() {
-        Author author = authorDao.
-                findFirstByNameAndAffiliation("Jia Liu", "Nanjing University");
-
-        assertEquals("Jia Liu", author.getName());
-    }
-
-    @Test
-    public void existsByNameAndAffiliation() {
-        boolean exists = authorDao
-                .existsByNameAndAffiliation("dhfvysdfguydsgefy", "sdyuwgduwfdytfw");
-        assertFalse(exists);
-    }
 
     @Test
     public void findByNameContaining() {
