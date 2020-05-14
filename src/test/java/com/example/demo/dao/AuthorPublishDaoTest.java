@@ -41,7 +41,7 @@ public class AuthorPublishDaoTest {
 
     @Test
     public void findAuthorKeyWords() {
-        List<String> res = authorPublishDao.findAuthorKeyWords(166);
+        List<String> res = authorPublishDao.findAuthorKeyWords(1);
         assert res.size() > 0;
     }
 

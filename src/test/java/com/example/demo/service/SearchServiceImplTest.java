@@ -21,7 +21,7 @@ public class SearchServiceImplTest {
     public void searchByAuTest(){
         ResponseVO<SearchVO> res = searchService.searchByAuthor(
                 SearchByAuthorInpVO.builder()
-                        .author("Ali")
+                        .author("Sinisa Krajnovic")
                         .size(2)
                         .page(0).build()
         );
@@ -32,7 +32,7 @@ public class SearchServiceImplTest {
     public void searchByInsTest(){
         ResponseVO<SearchVO> res = searchService.searchByInstitution(
                 SearchByInstitutionInpVO.builder()
-                        .institution("Dallas")
+                        .institution("Sweden")
                         .size(2)
                         .page(0).build()
         );
@@ -43,7 +43,7 @@ public class SearchServiceImplTest {
     public void searchByConTest(){
         ResponseVO<SearchVO> res = searchService.searchByConference(
                 SearchByConferenceInpVO.builder()
-                        .conference("34th")
+                        .conference("14th")
                         .size(2)
                         .page(0).build()
         );
@@ -56,7 +56,7 @@ public class SearchServiceImplTest {
 
         ResponseVO<SearchVO> res = searchService.searchByStudyKeyword(
                 SearchByKeywordInpVO.builder()
-                        .keyword("Solid modeling")
+                        .keyword("Virtualization")
                         .size(2)
                         .page(0).build()
         );

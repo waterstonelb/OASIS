@@ -22,7 +22,7 @@ public class AffiliationServiceImplTest {
 
     @Test
     public void getAffiliationInfo(){
-        ResponseVO<AffiliationVO> res= affiliationService.getAffiliationInfo(1273);
+        ResponseVO<AffiliationVO> res= affiliationService.getAffiliationInfo(3);
         assertTrue(res.getData().getHindex()>0);
     }
     @Test
@@ -33,7 +33,7 @@ public class AffiliationServiceImplTest {
 
     @Test
     public void getAffPieChart() {
-        ResponseVO<List<AffPieChartVO>> res=affiliationService.getAffPieChart(92);
+        ResponseVO<List<AffPieChartVO>> res=affiliationService.getAffPieChart(3);
         for(AffPieChartVO a:res.getData())
             System.out.println(a);
         assertFalse(res.getData().isEmpty());
@@ -41,7 +41,7 @@ public class AffiliationServiceImplTest {
 
     @Test
     public void getHindexTable() {
-        ResponseVO<AffTableVO> res=affiliationService.getHindexTable(270);
+        ResponseVO<AffTableVO> res=affiliationService.getHindexTable(3);
         int len=res.getData().getData().size();
         for (int i = 0; i < len; i++) {
             System.out.println(res.getData().getXdata().get(i)+" "+
@@ -52,7 +52,7 @@ public class AffiliationServiceImplTest {
 
     @Test
     public void getPaperTable() {
-        ResponseVO<AffTableVO> res=affiliationService.getPaperTable(270);
+        ResponseVO<AffTableVO> res=affiliationService.getPaperTable(3);
         int len=res.getData().getData().size();
         for (int i = 0; i < len; i++) {
             System.out.println(res.getData().getXdata().get(i)+" "+
@@ -63,7 +63,7 @@ public class AffiliationServiceImplTest {
 
     @Test
     public void getCitationTable() {
-        ResponseVO<AffTableVO> res=affiliationService.getCitationTable(270);
+        ResponseVO<AffTableVO> res=affiliationService.getCitationTable(3);
         int len=res.getData().getData().size();
         for (int i = 0; i < len; i++) {
             System.out.println(res.getData().getXdata().get(i)+" "+

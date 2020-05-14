@@ -20,21 +20,21 @@ public class ComSearchServiceImplTest {
     @Test
     public void comSearchCocument() {
         ResponseVO<SearchVO> res=comSearchService.comSearchDocument(ComSearchInpVO.builder()
-                .authors("Ali")
-                .institution("Dallas")
-                .conference("34th")
-                .page(1)
+                .authors("Sinisa Krajnovic")
+                .institution("Sweden")
+                .conference("14th")
+                .page(0)
                 .size(1)
                 .sortBy(0)
                 .build());
-        assertEquals(1,res.getData().getDocuments().size());
+        assertFalse(res.getData().getDocuments().isEmpty());
     }
     @Test
     public void searchNULL(){
         ResponseVO<SearchVO> res=comSearchService.comSearchDocument(ComSearchInpVO.builder()
-                .authors("Ali")
-                .institution("Dallas")
-                .conference("34th")
+                .authors("Sinisa Krajnovic")
+                .institution("Sweden")
+                .conference("14th")
                 .keywords("Test ERROR")
                 .page(1)
                 .size(1)

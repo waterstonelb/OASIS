@@ -27,9 +27,9 @@ pipeline {
         stage('Test') {
             steps{
                 echo 'Testing..'
-//                 sh 'mvn test'
-//                 junit 'target/surefire-reports/*.xml'
-//                 jacoco execPattern: 'target/jacoco.exec'
+                sh 'mvn test'
+                junit 'target/surefire-reports/*.xml'
+                jacoco execPattern: 'target/jacoco.exec'
                 echo 'Test Success'
             }
 

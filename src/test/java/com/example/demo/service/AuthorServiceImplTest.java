@@ -21,7 +21,7 @@ public class AuthorServiceImplTest {
 
     @Test
     public void getAuthorInfo() {
-        ResponseVO<AuthorVO> res=authorService.getAuthorInfo(599);
+        ResponseVO<AuthorVO> res=authorService.getAuthorInfo(5);
         assertFalse(res.getData().getKeywords().isEmpty());
     }
 

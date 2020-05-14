@@ -48,7 +48,7 @@ public class AffiliationPublishDaoTest {
 
     @Test
     public void findAffiliationKeyWords() {
-        List<String> res=affiliationPublishDao.findAffiliationKeyWords(270);
+        List<String> res=affiliationPublishDao.findAffiliationKeyWords(1);
         System.out.println(res.size());
         assertFalse(res.isEmpty());
     }

@@ -23,20 +23,20 @@ public class AffiliationDaoTest {
 
     @Test
     public void existsByName() {
-        boolean exists = affiliationDao.existsByName("Nanjing University");
+        boolean exists = affiliationDao.existsByName("Acreo Swedish ICT, Stockholm, Sweden");
         assertTrue(exists);
     }
 
     @Test
     public void findFirstByName() {
-        Affiliation res = affiliationDao.findFirstByName("Nanjing University");
-        assertEquals("Nanjing University", res.getName());
+        Affiliation res = affiliationDao.findFirstByName("Acreo Swedish ICT, Stockholm, Sweden");
+        assertEquals("Acreo Swedish ICT, Stockholm, Sweden", res.getName());
     }
 
 
     @Test
     public void getPaperCount() {
-        int res=affiliationDao.getPaperCount(710);
+        int res=affiliationDao.getPaperCount(1);
         assertTrue(res>0);
     }
 
@@ -71,13 +71,13 @@ public class AffiliationDaoTest {
 
     @Test
     public void getCitationByYear() {
-        List<AffiliationTable> res=affiliationDao.getCitationWithYear(270);
+        List<AffiliationTable> res=affiliationDao.getCitationWithYear(1);
         assertFalse(res.isEmpty());
     }
 
     @Test
     public void getPaperCountByYear() {
-        List<AffiliationTable> res=affiliationDao.getPaperCountWithYear(270);
+        List<AffiliationTable> res=affiliationDao.getPaperCountWithYear(1);
 
         assertFalse(res.isEmpty());
     }
