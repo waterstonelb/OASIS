@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,14 +63,22 @@ public class AuthorPublishDaoTest {
     }
 
     @Test
-    public void getAllAuthorNodesTest() {
-        List<AuthorNode> authorNodes = authorPublishDao.getAllAuthorNodes();
+    public void getTopAuthorNodesTest() {
+        List<AuthorNode> authorNodes = authorPublishDao
+                .getTopAuthorNodes(PageRequest.of(0, 100)).getContent();
         assertFalse(authorNodes.isEmpty());
     }
 
     @Test
-    public void getAllAuthorLinksTest() {
-        List<AuthorLink> authorLinks = authorPublishDao.getAllAuthorLinks();
+    public void getTopAndRelationsTest(){
+        List<AuthorNode> authorNodes = authorPublishDao
+                .getTopAndRelations(Arrays.asList(1, 2, 3, 4, 5));
+        assertFalse(authorNodes.isEmpty());
+    }
+    @Test
+    public void getTopAuthorLinksTest() {
+        List<AuthorLink> authorLinks = authorPublishDao
+                .getTopAuthorLinks(Arrays.asList(1, 2, 3, 4, 5));
         assertFalse(authorLinks.isEmpty());
     }
 

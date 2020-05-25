@@ -7,6 +7,7 @@ import com.example.demo.po.TopAuthor;
 import com.example.demo.vo.figure.AuthorLink;
 import com.example.demo.vo.figure.AuthorNode;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -79,21 +80,31 @@ public interface AuthorPublishDao extends JpaRepository<AuthorPublish, AuthorPub
     List<Integer> getAuthorRelations(int authorId);
 
     /**
-     * 获取所有作者节点信息
-     * @return List<AuthorNode>
+     * 获取TOP作者节点信息
+     * @return Page<AuthorNode>
      */
     @Query("select new com.example.demo.vo.figure.AuthorNode(a.name, count(ap.authorId), a.id) from " +
             "AuthorPublish ap, Author a where ap.authorId = a.id " +
-            "group by a.id")
-    List<AuthorNode> getAllAuthorNodes();
+            "group by a.id order by count(ap.authorId) desc")
+    Page<AuthorNode> getTopAuthorNodes(Pageable pageable);
 
     /**
-     * 获取所有作者关系信息
+     * 获取TOP作者以及和TOP作者关联的作者信息
+     * @return List<AuthorNode>
+     */
+    @Query("select new com.example.demo.vo.figure.AuthorNode(a.name, count(ap.authorId), a.id) from " +
+            "AuthorPublish ap, Author a where ap.authorId = a.id and a.id in ?1 " +
+            "group by a.id")
+    List<AuthorNode> getTopAndRelations(List<Integer> authorIds);
+
+    /**
+     * 获取TOP作者关系信息
      * @return List<AuthorLink>
      */
     @Query("select new com.example.demo.vo.figure.AuthorLink(ap1.authorId, ap2.authorId, count(ap1.authorId)) " +
             "from AuthorPublish ap1, AuthorPublish ap2 where ap1.documentId = ap2.documentId " +
-            "and ap1.authorId < ap2.authorId group by ap1.authorId, ap2.authorId")
-    List<AuthorLink> getAllAuthorLinks();
+            "and ap1.authorId < ap2.authorId and (ap1.authorId in ?1 or ap2.authorId in ?1)" +
+            "group by ap1.authorId, ap2.authorId")
+    List<AuthorLink> getTopAuthorLinks(List<Integer> topIds);
 
 }

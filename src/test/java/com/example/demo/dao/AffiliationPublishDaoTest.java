@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,16 +34,33 @@ public class AffiliationPublishDaoTest {
     }
 
     @Test
-    public void getAllAffiliationNodesTest(){
+    public void getTopAffiliationNodesTest(){
         List<AffiliationNode> affiliationNodes = affiliationPublishDao
-                .getAllAffiliationNodes();
+                .getTopAffiliationNodes(PageRequest.of(0, 100)).getContent();
         assertFalse(affiliationNodes.isEmpty());
     }
 
     @Test
-    public void getAllAffiliationLinksTest(){
+    public void getTopAndRelationsTest(){
+        List<Integer> affIds = affiliationPublishDao
+                .getTopAffiliationNodes(PageRequest.of(0, 100))
+                .getContent().stream().map(AffiliationNode::getId)
+                .collect(Collectors.toList());
+        List<AffiliationNode> affiliationNodes = affiliationPublishDao
+                .getTopAndRelations(affIds);
+        assertFalse(affiliationNodes.isEmpty());
+    }
+
+    @Test
+    public void getTopAffiliationLinksTest(){
+        List<AffiliationNode> affiliationNodes = affiliationPublishDao
+                .getTopAffiliationNodes(PageRequest.of(0, 100)).getContent();
+
         List<AffiliationLink> affiliationLinks = affiliationPublishDao
-                .getAllAffiliationLinks();
+                .getTopAffiliationLinks(affiliationNodes
+                        .stream().map(AffiliationNode::getId)
+                        .collect(Collectors.toList()));
+
         assertFalse(affiliationLinks.isEmpty());
     }
 

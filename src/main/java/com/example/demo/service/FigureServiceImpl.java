@@ -47,28 +47,20 @@ public class FigureServiceImpl implements FigureService {
     @Cacheable(value = "authorFigureCache")
     public ResponseVO<AuthorFigureVO> getAuthorFigure() {
         try {
-            List<AuthorNode> authorNodes = authorPublishDao.getAllAuthorNodes();
-            List<AuthorLink> authorLinks = authorPublishDao.getAllAuthorLinks();
-
-            authorNodes.sort((o1, o2) -> (int)(o1.getWeight() - o2.getWeight()));
-            Set<Integer> topIdSet = authorNodes
-                    .subList(authorNodes.size() - TOP, authorNodes.size())
-                    .stream().map(AuthorNode::getId).collect(Collectors.toSet());
-            //set of top100 ids and ids which have relations with top100
-            Set<Integer> idSet = new HashSet<>();
-
-            for (AuthorLink authorLink : authorLinks){
-                if (topIdSet.contains(authorLink.getSource())
-                        || topIdSet.contains(authorLink.getTarget())){
-                    idSet.add(authorLink.getSource());
-                    idSet.add(authorLink.getTarget());
-                }
-            }
-            authorNodes = authorNodes.stream()
-                    .filter(an -> idSet.contains(an.getId())).collect(Collectors.toList());
-            authorLinks = authorLinks.stream()
-                    .filter(al -> idSet.contains(al.getSource()) && idSet.contains(al.getTarget()))
+            List<AuthorNode> authorNodes = authorPublishDao
+                    .getTopAuthorNodes(PageRequest.of(0, TOP)).getContent();
+            List<Integer> topIds = authorNodes.stream().map(AuthorNode::getId)
                     .collect(Collectors.toList());
+            List<AuthorLink> authorLinks = authorPublishDao.getTopAuthorLinks(topIds);
+            //set of top ids and ids which have relations with top
+            Set<Integer> idSet = new HashSet<>();
+            for(AuthorLink authorLink : authorLinks){
+                idSet.add(authorLink.getSource());
+                idSet.add(authorLink.getTarget());
+            }
+            authorNodes = authorPublishDao
+                    .getTopAndRelations(new ArrayList<>(idSet));
+
 
             log.info("作者关系大图建立成功");
             return ResponseVO.buildSuccess(new AuthorFigureVO(authorNodes, authorLinks));
@@ -84,30 +76,23 @@ public class FigureServiceImpl implements FigureService {
     @Cacheable(value = "affiliationFigureCache")
     public ResponseVO<AffiliationFigureVO> getAffiliationFigure() {
         try {
-            List<AffiliationNode> affiliationNodes = affiliationPublishDao.getAllAffiliationNodes();
-            List<AffiliationLink> affiliationLinks = affiliationPublishDao.getAllAffiliationLinks();
-            affiliationNodes.sort((o1, o2) -> (int)(o1.getWeight() - o2.getWeight()));
+            List<AffiliationNode> affiliationNodes = affiliationPublishDao
+                    .getTopAffiliationNodes(PageRequest.of(0, TOP)).getContent();
+            List<Integer> topIds = affiliationNodes.stream().map(AffiliationNode::getId)
+                    .collect(Collectors.toList());
 
+            List<AffiliationLink> affiliationLinks = affiliationPublishDao
+                    .getTopAffiliationLinks(topIds);
 
-            Set<Integer> topIdSet = affiliationNodes
-                    .subList(affiliationNodes.size() - TOP, affiliationNodes.size())
-                    .stream().map(AffiliationNode::getId).collect(Collectors.toSet());
             //set of top100 ids and ids which have relations with top100
             Set<Integer> idSet = new HashSet<>();
-
-
-            for (AffiliationLink affiliationLink : affiliationLinks){
-                if (topIdSet.contains(affiliationLink.getSource())
-                        || topIdSet.contains(affiliationLink.getTarget())){
-                    idSet.add(affiliationLink.getSource());
-                    idSet.add(affiliationLink.getTarget());
-                }
+            for(AffiliationLink affiliationLink : affiliationLinks){
+                idSet.add(affiliationLink.getSource());
+                idSet.add(affiliationLink.getTarget());
             }
-            affiliationNodes = affiliationNodes.stream()
-                    .filter(an -> idSet.contains(an.getId())).collect(Collectors.toList());
-            affiliationLinks = affiliationLinks.stream()
-                    .filter(al -> idSet.contains(al.getSource()) && idSet.contains(al.getTarget()))
-                    .collect(Collectors.toList());
+
+            affiliationNodes = affiliationPublishDao
+                    .getTopAndRelations(new ArrayList<>(idSet));
 
             log.info("机构关系大图建立成功");
             return ResponseVO.buildSuccess(new AffiliationFigureVO(affiliationNodes, affiliationLinks));

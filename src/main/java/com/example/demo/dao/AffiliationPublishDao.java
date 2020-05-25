@@ -27,22 +27,33 @@ public interface AffiliationPublishDao extends
     Page<TopAffliation> findTopAffliation(Pageable pageable);
 
     /**
-     * 获取所有机构节点信息
-     * @return List<AffiliationNode>
+     * 获取TOP机构节点信息
+     * @return Page<AffiliationNode>
      */
     @Query("select new com.example.demo.vo.figure.AffiliationNode(a.name, count(ap.affId), a.id) from " +
             "AffiliationPublish ap, Affiliation a where ap.affId = a.id " +
-            "group by a.id")
-    List<AffiliationNode> getAllAffiliationNodes();
+            "group by a.id order by count(ap.affId) desc")
+    Page<AffiliationNode> getTopAffiliationNodes(Pageable pageable);
+
 
     /**
-     * 获取所有机构关系信息
+     * 获取TOP机构以及和TOP机构关联的机构节点信息
+     * @return List<AffiliationNode>
+     */
+    @Query("select new com.example.demo.vo.figure.AffiliationNode(a.name, count(ap.affId), a.id) from " +
+            "AffiliationPublish ap, Affiliation a where ap.affId = a.id and a.id in ?1 " +
+            "group by a.id")
+    List<AffiliationNode> getTopAndRelations(List<Integer> affIds);
+
+    /**
+     * 获取TOP机构关系信息
      * @return List<AffiliationLink>
      */
     @Query("select new com.example.demo.vo.figure.AffiliationLink(ap1.affId, ap2.affId, count(ap1.affId)) " +
             "from AffiliationPublish ap1, AffiliationPublish ap2 where ap1.documentId = ap2.documentId " +
-            "and ap1.affId < ap2.affId group by ap1.affId, ap2.affId")
-    List<AffiliationLink> getAllAffiliationLinks();
+            "and ap1.affId < ap2.affId and (ap1.affId in ?1 or ap2.affId in ?1) " +
+            "group by ap1.affId, ap2.affId")
+    List<AffiliationLink> getTopAffiliationLinks(List<Integer> topIds);
 
     /**
      * 查询机构的所有关键词
