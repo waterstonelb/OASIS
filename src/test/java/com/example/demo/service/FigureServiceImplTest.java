@@ -43,12 +43,12 @@ public class FigureServiceImplTest {
         assertEquals( idLink1.hashCode(),idLink2.hashCode());
     }
 
-    @Test
-    public void getFieldFigureTest(){
-        ResponseVO<FieldFigureVO> res = figureService.getFieldFigure();
-        System.out.println(res.getData().getLinks().size());
-        System.out.println(res.getData().getNodes().size());
-        assertFalse(res.getData().getLinks().isEmpty());
-        assertFalse(res.getData().getNodes().isEmpty());
-    }
+//    @Test
+//    public void getFieldFigureTest(){
+//        ResponseVO<FieldFigureVO> res = figureService.getFieldFigure();
+//        System.out.println(res.getData().getLinks().size());
+//        System.out.println(res.getData().getNodes().size());
+//        assertFalse(res.getData().getLinks().isEmpty());
+//        assertFalse(res.getData().getNodes().isEmpty());
+//    }
 }
