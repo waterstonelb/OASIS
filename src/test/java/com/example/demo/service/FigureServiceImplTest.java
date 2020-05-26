@@ -11,12 +11,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class FigureServiceImplTest {
     @Autowired
     FigureService figureService;
@@ -43,12 +45,12 @@ public class FigureServiceImplTest {
         assertEquals( idLink1.hashCode(),idLink2.hashCode());
     }
 
-//    @Test
-//    public void getFieldFigureTest(){
-//        ResponseVO<FieldFigureVO> res = figureService.getFieldFigure();
-//        System.out.println(res.getData().getLinks().size());
-//        System.out.println(res.getData().getNodes().size());
-//        assertFalse(res.getData().getLinks().isEmpty());
-//        assertFalse(res.getData().getNodes().isEmpty());
-//    }
+    @Test
+    public void getFieldFigureTest(){
+        ResponseVO<FieldFigureVO> res = figureService.getFieldFigure();
+        System.out.println(res.getData().getLinks().size());
+        System.out.println(res.getData().getNodes().size());
+        assertFalse(res.getData().getLinks().isEmpty());
+        assertFalse(res.getData().getNodes().isEmpty());
+    }
 }

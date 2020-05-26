@@ -49,7 +49,6 @@ public class DataLoad implements DataLoadService {
 
     //postconstruct注解使方法在springboot初始化完成后执行该方法
     //该方法运行较慢, 所以只在需要时使用!!!!!!!!!!!!!!!
-    //使用低压双核四线程cpu加nvme ssd(1300左右条原始数据)本地运行时间大约10分钟
     //@PostConstruct
     @Override
     public void load(){
