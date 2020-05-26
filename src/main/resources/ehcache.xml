@@ -68,6 +68,26 @@
             timeToLiveSeconds = "1800"
             memoryStoreEvictionPolicy = "LRU"/>
 
+    <cache
+            name = "topAuthorCache"
+            eternal = "false"
+            maxElementsInMemory = "100"
+            overflowToDisk = "false"
+            diskPersistent = "false"
+            timeToIdleSeconds = "12000"
+            timeToLiveSeconds = "18000"
+            memoryStoreEvictionPolicy = "LRU"/>
+
+    <cache
+            name = "topInstitutionCache"
+            eternal = "false"
+            maxElementsInMemory = "100"
+            overflowToDisk = "false"
+            diskPersistent = "false"
+            timeToIdleSeconds = "12000"
+            timeToLiveSeconds = "18000"
+            memoryStoreEvictionPolicy = "LRU"/>
+
 
 
     <!-- maxElementsInMemory 内存中最大缓存对象数，看着自己的heap大小来搞 -->

@@ -13,6 +13,7 @@ import com.example.demo.vo.top.TopCiteDocVO;
 import com.example.demo.vo.top.TopInstitutionVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +62,7 @@ public class InterestingServiceImpl implements InterestingService {
     }
 
     @Override
+    @Cacheable(value = "topAuthorCache")
     public ResponseVO<List<TopAuthorVO>> getTopAuthor() {
         try {
             List<TopAuthorVO> topAuthorVOS = new ArrayList<>();
@@ -87,6 +89,7 @@ public class InterestingServiceImpl implements InterestingService {
     }
 
     @Override
+    @Cacheable(value = "topInstitutionCache")
     public ResponseVO<List<TopInstitutionVO>> getTopInstitution() {
         try {
             List<TopInstitutionVO> topInstitutionVOS = new ArrayList<>();
