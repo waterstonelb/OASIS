@@ -10,11 +10,11 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Clean') {
             steps {
                 echo 'Building..'
-                sh 'mvn clean package'
-                echo 'Build Success'
+                sh 'mvn clean'
+                echo 'Clean Success'
             }
         }
 //         stage('Build Docker Image') {
@@ -33,6 +33,14 @@ pipeline {
                 echo 'Test Success'
             }
 
+        }
+
+        stage('Build'){
+            steps{
+                echo 'Building'
+                sh 'mvn package -Dmaven.test.skip=true'
+                echo 'Build Success'
+            }
         }
 
         stage('Push to SonarQube') {
