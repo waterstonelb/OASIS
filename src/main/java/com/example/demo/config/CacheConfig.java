@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisConfiguration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,6 +17,8 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @AutoConfigureAfter(RedisAutoConfiguration.class)
@@ -45,6 +48,7 @@ public class CacheConfig {
     public RedisTemplate<Object, Object> redisTemplate() {
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory());
+
         return redisTemplate;
     }
 
@@ -56,9 +60,31 @@ public class CacheConfig {
 
         redisCacheConfiguration.usePrefix();
 
-        return RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(lettuceConnectionFactory)
-                .cacheDefaults(redisCacheConfiguration).build();
+
+        RedisCacheManager redisCacheManager = RedisCacheManager
+                .RedisCacheManagerBuilder.fromConnectionFactory(lettuceConnectionFactory)
+                .cacheDefaults(redisCacheConfiguration)
+                .withInitialCacheConfigurations(getConfig()).build();
+
+        return redisCacheManager;
 
     }
+
+    private Map<String, RedisCacheConfiguration> getConfig(){
+        Map<String, RedisCacheConfiguration> configs = new HashMap<>();
+        configs.put("affiliationFigureCache",
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(24)));
+
+        configs.put("authorFigureCache",
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(24)));
+
+        configs.put("fieldFigureCache",
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(24)));
+
+
+
+    }
+
+
 }
 
