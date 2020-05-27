@@ -9,8 +9,13 @@ spring:
       ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-  cache:
-    type: ehcache
-    ehcache:
-      config: classpath:/ehcache.xml
+  redis:
+    host: ismzl.com
+    port: 6379
+    password: shkb
+    timeout: 200
+#  cache:
+#    type: ehcache
+#    ehcache:
+#      config: classpath:/ehcache.xml
 

@@ -6,6 +6,7 @@ import com.example.demo.po.AuthorPublishPK;
 import com.example.demo.po.TopAuthor;
 import com.example.demo.vo.figure.AuthorLink;
 import com.example.demo.vo.figure.AuthorNode;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
