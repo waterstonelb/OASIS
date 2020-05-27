@@ -5,12 +5,13 @@ import com.example.demo.vo.author.AuthorMapNode;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Builder
-public class AuthorMapVO {
+public class AuthorMapVO implements Serializable {
     List<AuthorMapNode> nodes;
     List<AuthorMapLink> links;
     public AuthorMapVO(List<AuthorMapNode> nodes,List<AuthorMapLink> links){

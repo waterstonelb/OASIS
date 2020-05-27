@@ -5,13 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthorLink {
+public class AuthorLink implements Serializable {
 
     private int source;
 

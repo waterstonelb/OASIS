@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TopInstitutionVO {
+public class TopInstitutionVO implements Serializable {
 
     @ApiModelProperty("机构id")
     private int institutionId;

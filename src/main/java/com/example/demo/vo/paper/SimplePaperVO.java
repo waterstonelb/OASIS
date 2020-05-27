@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SimplePaperVO {
+public class SimplePaperVO implements Serializable {
     int documentId;
     int publishYear;
     String title;

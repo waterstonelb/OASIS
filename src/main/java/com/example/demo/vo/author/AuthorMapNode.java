@@ -7,12 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
+
 @Slf4j
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthorMapNode implements Cloneable{
+public class AuthorMapNode implements Cloneable, Serializable {
     String name;
     String authorName;
     long symbolSize;

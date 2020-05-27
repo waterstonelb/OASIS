@@ -4,8 +4,10 @@ import com.example.demo.po.Author;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class AuthorSimpleVO {
+public class AuthorSimpleVO implements Serializable {
     int id;
     String name;
     String affiliations;

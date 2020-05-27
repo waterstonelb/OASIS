@@ -5,11 +5,12 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class SearchVO {
+public class SearchVO implements Serializable {
 
     @ApiModelProperty("结果总数")
     private long total;

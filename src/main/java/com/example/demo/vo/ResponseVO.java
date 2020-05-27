@@ -4,10 +4,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import org.springframework.scheduling.annotation.AsyncResult;
 
+import java.io.Serializable;
 import java.util.concurrent.Future;
 
 @Builder
-public class ResponseVO<T>{
+public class ResponseVO<T> implements Serializable {
 
     @ApiModelProperty("状态码 0失败，1成功")
     private Integer code;
