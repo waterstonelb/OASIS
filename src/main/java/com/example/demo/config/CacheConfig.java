@@ -81,7 +81,7 @@ public class CacheConfig {
         configs.put("fieldFigureCache",
                 RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(24)));
 
-
+        return configs;
 
     }
 
