@@ -12,6 +12,7 @@ import com.example.demo.vo.figure.FieldFigureVO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -74,5 +75,12 @@ public interface AffiliationPublishDao extends
             "where af.id = afp.affId and exists (select d.id from Document d " +
             "where afp.documentId = d.id and d.keywords like concat('%', ?1, '%')) group by af.id")
     List<FieldPieVO> getAffiliationOnField(String field);
+
+    /**
+     * 将合并前的机构id更新为合并后的
+     */
+    @Modifying
+    @Query("update AffiliationPublish set affId = ?2 where affId in ?1")
+    void updateToMerged(List<Integer> before, int after);
 
 }
