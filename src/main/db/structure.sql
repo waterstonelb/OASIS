@@ -62,3 +62,11 @@ CREATE TABLE affiliation_publish(
     ,aff_id              INT NOT NULL
     ,PRIMARY KEY (document_id, aff_id)
 )ENGINE=InnoDB DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS field;
+CREATE TABLE field(
+     id      INT NOT NULL
+    ,name    VARCHAR(50)
+    ,conference VARCHAR(400)
+    ,PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET = utf8
