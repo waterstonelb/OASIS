@@ -75,13 +75,25 @@ public class CacheConfig {
     private Map<String, RedisCacheConfiguration> getConfig(){
         Map<String, RedisCacheConfiguration> configs = new HashMap<>();
         configs.put("affiliationFigureCache",
-                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(24)));
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(240)));
 
         configs.put("authorFigureCache",
-                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(24)));
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(240)));
 
         configs.put("fieldFigureCache",
-                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(24)));
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(240)));
+
+        configs.put("affRankingCache",
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(240)));
+
+        configs.put("affDetailCache",
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(240)));
+
+        configs.put("authorRankingCache",
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(240)));
+
+        configs.put("authorDetailCache",
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(240)));
 
         return configs;
 

@@ -149,4 +149,8 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
     @Query("select d.keywords from Document d")
     List<String> findAllKeywords();
 
+    @Query(value = "select id from document where keywords regexp ?1 " +
+            "and publication_year between ?2 and ?3", nativeQuery = true)
+    List<Integer> getDocIdsByFieldAndTime(String regexp, int startTime, int endTime);
+
 }
