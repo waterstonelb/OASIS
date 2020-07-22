@@ -68,7 +68,6 @@ public class RankingServiceImplTest {
 
     @Test
     public void getAuListTest(){
-        return;
         authorRankingInpVO.setSortBy("Count");
         AuthorRankingResVO authorRankingResVO =
                 rankingService.getAuthorList(authorRankingInpVO).getData();
