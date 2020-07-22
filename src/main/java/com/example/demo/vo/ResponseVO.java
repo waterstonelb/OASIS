@@ -2,10 +2,8 @@ package com.example.demo.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
-import org.springframework.scheduling.annotation.AsyncResult;
 
 import java.io.Serializable;
-import java.util.concurrent.Future;
 
 @Builder
 public class ResponseVO<T> implements Serializable {
