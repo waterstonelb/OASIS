@@ -24,8 +24,7 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
      * @return {@link Document}
      */
     @Query(value = "select d from Document d where d.publicationYear between ?2 and ?3 and d.id in " +
-            "(select aup.documentId from AuthorPublish aup where aup.authorId in " +
-            "(select au.id from Author au where au.id = ?1))")
+            "(select aup.documentId from AuthorPublish aup where aup.authorId = ?1 )")
     Page<Document> getByAuthorId(int authorId, int startTime, int endTime, Pageable pageable);
 
     /**
@@ -133,6 +132,13 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
     @Query(value = "select * from document d where d.id in " +
             "(select aup.document_id from author_publish aup where aup.author_id = ?1) limit 3",nativeQuery = true)
     List<Document> findByAuthorId(int authorId);
+
+    /**
+     * 根据作者Id查询论文
+     */
+    @Query(value = "select * from document d where d.id in " +
+        "(select aup.document_id from author_publish aup where aup.author_id = ?1)",nativeQuery = true)
+    List<Document> findByauthorId(int authorId);
 
     /**
      * 判断论文链接是否存在
