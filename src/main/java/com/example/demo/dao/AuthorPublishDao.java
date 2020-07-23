@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import com.example.demo.po.AuthorDirectInfo;
 import com.example.demo.po.AuthorPublish;
 import com.example.demo.po.AuthorPublishPK;
+import com.example.demo.po.AuthorRelationHis;
 import com.example.demo.po.TopAuthor;
 import com.example.demo.vo.figure.AuthorLink;
 import com.example.demo.vo.figure.AuthorNode;
@@ -107,5 +108,16 @@ public interface AuthorPublishDao extends JpaRepository<AuthorPublish, AuthorPub
             "and ap1.authorId < ap2.authorId and (ap1.authorId in ?1 or ap2.authorId in ?1)" +
             "group by ap1.authorId, ap2.authorId")
     List<AuthorLink> getTopAuthorLinks(List<Integer> topIds);
+
+    /**
+     * 获取与某个作者相关的所有作者的历年合作次数信息
+     * @return List<AuthorRelationHis>
+     */
+    @Query("select new com.example.demo.po.AuthorRelationHis(a.id,a.name,d.publicationYear,count(ap.documentId)) "
+        + "from Author a join AuthorPublish ap on a.id = ap.authorId and ap.documentId in "
+        + "(select ap1.documentId from AuthorPublish ap1 where ap1.authorId=?1) "
+        + "join Document d on ap.documentId=d.id "
+        + "where a.id<>?1 group by a.id,a.name,d.publicationYear")
+    List<AuthorRelationHis> getAuthorRelationHis(int authorId);
 
 }

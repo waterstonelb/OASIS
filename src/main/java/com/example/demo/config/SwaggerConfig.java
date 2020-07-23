@@ -19,7 +19,7 @@ public class SwaggerConfig  {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .host("ismzl.com:8090")
+                //.host("ismzl.com:8090")
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
