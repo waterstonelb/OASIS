@@ -20,6 +20,7 @@ public class AffiliationFigureVO implements Serializable {
 
     public AffiliationFigureVO(List<AffiliationNode> affiliationNodes,
                                List<AffiliationLink> affiliationLinks){
+        affiliationNodes.sort((a1, a2) -> (int)(a1.getWeight() - a2.getWeight()));
         Map<Integer,Integer> idToIndex = new HashMap<>();
         for(int i = 0; i < affiliationNodes.size(); i++)
             idToIndex.put(affiliationNodes.get(i).getId(), i);

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class AuthorFigureVO implements Serializable {
     private List<String> links;
 
     public AuthorFigureVO(List<AuthorNode> authorNodes, List<AuthorLink> authorLinks){
+        authorNodes.sort((a1, a2) -> (int) (a1.getWeight() - a2.getWeight()));
         Map<Integer,Integer> idToIndex = new HashMap<>();
         for(int i = 0; i < authorNodes.size(); i++)
             idToIndex.put(authorNodes.get(i).getId(), i);

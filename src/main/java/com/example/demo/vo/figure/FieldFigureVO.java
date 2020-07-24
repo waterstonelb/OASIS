@@ -19,6 +19,7 @@ public class FieldFigureVO implements Serializable {
     List<String> links;
 
     public FieldFigureVO(List<FieldNode> fieldNodes, List<FieldLink> fieldLinks){
+        fieldNodes.sort((f1, f2) -> (int) (f1.getWeight() - f2.getWeight()));
         Map<Integer,Integer> idToIndex = new HashMap<>();
         for(int i = 0; i < fieldNodes.size(); i++)
             idToIndex.put(fieldNodes.get(i).getId(), i);
