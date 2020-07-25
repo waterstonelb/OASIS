@@ -43,7 +43,7 @@ pipeline {
             }
         }
 
-/*
+
         stage('Push to SonarQube') {
                 steps{
                     withSonarQubeEnv('sonarqube') {
@@ -51,7 +51,7 @@ pipeline {
                     }
                 }
 
-        }*/
+        }
 
         stage('Deploy to Service'){
                 steps{
