@@ -53,6 +53,7 @@ pipeline {
 
         }
 
+
         stage('Deploy to Service'){
                 steps{
                     sh "/home/shkb/jar.sh"
