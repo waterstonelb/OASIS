@@ -265,11 +265,15 @@ public class AuthorServiceImpl implements AuthorService {
             AuthorPrd.builder().authorId(key).author(value.author).relation((long) index).build());
       });
       res.sort(Comparator.comparingLong(AuthorPrd::getRelation));
+      List<AuthorPrd> finalRes = res;
+      if(finalRes.size()>5){
+        finalRes = res.subList(0,5);
+      }
       for (int i = 0; i < 5; i++) {
-        res.get(i).setRank(i+1);
+        finalRes.get(i).setRank(i+1);
       }
       log.info("预测成功");
-      return ResponseVO.buildSuccess(res);
+      return ResponseVO.buildSuccess(finalRes);
     }catch (Exception e){
       e.printStackTrace();
       log.error(e.getMessage());
