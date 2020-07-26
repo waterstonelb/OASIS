@@ -55,9 +55,12 @@ public class FieldServiceImpl implements FieldService {
                 fieldWcVOS.add(FieldWcVO.builder().name(entry.getKey())
                         .value(entry.getValue()).build());
             fieldWcVOS.sort((f1, f2) ->(int)(f2.getValue() - f1.getValue()));
-            fieldWcVOS = fieldWcVOS.subList(0, Math.min(fieldWcVOS.size(), 1000));
+            List<FieldWcVO> res = new ArrayList<>();
+            for(int i = 0; i < Math.min(fieldWcVOS.size(), 1000); i++)
+                res.add(fieldWcVOS.get(i));
+
             log.info("领域云图建立成功");
-            return ResponseVO.buildSuccess(fieldWcVOS);
+            return ResponseVO.buildSuccess(res);
         }catch (Exception ex){
             log.error("领域云图建立失败");
             log.error(ex.getLocalizedMessage());
