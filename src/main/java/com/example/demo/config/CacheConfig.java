@@ -95,6 +95,9 @@ public class CacheConfig {
         configs.put("authorDetailCache",
                 RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(240)));
 
+        configs.put("fieldWcCache",
+                RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(240)));
+
         return configs;
 
     }

@@ -9,6 +9,7 @@ import com.example.demo.vo.field.FieldPromptVO;
 import com.example.demo.vo.field.FieldWcVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -34,6 +35,7 @@ public class FieldServiceImpl implements FieldService {
     }
 
     @Override
+    @Cacheable(value = "fieldWcCache")
     public ResponseVO<List<FieldWcVO>> getFieldWc() {
         try {
 
@@ -52,8 +54,8 @@ public class FieldServiceImpl implements FieldService {
             for(Map.Entry<String, Long> entry : kwTimes.entrySet())
                 fieldWcVOS.add(FieldWcVO.builder().name(entry.getKey())
                         .value(entry.getValue()).build());
-
-
+            fieldWcVOS.sort((f1, f2) ->(int)(f2.getValue() - f1.getValue()));
+            fieldWcVOS = fieldWcVOS.subList(0, Math.min(fieldWcVOS.size(), 1000));
             log.info("领域云图建立成功");
             return ResponseVO.buildSuccess(fieldWcVOS);
         }catch (Exception ex){

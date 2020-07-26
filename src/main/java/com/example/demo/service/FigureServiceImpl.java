@@ -167,23 +167,13 @@ public class FigureServiceImpl implements FigureService {
       fieldNodes.sort(((o1, o2) -> (int) (o1.getWeight() - o2.getWeight())));
 
       Set<Integer> topIdSet = fieldNodes
-          .subList(fieldNodes.size() - TOP, fieldNodes.size())
+          .subList(fieldNodes.size() - 2 * TOP, fieldNodes.size())
           .stream().map(FieldNode::getId).collect(Collectors.toSet());
-      //set of top100 ids and ids which have relations with top100
-      Set<Integer> idSet = new HashSet<>();
-
-      for (FieldLink fieldLink : fieldLinks) {
-        if (topIdSet.contains(fieldLink.getSource())
-            || topIdSet.contains(fieldLink.getTarget())) {
-          idSet.add(fieldLink.getSource());
-          idSet.add(fieldLink.getTarget());
-        }
-      }
 
       fieldNodes = fieldNodes.stream()
-          .filter(fn -> idSet.contains(fn.getId())).collect(Collectors.toList());
+          .filter(fn -> topIdSet.contains(fn.getId())).collect(Collectors.toList());
       fieldLinks = fieldLinks.stream()
-          .filter(fl -> idSet.contains(fl.getSource()) && idSet.contains(fl.getTarget()))
+          .filter(fl -> topIdSet.contains(fl.getSource()) && topIdSet.contains(fl.getTarget()))
           .collect(Collectors.toList());
 
       log.info("领域关系大图建立成功");

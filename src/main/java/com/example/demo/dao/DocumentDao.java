@@ -151,7 +151,6 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
      * 查询全部关键词
      * @return {@link List<String>}
      */
-    @Cacheable("keywordsCache")
     @Query("select d.keywords from Document d")
     List<String> findAllKeywords();
 
