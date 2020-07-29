@@ -16,10 +16,10 @@ public class SearchByAuthorIdVO implements Serializable {
 
     private int authorId;
 
-    int size;
+    private int size;
 
     @ApiModelProperty("页号, 从0开始")
-    int page;
+    private int page;
 
 
     @ApiModelProperty("排序标准: 0最新, 1(被)引用次数最多")

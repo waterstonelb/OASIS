@@ -52,6 +52,13 @@ public class SearchController {
 
         return searchService.searchByStudyKeyword(searchByKeywordInpVO);
     }
+    @ApiOperation(value = "根据论文标题查询")
+    @RequestMapping(value = "/title", method = RequestMethod.POST)
+    public ResponseVO<SearchVO>
+    searchByTitle(@RequestBody SearchByTitleVO searchByTitleVO) {
+
+        return searchService.searchByTitle(searchByTitleVO);
+    }
 
     @ApiOperation("查询具体机构Id的论文")
     @RequestMapping(value = "/affiliation", method = RequestMethod.POST)

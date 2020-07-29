@@ -13,6 +13,8 @@ public interface SearchService {
 
     ResponseVO<SearchVO>  searchByStudyKeyword(SearchByKeywordInpVO searchByKeywordInpVO);
 
+    ResponseVO<SearchVO> searchByTitle(SearchByTitleVO searchByTitleVO);
+
     /**
      * 用于机构详情页面查询
      * @param searchByAffiliationIdVO 输入

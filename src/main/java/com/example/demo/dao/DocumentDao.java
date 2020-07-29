@@ -98,6 +98,17 @@ public interface DocumentDao extends JpaRepository<Document, Integer> {
     Page<Document> findByKeywords(String keyword, int startTime, int endTime, Pageable pageable);
 
     /**
+     * 使用标题模糊查询相关论文
+     * @param title 关键字
+     * @param startTime 开始时间
+     * @param endTime 结束时间
+     * @param pageable 分页
+     * @return {@link Document}
+     */
+    @Query(value = "select d from Document d where d.publicationYear between ?2 and ?3 and d.title like concat('%',?1,'%')")
+    Page<Document> findByTitle(String title, int startTime, int endTime, Pageable pageable);
+
+    /**
      * 根据Id查询论文
      * @param id 文章Id
      * @return {@link Document}

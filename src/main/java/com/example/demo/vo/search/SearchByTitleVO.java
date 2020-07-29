@@ -12,9 +12,8 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchByAuthorInpVO implements Serializable {
-
-    private String author;
+public class SearchByTitleVO implements Serializable {
+    private String title;
 
     private int size;
 

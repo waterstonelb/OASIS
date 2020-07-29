@@ -167,6 +167,33 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
+    public ResponseVO<SearchVO> searchByTitle(SearchByTitleVO searchByTitleVO) {
+        try {
+            PageRequest pageRequest = PageRequest.of(
+                    searchByTitleVO.getPage(),
+                    searchByTitleVO.getSize(),
+                    Sort.by(Sort.Direction.DESC,
+                            searchByTitleVO.getSortby() == 0 ? "publicationYear" : "citationCount"));
+
+
+            Page<Document> queryRes = documentDao.findByTitle(
+                    searchByTitleVO.getTitle(),
+                    searchByTitleVO.getStartTime() == null ? 0 : searchByTitleVO.getStartTime(),
+                    searchByTitleVO.getEndTime() == null ? 9999 : searchByTitleVO.getEndTime(),
+                    pageRequest);
+            List<DocumentVO> resVO = new ArrayList<>();
+
+            for (Document document : queryRes.getContent())
+                resVO.add(new DocumentVO(document, authorDao.findByDocumentId(document.getId())));
+            log.info("查询成功");
+            return ResponseVO.buildSuccess(new SearchVO(queryRes.getTotalElements(), resVO));
+        }catch (Exception e){
+            log.error(e.getLocalizedMessage());
+            return ResponseVO.buildFailure("Error in searchByTitle");
+        }
+    }
+
+    @Override
     public ResponseVO<SearchVO> searchByAffiliation(SearchByAffiliationIdVO searchByAffiliationIdVO) {
         try {
             PageRequest pageRequest = PageRequest.of(
