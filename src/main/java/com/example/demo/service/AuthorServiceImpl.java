@@ -31,7 +31,7 @@ import java.util.*;
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
-  private static final int YEAR_WEIGHT = 10000;
+  private static final int YEAR_WEIGHT = 64;
   private static final int AMOUNT_WEIGHT = 4;
   private static final int TREND_WEIGHT = 6;
 
@@ -257,14 +257,18 @@ public class AuthorServiceImpl implements AuthorService {
         for (int i = 1; i < r.size(); i++) {
           int temp = r.get(i).getKey();
           long tcount = r.get(i).getValue();
-          trendIndex += (YEAR_WEIGHT >> (maxYear.get() - temp)) * ((tcount - startCount) / (temp
-              - startYear * 1.0));
+          if(tcount-startCount>0) {
+            trendIndex += (YEAR_WEIGHT >> (maxYear.get() - temp)) * ((tcount - startCount) / (temp
+                    - startYear * 1.0));
+          }
+          startYear=temp;
+          startCount=tcount;
         }
-        double index = amountIndex + AMOUNT_WEIGHT + trendIndex * TREND_WEIGHT;
+        double index = amountIndex * AMOUNT_WEIGHT + trendIndex * TREND_WEIGHT;
         res.add(
             AuthorPrd.builder().authorId(key).author(value.author).relation((long) index).build());
       });
-      res.sort(Comparator.comparingLong(AuthorPrd::getRelation));
+      res.sort(((o1, o2) -> Long.compare(o2.getRelation(), o1.getRelation())));
       List<AuthorPrd> finalRes = res;
       if(finalRes.size()>5){
         finalRes = res.subList(0,5);
