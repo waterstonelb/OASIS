@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://182.92.80.192:3306/shkb_test
+    url: jdbc:mysql://localhost:3306/shkb_test
     username: shkb
     password: shkb
   jpa:
