@@ -27,7 +27,7 @@ import java.util.Map;
 @Profile("!test")
 public class CacheConfig {
 
-    @Value("${redis.hostname:ismzl.com}")
+    @Value("${redis.hostname:localhost}")
     private String redisHostName;
 
     @Value("${redis.port:6379}")
